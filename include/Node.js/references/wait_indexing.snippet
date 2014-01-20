@@ -1,0 +1,9 @@
+```javascript
+index.addObject({'firstname': 'Jimmie', 
+                 'lastname': 'Barninger'}, function(error, content) {
+  index.waitTask(content.taskID, function() {
+    console.log("object " + content.objectID + " indexed");
+  });
+});
+```
+

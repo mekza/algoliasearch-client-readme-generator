@@ -1,0 +1,15 @@
+{
+  "languages":{
+    "Ruby": {
+      "outputDir":"Ruby"},
+    "PHP": {
+      "outputDir":"PHP"},
+    "Node.js": {
+      "outputDir":"Node.js"},
+    "Python": {
+      "outputDir":"Python"}
+  },
+  "templateFiles":{
+    "template1":"templates/README.md"
+  }
+}

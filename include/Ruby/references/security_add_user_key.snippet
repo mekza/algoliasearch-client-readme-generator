@@ -1,0 +1,9 @@
+```ruby
+# Creates a new global API key that is valid for 300 seconds
+res = Algolia.add_user_key(["search"], 300)
+puts res['key']
+# Creates a new index specific API key valid for 300 seconds, with a rate limit of 100 calls per hour per IP and a maximum of 20 hits
+res = index.add_user_key(["search"], 300, 100, 20)
+puts res['key']
+```
+

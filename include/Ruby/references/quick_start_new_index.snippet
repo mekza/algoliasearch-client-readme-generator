@@ -1,0 +1,7 @@
+Without any prior-configuration, you can index [500 contacts](https://github.com/algolia/algoliasearch-client-ruby/blob/master/contacts.json) in the ```contacts``` index with the following code:
+```ruby
+index = Algolia::Index.new("contacts")
+batch = JSON.parse(File.read("contacts.json"))
+index.add_objects(batch)
+```
+

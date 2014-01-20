@@ -1,0 +1,9 @@
+ ```php
+// Creates a new global API key that is valid for 300 seconds
+$res = $client->addUserKey(array("search"), 300);
+echo "key=" . $res['key'] . "\n";
+// Creates a new index specific API key valid for 300 seconds, with a rate limit of 100 calls per hour per IP and a maximum of 20 hits
+$res = $index->addUserKey(array("search"), 300, 100, 20);
+echo "key=" . $res['key'] . "\n";
+```
+

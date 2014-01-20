@@ -1,0 +1,9 @@
+```php
+// Creates a new global API key that can only perform search actions
+$res = $client->addUserKey(array("search"));
+echo "key=" . $res['key'] . "\n";
+// Creates a new API key that can only perform search action on this index
+$res = $index->addUserKey(array("search"));
+echo "key=" . $res['key'] . "\n";
+```
+

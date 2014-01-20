@@ -1,0 +1,10 @@
+```javascript
+// Creates a new global API key that can only perform search actions
+client.addUserKey(["search"], function(error, content) {
+    console.log("Key:" + content['key']);
+});
+// Creates a new API key that can only perform search action on this index
+index.addUserKey(["search"], function(error, content) {
+    console.log("Key:" + content['key']);
+});
+```

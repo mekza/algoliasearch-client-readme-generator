@@ -1,0 +1,6 @@
+```ruby
+index = Algolia::Index.new("contacts")
+res = index.search("query string")
+res = index.search("query string", { "attributesToRetrieve" => "firstname,lastname", "hitsPerPage" => 20})
+```
+

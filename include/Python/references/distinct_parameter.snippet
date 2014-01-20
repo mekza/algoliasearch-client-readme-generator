@@ -1,0 +1,6 @@
+```python
+index = client.initIndex("contacts")
+res = index.search("query string")
+res = index.search("query string", { "attributesToRetrieve": "fistname,lastname", "hitsPerPage": 20})
+```
+

@@ -1,0 +1,12 @@
+To list existing keys, you can use `listUserKeys` method:
+```javascript
+// Lists global API Keys
+client.listUserKeys(function(error, content) {
+    console.log(content);
+});
+// Lists API Keys that can access only to this index
+index.listUserKeys(function(error, content) {
+    console.log(content);
+});
+```
+

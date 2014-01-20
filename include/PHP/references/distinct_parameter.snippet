@@ -1,0 +1,6 @@
+```php
+$index = $client->initIndex("contacts");
+$res = $index->search("query string");
+$res = $index->search("query string", array("attributesToRetrieve" => "fistname,lastname", "hitsPerPage" => 50));
+```
+

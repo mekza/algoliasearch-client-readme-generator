@@ -1,0 +1,10 @@
+```javascript
+// Get last 10 log entries
+client.getLogs(function(error, content) {
+  console.log(content);
+});
+// Get last 100 log entries
+client.getLogs(function(error, content) {
+  console.log(content);
+}, 0, 100);
+```

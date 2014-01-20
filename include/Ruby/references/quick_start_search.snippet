@@ -1,0 +1,11 @@
+```ruby
+# search by firstname
+puts index.search('jimmie').to_json
+# search a firstname with typo
+puts index.search('jimie').to_json
+# search for a company
+puts index.search('california paint').to_json
+# search for a firstname & company
+puts index.search('jimmie paint').to_json
+```
+

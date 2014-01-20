@@ -1,0 +1,9 @@
+```python
+# Creates a new global API key that can only perform search actions
+res = client.addUserKey(["search"])
+print res["key"]
+# Creates a new API key that can only perform search action on this index
+res = index.addUserKey(["search"])
+print res["key"]
+```
+

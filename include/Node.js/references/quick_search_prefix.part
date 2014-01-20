@@ -1,0 +1,9 @@
+```javascript
+index.search('or', function(error, content) {
+  console.log(content.hits);
+});
+index.search('jim', function(error, content) {
+  console.log(content.hits);
+});
+```
+

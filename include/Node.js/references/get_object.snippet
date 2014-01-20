@@ -1,0 +1,15 @@
+```javascript
+// Retrieves all attributes
+idx.getObject('myID', function(error, content) {
+  console.log(content.objectID + ": " + content.toString());
+});
+// Retrieves firstname and lastname attributes
+idx.getObject('myID', function(error, content) {
+  console.log(content.objectID + ": " + content.toString());
+}, "firstname,lastname");
+// Retrieves only the firstname attribute
+idx.getObject('myID', function(error, content) {
+  console.log(content.objectID + ": " + content.toString());
+}, "firstname");
+```
+
