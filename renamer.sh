@@ -1,11 +1,13 @@
+#! /bin/sh
 
 if [ "$#" -lt 2 ] ; then
-  echo "Usage : ./complain.sh currentFileName newFileName"
+  echo "Usage: $0 currentFileName newFileName"
+  exit 1
 fi
 
 TMP_OUT=`mktemp /tmp/complain.XXX`
 
-echo "Begin rename : $1 to $2"
+echo "Begin rename: $1 to $2"
 
 for dir in include/*; do
   if [ -d "$dir"  ] ; then
