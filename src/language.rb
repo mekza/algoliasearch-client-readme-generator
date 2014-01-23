@@ -1,4 +1,3 @@
-
 class Language
   attr_reader :name
   attr_reader :referenceLanguage
@@ -10,46 +9,47 @@ class Language
     @outputDir = languageData["outputDir"]
   end
 
-  def printContent
-    puts "name : #{@name}"
-    puts "features : #{@features}"
-    puts "referenceLanguage : #{@referenceLanguage}"
-    puts "outputDir : #{@outputDir}"
-  end
-
-  def haveFeature?(name)
-    if ! @features[name].nil? 
-      return feature[name]["languages"]["ruby"]
-    end
-    puts "Error : unknown feature \"#{name}\"."
-    return false
-  end
-
-  def importFile(fileName, dir)
-    fileName = File.join(dir, fileName)
-    content = File.read(fileName)
-    content = content[0, content.size - 1] #Remove \n
-  end
-
-  def import(featureFile, languages, default = "")
-    if languages.empty? || languages.include?(@name)
-      return importFile(featureFile, @referenceLanguage)
+  def import(featureFile, languages = [], default = "")
+    if languages.empty? || languages.include?(name)
+      import_file(featureFile, referenceLanguage)
     else
-      return default
+      default
     end
   end
 
-  def putWord(wordsLanguages, default = "")
-    if wordsLanguages.include?(@name)
-      return wordsLanguages[@name]
-    else
-      return default
-    end
+  def snippet(featureFile, languages = [], default = "")
+    import("#{featureFile}.snippet", languages, default)
+  end
 
+  def puts(strings, default = "")
+    strings[name] || default
+  end
+
+  def ruby?
+    name == 'Ruby'
+  end
+
+  def php?
+    name == 'PHP'
+  end
+
+  def python?
+    name == 'Python'
+  end
+
+  def nodejs?
+    name == 'Node.js'
   end
 
   def get_binding
     binding
   end
-  
+
+  private  
+  def import_file(fileName, dir)
+    fileName = File.join(dir, fileName)
+    content = File.read(fileName)
+    content = content.strip
+  end
+
 end 

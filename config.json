@@ -1,15 +1,19 @@
 {
   "languages":{
     "Ruby": {
-      "outputDir":"Ruby"},
+      "outputDir": "../../algoliasearch-client-ruby"
+    },
     "PHP": {
-      "outputDir":"PHP"},
+      "outputDir": "../../algoliasearch-client-php"
+    },
     "Node.js": {
-      "outputDir":"Node.js"},
+      "outputDir": "../../algoliasearch-client-node"
+    },
     "Python": {
-      "outputDir":"Python"}
+      "outputDir": "../../algoliasearch-client-python"
+    }
   },
-  "templateFiles":{
-    "template1":"templates/README.md"
-  }
+  "templateFiles": [
+    "templates/README.md"
+  ]
 }
