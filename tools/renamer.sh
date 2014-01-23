@@ -18,9 +18,9 @@ for dir in include/*; do
           sed -e "s/$1/$2/g" $file > $TMP_OUT; cp $TMP_OUT $file
         fi
       done
-    elif [ -f "$dir/references/$1" ] ; then
-      echo "move $dir/references/$1 to $dir/references/$2"
-      git mv $dir/references/$1 $dir/references/$2 || mv $dir/references/$1 $dir/references/$2
+    elif [ -f "$dir/$1" ] ; then
+      echo "move $dir/$1 to $dir/$2"
+      git mv $dir/$1 $dir/$2 || mv $dir/$1 $dir/$2
     fi
   fi
 done

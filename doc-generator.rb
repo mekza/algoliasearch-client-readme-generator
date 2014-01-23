@@ -36,7 +36,7 @@ class Generator
         puts "Error: \"#{languageData["outputDir"]}\" is not a directory"
         exit 2
       end
-      languageData["referenceLanguage"] = File.join(@pwd, INCLUDE_DIR, languageName, "references")
+      languageData["referenceLanguage"] = File.join(@pwd, INCLUDE_DIR, languageName)
       if !File.directory?(languageData["referenceLanguage"])
         puts "Error: \"#{languageData["referenceLanguage"]}\" is not a directory"
         exit 2
