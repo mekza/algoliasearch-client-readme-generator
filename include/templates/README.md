@@ -157,7 +157,7 @@ You can use the following optional arguments:
 #### Distinct parameter
  * **distinct**: If set to 1, enable the distinct feature (disabled by default) if the `attributeForDistinct` index setting is set. This feature is similar to the SQL "distinct" keyword: when enabled in a query with the `distinct=1` parameter, all hits containing a duplicate value for the attributeForDistinct attribute are removed from results. For example, if the chosen attribute is `show_name` and several hits have the same value for `show_name`, then only the best one is kept and others are removed.
 
-<%= snippet("distinct_parameter") %>
+<%= snippet("query") %>
 
 The server response will look like:
 
