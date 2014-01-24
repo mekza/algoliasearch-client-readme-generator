@@ -49,7 +49,7 @@ class Language
   def import_file(fileName, dir)
     fileName = File.join(dir, fileName)
     content = File.read(fileName)
-    content = content.strip
+    content = content.rstrip
   end
 
 end 
