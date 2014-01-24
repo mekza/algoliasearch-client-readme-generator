@@ -45,6 +45,10 @@ class Language
     name == 'JavaScript'
   end
 
+  def cmd?
+    name == 'Shell'
+  end
+
   def get_binding
     binding
   end

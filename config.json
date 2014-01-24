@@ -14,6 +14,9 @@
     },
     "JavaScript": {
       "outputDir": "../../algoliasearch-client-js"
+    },
+    "Shell": {
+      "outputDir": "../../algoliasearch-client-cmd"
     }
   },
   "templateFiles": [

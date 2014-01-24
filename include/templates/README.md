@@ -1,4 +1,4 @@
-Algolia Search API Client for <%= @name %>
+<% if cmd? %>Algolia Search Command Line API Client<% else %>Algolia Search API Client for <%= @name %><% end %>
 ==================
 
 <% if js? %>
@@ -27,9 +27,9 @@ Algolia’s Search API makes it easy to deliver a great search experience in you
  * 99.99% SLA
  * first-class data security
 
-<% if !js? %>This <%= @name %> client let you easily use the Algolia Search API from your backend. It wraps [Algolia's REST API](http://www.algolia.com/doc/rest_api).<% end %>
+<% if !js? && !cmd? %>This <%= @name %> client let you easily use the Algolia Search API from your backend. It wraps [Algolia's REST API](http://www.algolia.com/doc/rest_api).<% elsif cmd? %>This command line API Client is a small wrapper around CURL to easily use Algolia Search's REST API.<% end %>
 
-<%= import("build_status.info") %>
+<%= import("build_status.info") if !cmd? %>
 
 Table of Content
 -------------
@@ -62,7 +62,7 @@ Table of Content
 
 Setup
 -------------
-To setup your project, follow these steps:
+<% if cmd? %>To setup the command line client<% else %>To setup your project<% end %>, follow these steps:
 
 <%= snippet("setup") %>
 
@@ -105,11 +105,11 @@ All API calls will return the result in a callback that takes two arguments:
 
 Search
 -------------
-<% if !js? %> **Opening note:** If you are building a web application, you may be more interested in using our [javascript client](https://github.com/algolia/algoliasearch-client-js) to send queries. It brings two benefits: (i) your users get a better response time by avoiding to go through your servers, and (ii) it will offload your servers of unnecessary tasks.<% end %>
+<% if !js? && !cmd? %> **Opening note:** If you are building a web application, you may be more interested in using our [javascript client](https://github.com/algolia/algoliasearch-client-js) to send queries. It brings two benefits: (i) your users get a better response time by avoiding to go through your servers, and (ii) it will offload your servers of unnecessary tasks.<% end %>
 
-To perform a search, you just need to initialize the index and perform a call to the search function.<br/>
+<% if cmd? %>To perform a search, you have just to specify the index name and the query.<% else %>To perform a search, you just need to initialize the index and perform a call to the search function.<% end %>
+
 You can use the following optional arguments:
-
 
 ### Query parameters
 
@@ -263,7 +263,7 @@ You can delete an object using its `objectID`:
 Index Settings
 -------------
 
-You can retrieve all settings using the `getSettings` function. The result will contains the following attributes:
+You can retrieve all settings using the `<%= puts({ "Node.js" => "getSettings", "PHP" => "getSettings", "Python" => "getSettings", "Ruby" => "get_settings", "Shell" => "settings" }) %>` function. The result will contains the following attributes:
 
 
 #### Indexing parameters
@@ -305,7 +305,7 @@ You can easily retrieve settings or update them:
 
 List indexes
 -------------
-You can list all your indexes with their associated information (number of entries, disk size, etc.) with the `<%= puts({ "Node.js" => "listIndexes", "PHP" => "listIndexes", "Python" => "listIndexes", "Ruby" => "list_indexes" }) %>` method:
+You can list all your indexes with their associated information (number of entries, disk size, etc.) with the `<%= puts({ "Node.js" => "listIndexes", "PHP" => "listIndexes", "Python" => "listIndexes", "Ruby" => "list_indexes", "Shell" => "indexes" }) %>` method:
 
 <%= snippet("list_index") %>
 
@@ -337,9 +337,9 @@ Batch writes
 
 You may want to perform multiple operations with one API call to reduce latency.
 We expose three methods to perform batch:
- * `<%= puts({ "Node.js" => "addObjects", "PHP" => "addObjects", "Python" => "addObjects", "Ruby" => "add_objects" }) %>`: add an array of object using automatic `objectID` assignement
- * `<%= puts({ "Node.js" => "saveObjects", "PHP" => "saveObjects", "Python" => "saveObjects", "Ruby" => "save_objects" }) %>`: add or update an array of object that contains an `objectID` attribute
- * `<%= puts({ "Node.js" => "partialUpdateObjects", "PHP" => "partialUpdateObjects", "Python" => "partialUpdateObjects", "Ruby" => "partial_update_objects" }) %>`: partially update an array of objects that contain an `objectID` attribute (only specified attributes will be updated, other will remain unchanged)
+ * `<%= puts({ "Node.js" => "addObjects", "PHP" => "addObjects", "Python" => "addObjects", "Ruby" => "add_objects", "Shell" => "addObject" }) %>`: add an array of object using automatic `objectID` assignement
+ * `<%= puts({ "Node.js" => "saveObjects", "PHP" => "saveObjects", "Python" => "saveObjects", "Ruby" => "save_objects", "Shell" => "saveObject" }) %>`: add or update an array of object that contains an `objectID` attribute
+ * `<%= puts({ "Node.js" => "partialUpdateObjects", "PHP" => "partialUpdateObjects", "Python" => "partialUpdateObjects", "Ruby" => "partial_update_objects", "Shell" => "partialUpdate" }) %>`: partially update an array of objects that contain an `objectID` attribute (only specified attributes will be updated, other will remain unchanged)
 
 Example using automatic `objectID` assignement:
 <%= snippet("batch_new_objects") %>
@@ -375,8 +375,9 @@ You can also create an API Key with advanced restrictions:
 
  * Add a validity period: the key will be valid only for a specific period of time (in seconds),
  * Specify the maximum number of API calls allowed from an IP address per hour. Each time an API call is performed with this key, a check is performed. If the IP at the origin of the call did more than this number of calls in the last hour, a 403 code is returned. Defaults to 0 (no rate limit). This parameter can be used to protect you from attempts at retrieving your entire content by massively querying the index.
-
+<% if !cmd? %>
 <%= snippet("security_note_forward") %>
+<% end %>
  * Specify the maximum number of hits this API key can retrieve in one call. Defaults to 0 (unlimited). This parameter can be used to protect you from attempts at retrieving your entire content by massively querying the index.
 
 <%= snippet("security_add_user_key") %>
@@ -435,4 +436,17 @@ You can retrieve the logs of your last 1000 API calls and browse them using the 
 For testing purpose, you may want to mock Algolia's API calls. We provide a [WebMock](https://github.com/bblimke/webmock) configuration that you can use including `algolia/webmock`:
 
 <%= snippet("mock") %><% end %>
+<% end %>
+
+<% if cmd? %>
+MongoDB
+-------
+
+You can use the `mongodb/crawler` tool to export a MongoDB collection and add all items to an Algolia index. This script is based on `mongoexport` and `algoliasearch-client-cmd`.
+
+For example, to export the collection `users` of your `myapp` database running on the default port and localhost to a `users` index, use:
+
+```sh
+./mongodb/crawler -d myapp -c users --applicationID YourApplicationID --apiKey YourAPIKey --index users
+```
 <% end %>

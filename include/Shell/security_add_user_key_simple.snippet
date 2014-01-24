@@ -1,0 +1,7 @@
+```sh
+# Creates a new global API key that can only perform search actions
+echo '{"acl": ["search"]}' > acl.json
+algoliasearch-cmd.sh addACL acl.json
+# Creates a new API key that can only perform search action on this index
+algoliasearch-cmd.sh addIndexACL indexName acl.json
+```

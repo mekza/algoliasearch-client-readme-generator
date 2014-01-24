@@ -1,0 +1,4 @@
+```sh
+echo '{ "requests":[{"action": "saveObject", "body": { "firstname": "Jimmie", "lastname": "Barninger"}, "objectID": "myID1" }, {"action": "saveObject", "body": { "firstname": "Warren", "lastname": "Speach" }, "objectID": "myID2" } ] }' > batch.json
+algoliasearch-cmd.sh batch contacts batch.json
+```
