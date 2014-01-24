@@ -41,6 +41,10 @@ class Language
     name == 'Node.js'
   end
 
+  def js?
+    name == 'JavaScript'
+  end
+
   def get_binding
     binding
   end

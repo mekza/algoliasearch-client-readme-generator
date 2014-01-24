@@ -11,6 +11,9 @@
     },
     "Python": {
       "outputDir": "../../algoliasearch-client-python"
+    },
+    "JavaScript": {
+      "outputDir": "../../algoliasearch-client-js"
     }
   },
   "templateFiles": [
