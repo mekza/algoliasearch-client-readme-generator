@@ -1,0 +1,12 @@
+```objc
+[index getSettings:^(ASRemoteIndex *index, NSDictionary *result) {
+    NSLog(@"Settings: %@", result);
+} failure:nil];
+```
+
+```objc
+NSArray *customRanking = [NSArray arrayWithObjects:@"desc(followers)", @"asc(name)", nil];
+NSDictionary *settings = [NSDictionary dictionaryWithObjectsAndKeys:customRanking, @"customRanking", nil];
+[index setSettings:settings success:nil failure:nil];
+
+```

@@ -1,0 +1,12 @@
+```objc
+NSDictionary *obj1 = [NSDictionary dictionaryWithObjectsAndKeys:@"Jimmie", @"firstname",
+                            @"Barninger", @"lastname",
+                            @"myID1", @"objectID", nil];
+NSDictionary *obj2 = [NSDictionary dictionaryWithObjectsAndKeys:@"Warren", @"firstname",
+                            @"Speach", @"lastname",
+                            @"myID2", @"objectID", nil];
+[index saveObjects:[NSArray arrayWithObjects:obj1, obj2, nil] 
+  success:^(ASRemoteIndex *index, NSArray *objects, NSDictionary *result) {
+    NSLog(@"Object IDs: %@", result);
+} failure:nil];
+```

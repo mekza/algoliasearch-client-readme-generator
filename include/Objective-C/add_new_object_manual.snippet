@@ -1,0 +1,8 @@
+```objc
+NSDictionary *newObject = [NSDictionary dictionaryWithObjectsAndKeys:@"Jimmie", @"firstname",
+                                        @"Barninger", @"lastname", nil];
+[index addObject:newObject withObjectID:@"myID" 
+  success:^(ASRemoteIndex *index, NSDictionary *object, NSString *objectID, NSDictionary *result) {
+    NSLog(@"Object ID:%@", [result valueForKey:@"objectID"]);
+} failure:nil];
+```

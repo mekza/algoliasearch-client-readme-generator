@@ -61,6 +61,10 @@ class Language
     name == 'Android'
   end
 
+  def objc?
+    name == "Objective-C"
+  end
+
   def get_binding
     binding
   end

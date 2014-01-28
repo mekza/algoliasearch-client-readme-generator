@@ -1,0 +1,11 @@
+```objc
+[index search:[ASQuery queryWithFullTextQuery:@"or"] 
+  success:^(ASRemoteIndex *index, ASQuery *query, NSDictionary *result) {
+    NSLog(@"Result:%@", result);
+} failure:nil];
+
+[index search:[ASQuery queryWithFullTextQuery:@"jim"] 
+  success:^(ASRemoteIndex *index, ASQuery *query, NSDictionary *result) {
+    NSLog(@"Result:%@", result);
+} failure:nil];
+```

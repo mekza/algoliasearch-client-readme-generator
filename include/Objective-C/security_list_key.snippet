@@ -1,0 +1,11 @@
+To list existing keys, you can use `listUserKeys` method:
+```objc
+// Lists global API Keys
+[apiClient listUserKeys:^(ASAPIClient *client, NSDictionary *result) {
+    NSLog(@"User keys: %@", result);
+} failure:nil];
+// Lists API Keys that can access only to this index
+[index listUserKeys:^(ASRemoteIndex *index, NSDictionary *result) {
+    NSLog(@"User keys: %@", result);
+} failure:nil];
+```

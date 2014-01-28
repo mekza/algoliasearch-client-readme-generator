@@ -1,0 +1,12 @@
+```objc
+// Gets the rights of a global key
+[apiClient getUserKeyACL:@"79710f2fbe18a06fdf12c17a16878654" 
+  success:^(ASAPIClient *client, NSString *key, NSDictionary *result) {
+    NSLog(@"Key details: %@", result);
+} failure:nil];
+// Gets the rights of an index specific key
+[index getUserKeyACL:@"013464b04012cb73299395a635a2fc6c" 
+  success:^(ASRemoteIndex *index, NSString *key, NSDictionary *result) {
+    NSLog(@"Key details: %@", result);
+} failure:nil];
+```

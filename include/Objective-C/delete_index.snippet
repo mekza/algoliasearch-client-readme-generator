@@ -1,0 +1,6 @@
+```objc
+[client deleteIndex:@"contacts" success:nil 
+  failure:^(ASAPIClient *client, NSString *indexName, NSString *errorMessage) {
+    NSLog(@"Could not delete: %@", errorMessage);
+}];
+```
