@@ -351,6 +351,11 @@ Example with user defined `objectID` (add or update):
 Example that update only the `firstname` attribute:
 <%= snippet("batch_update_partial") %>
 
+<% if php? %>
+Custom batch:
+<%= snippet("custom_batch") %>
+<% end %>
+
 Security / User API Keys
 -------------
 
