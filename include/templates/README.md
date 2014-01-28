@@ -27,7 +27,7 @@ Algolia’s Search API makes it easy to deliver a great search experience in you
  * 99.99% SLA
  * first-class data security
 
-<% if !js? && !cmd? %>This <%= @name %> client let you easily use the Algolia Search API from your backend. It wraps [Algolia's REST API](http://www.algolia.com/doc/rest_api).<% elsif cmd? %>This command line API Client is a small wrapper around CURL to easily use Algolia Search's REST API.<% end %><% if csharp? %>(Compatible with .NET 4.5, SL4+, WP7.5+, Windows Store)<% end %>
+<% if !js? && !cmd? %>This <%= @name %> client let you easily use the Algolia Search API from your <%= puts({'C#' => 'App'}, "backend") %>. It wraps [Algolia's REST API](http://www.algolia.com/doc/rest_api).<% elsif cmd? %>This command line API Client is a small wrapper around CURL to easily use Algolia Search's REST API.<% end %><% if csharp? %>(Compatible with .NET 4.5, SL4+, WP7.5+, Windows Store)<% end %>
 
 <%= import("build_status.info") if !cmd? && !csharp? %>
 
@@ -137,7 +137,7 @@ You can use the following optional arguments<% if csharp? %> on Query class<% en
  * **aroundLatLng**: search for entries around a given latitude/longitude (specified as two floats separated by a comma).<br/>For example `aroundLatLng=47.316669,5.016670`).<br/>You can specify the maximum distance in meters with the **aroundRadius** parameter (in meters) and the precision for ranking with **aroundPrecision** (for example if you set aroundPrecision=100, two objects that are distant of less than 100m will be considered as identical for "geo" ranking parameter).<br/>At indexing, you should specify geoloc of an object with the _geoloc attribute (in the form `{"_geoloc":{"lat":48.853409, "lng":2.348800}}`)
 
 <% end %>
- * **<%= puts({'C#' => 'InsideBoundingBox'}, "insideBoundingBox") %>**: search entries inside a given area defined by the two extreme points of a rectangle (defined by 4 floats: p1Lat,p1Lng,p2Lat,p2Lng).<br/>For example `<% puts({'C#' => 'insideBoundingBox(47.3165, 4.9665, 47.3424, 5.0201)'}, "insideBoundingBox=47.3165,4.9665,47.3424,5.0201") %>`.<br/>At indexing, you should specify geoloc of an object with the _geoloc attribute (in the form `{"_geoloc":{"lat":48.853409, "lng":2.348800}}`)
+ * **<%= puts({'C#' => 'InsideBoundingBox'}, "insideBoundingBox") %>**: search entries inside a given area defined by the two extreme points of a rectangle (defined by 4 floats: p1Lat,p1Lng,p2Lat,p2Lng).<br/>For example `<%= puts({'C#' => 'insideBoundingBox(47.3165, 4.9665, 47.3424, 5.0201)'}, "insideBoundingBox=47.3165,4.9665,47.3424,5.0201") %>`.<br/>At indexing, you should specify geoloc of an object with the _geoloc attribute (in the form `{"_geoloc":{"lat":48.853409, "lng":2.348800}}`)
 
 #### Parameters to control results content
 <% if csharp? %>
