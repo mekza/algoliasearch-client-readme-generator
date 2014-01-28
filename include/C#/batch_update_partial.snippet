@@ -1,0 +1,9 @@
+```csharp
+List<JObject> objs = new List<JObject>();
+objs.Add(JObject.Parse(@"{""firstname"":""Jimmie"", 
+                          ""objectID"":""myID1""}"));
+objs.Add(JObject.Parse(@"{""firstname"":""Warren"", 
+                          ""objectID"": ""myID2""}"));
+var res = await index.PartialUpdateObjects(objs);
+System.Diagnostics.Debug.WriteLine(res);
+```

@@ -49,6 +49,10 @@ class Language
     name == 'Shell'
   end
 
+  def csharp?
+    name == 'C#'
+  end
+
   def get_binding
     binding
   end

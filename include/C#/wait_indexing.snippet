@@ -1,0 +1,5 @@
+```csharp
+var res = await index.AddObject(JObject.Parse(@"{""firstname"":""Jimmie"", 
+                                                 ""lastname"":""Barninger""}"), "myID");
+await index.WaitTask(res["taskID"].ToString());
+```

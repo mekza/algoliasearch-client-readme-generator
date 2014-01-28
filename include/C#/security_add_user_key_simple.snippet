@@ -1,0 +1,8 @@
+```csharp
+// Creates a new global API key that can only perform search actions
+var res = await client.AddUserKey(new String[] { "search" });
+System.Diagnostics.Debug.WriteLine("Key: " + res["key"]);
+// Creates a new API key that can only perform search action on this index
+res = await index.AddUserKey(new String[] { "search" });
+System.Diagnostics.Debug.WriteLine("Key: " + res["key"]);
+```

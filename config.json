@@ -17,6 +17,9 @@
     },
     "Shell": {
       "outputDir": "../../algoliasearch-client-cmd"
+    },
+    "C#": {
+      "outputDir": "./"
     }
   },
   "templateFiles": [

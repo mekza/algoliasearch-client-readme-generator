@@ -27,9 +27,9 @@ Algolia’s Search API makes it easy to deliver a great search experience in you
  * 99.99% SLA
  * first-class data security
 
-<% if !js? && !cmd? %>This <%= @name %> client let you easily use the Algolia Search API from your backend. It wraps [Algolia's REST API](http://www.algolia.com/doc/rest_api).<% elsif cmd? %>This command line API Client is a small wrapper around CURL to easily use Algolia Search's REST API.<% end %>
+<% if !js? && !cmd? %>This <%= @name %> client let you easily use the Algolia Search API from your backend. It wraps [Algolia's REST API](http://www.algolia.com/doc/rest_api).<% elsif cmd? %>This command line API Client is a small wrapper around CURL to easily use Algolia Search's REST API.<% end %><% if csharp? %>(Compatible with .NET 4.5, SL4+, WP7.5+, Windows Store)<% end %>
 
-<%= import("build_status.info") if !cmd? %>
+<%= import("build_status.info") if !cmd? && !csharp? %>
 
 Table of Content
 -------------
@@ -109,32 +109,46 @@ Search
 
 <% if cmd? %>To perform a search, you have just to specify the index name and the query.<% else %>To perform a search, you just need to initialize the index and perform a call to the search function.<% end %>
 
-You can use the following optional arguments:
+You can use the following optional arguments<% if csharp? %> on Query class<% end %>:
 
 ### Query parameters
 
 #### Full Text Search parameters
 
- * **query**: (string) The instant-search query string, all words of the query are interpreted as prefixes (for example "John Mc" will match "John Mccamey" and "Johnathan Mccamey"). If no query parameter is set, retrieves all objects.
- * **queryType**: select how the query words are interpreted, it can be one of the following value:
-  * **prefixAll**: all query words are interpreted as prefixes,
-  * **prefixLast**: only the last word is interpreted as a prefix (default behavior),
-  * **prefixNone**: no query word is interpreted as a prefix. This option is not recommended.
- * **optionalWords**: a string that contains the list of words that should be considered as optional when found in the query. The list of words is comma separated.
- * **minWordSizefor1Typo**: the minimum number of characters in a query word to accept one typo in this word.<br/>Defaults to 3.
- * **minWordSizefor2Typos**: the minimum number of characters in a query word to accept two typos in this word.<br/>Defaults to 7.
+ * **<%= puts({'C#' => 'SetQueryString' }, "query") %>**: (string) The instant-search query string, all words of the query are interpreted as prefixes (for example "John Mc" will match "John Mccamey" and "Johnathan Mccamey"). If no query parameter is set, retrieves all objects.
+ * **<%= puts({'C#' => 'SetQueryType'}, "queryType") %>**: select how the query words are interpreted, it can be one of the following value:
+  * **<%= puts({'C#' => 'PREFIX_ALL'}, "prefixAll") %>**: all query words are interpreted as prefixes,
+  * **<%= puts({'C#' => 'PREFIX_LAST'}, "prefixLast") %>**: only the last word is interpreted as a prefix (default behavior),
+  * **<%= puts({'C#' => 'PREFIX_NONE'}, "prefixNone") %>**: no query word is interpreted as a prefix. This option is not recommended.
+ * **<%= puts({'C#' => 'SetOptionalWords'}, "optionalWords") %>**: a string that contains the list of words that should be considered as optional when found in the query. The list of words is comma separated.
+ * **<%= puts({'C#' => 'SetMinWordSizeToAllowOneTypo'}, "minWordSizefor1Typo") %>**: the minimum number of characters in a query word to accept one typo in this word.<br/>Defaults to 3.
+ * **<%= puts({'C#' => 'SetMinWordSizeToAllowTwoTypos'}, "minWordSizefor2Typos") %>**: the minimum number of characters in a query word to accept two typos in this word.<br/>Defaults to 7.
 
 #### Pagination parameters
 
- * **page**: (integer) Pagination parameter used to select the page to retrieve.<br/>Page is zero-based and defaults to 0. Thus, to retrieve the 10th page you need to set `page=9`
- * **hitsPerPage**: (integer) Pagination parameter used to select the number of hits per page. Defaults to 20.
+ * **<%= puts({'C#' => 'SetPage'}, "page") %>**: (integer) Pagination parameter used to select the page to retrieve.<br/>Page is zero-based and defaults to 0. Thus, to retrieve the 10th page you need to set `page=9`
+ * **<%= puts({'C#' => 'SetNbHitsPerPage'}, "hitsPerPage") %>**: (integer) Pagination parameter used to select the number of hits per page. Defaults to 20.
 
 #### Geo-search parameters
-
+<% if csharp? %>
+ * **AroundLatitudeLongitude(float, float, int)**: search for entries around a given latitude/longitude.<br/>You specify the maximum distance in meters with the **radius** parameter (in meters).<br/>At indexing, you should specify geoloc of an object with the _geoloc attribute (in the form `{"_geoloc":{"lat":48.853409, "lng":2.348800}}`)
+ * **AroundLatitudeLongitude(flot, float, int, int)**: search for entries around a given latitude/longitude with a given precision for ranking (for example if you set precision=100, two objects that are distant of less than 100m will be considered as identical for "geo" ranking parameter).
+<% else %>
  * **aroundLatLng**: search for entries around a given latitude/longitude (specified as two floats separated by a comma).<br/>For example `aroundLatLng=47.316669,5.016670`).<br/>You can specify the maximum distance in meters with the **aroundRadius** parameter (in meters) and the precision for ranking with **aroundPrecision** (for example if you set aroundPrecision=100, two objects that are distant of less than 100m will be considered as identical for "geo" ranking parameter).<br/>At indexing, you should specify geoloc of an object with the _geoloc attribute (in the form `{"_geoloc":{"lat":48.853409, "lng":2.348800}}`)
- * **insideBoundingBox**: search entries inside a given area defined by the two extreme points of a rectangle (defined by 4 floats: p1Lat,p1Lng,p2Lat,p2Lng).<br/>For example `insideBoundingBox=47.3165,4.9665,47.3424,5.0201`).<br/>At indexing, you should specify geoloc of an object with the _geoloc attribute (in the form `{"_geoloc":{"lat":48.853409, "lng":2.348800}}`)
+
+<% end %>
+ * **<%= puts({'C#' => 'InsideBoundingBox'}, "insideBoundingBox") %>**: search entries inside a given area defined by the two extreme points of a rectangle (defined by 4 floats: p1Lat,p1Lng,p2Lat,p2Lng).<br/>For example `<% puts({'C#' => 'insideBoundingBox(47.3165, 4.9665, 47.3424, 5.0201)'}, "insideBoundingBox=47.3165,4.9665,47.3424,5.0201") %>`.<br/>At indexing, you should specify geoloc of an object with the _geoloc attribute (in the form `{"_geoloc":{"lat":48.853409, "lng":2.348800}}`)
 
 #### Parameters to control results content
+<% if csharp? %>
+ * **SetAttributesToRetrieve**: The list of object attributes you want to retrieve (let you minimize the answer size). By default, all attributes are retrieved. You can also use `*` to retrieve all values when an **attributesToRetrieve** setting is specified for your index.
+ * **SetAttributesToHighlight**: The list of attributes you want to highlight according to the query. If an attribute has no match for the query, the raw value is returned. By default all indexed text attributes are highlighted. You can use `*` if you want to highlight all textual attributes. Numerical attributes are not highlighted. A matchLevel is returned for each highlighted attribute and can contain:
+  * **full**: if all the query terms were found in the attribute,
+  * **partial**: if only some of the query terms were found,
+  * **none**: if none of the query terms were found.
+ * **SetAttributesToSnippet**: The list of attributes to snippet alongside the number of words to return (syntax is `attributeName:nbWords`). By default no snippet is computed.
+ * **GetRankingInfo**: if set to true, the result hits will contain ranking information in **_rankingInfo** attribute.
+<% else %>
  * **attributesToRetrieve**: a string that contains the list of object attributes you want to retrieve (let you minimize the answer size).<br/> Attributes are separated with a comma (for example `"name,address"`), you can also use a string array encoding (for example `["name","address"]` ). By default, all attributes are retrieved. You can also use `*` to retrieve all values when an **attributesToRetrieve** setting is specified for your index.
  * **attributesToHighlight**: a string that contains the list of attributes you want to highlight according to the query. Attributes are separated by a comma. You can also use a string array encoding (for example `["name","address"]`). If an attribute has no match for the query, the raw value is returned. By default all indexed text attributes are highlighted. You can use `*` if you want to highlight all textual attributes. Numerical attributes are not highlighted. A matchLevel is returned for each highlighted attribute and can contain:
   * **full**: if all the query terms were found in the attribute,
@@ -142,20 +156,21 @@ You can use the following optional arguments:
   * **none**: if none of the query terms were found.
  * **attributesToSnippet**: a string that contains the list of attributes to snippet alongside the number of words to return (syntax is `attributeName:nbWords`). Attributes are separated by a comma (Example: `attributesToSnippet=name:10,content:10`). <br/>You can also use a string array encoding (Example: `attributesToSnippet: ["name:10","content:10"]`). By default no snippet is computed.
  * **getRankingInfo**: if set to 1, the result hits will contain ranking information in **_rankingInfo** attribute.
+ <% end %>
 
 #### Numeric search parameters
- * **numericFilters**: a string that contains the list of numeric filters you want to apply separated by a comma. The syntax of one filter is `attributeName` followed by `operand` followed by `value`. Supported operands are `<`, `<=`, `=`, `>` and `>=`. 
+ * **<%= puts({'C#' => 'SetNumericFilters'}, "numericFilters") %>**: a string that contains the list of numeric filters you want to apply separated by a comma. The syntax of one filter is `attributeName` followed by `operand` followed by `value`. Supported operands are `<`, `<=`, `=`, `>` and `>=`. 
  You can have multiple conditions on one attribute like for example `numericFilters=price>100,price<1000`. You can also use a string array encoding (for example `numericFilters: ["price>100","price<1000"]`).
 
 #### Category search parameters
- * **tagFilters**: filter the query by a set of tags. You can AND tags by separating them by commas. To OR tags, you must add parentheses. For example, `tags=tag1,(tag2,tag3)` means *tag1 AND (tag2 OR tag3)*. You can also use a string array encoding, for example `tagFilters: ["tag1",["tag2","tag3"]]` means *tag1 AND (tag2 OR tag3)*.<br/>At indexing, tags should be added in the **_tags** attribute of objects (for example `{"_tags":["tag1","tag2"]}`). 
+ * **<%= puts({'C#' => 'SetTagFilters'}, "tagFilters") %>**: filter the query by a set of tags. You can AND tags by separating them by commas. To OR tags, you must add parentheses. For example, `tags=tag1,(tag2,tag3)` means *tag1 AND (tag2 OR tag3)*. You can also use a string array encoding, for example `tagFilters: ["tag1",["tag2","tag3"]]` means *tag1 AND (tag2 OR tag3)*.<br/>At indexing, tags should be added in the **_tags** attribute of objects (for example `{"_tags":["tag1","tag2"]}`). 
 
 #### Faceting parameters
- * **facetFilters**: filter the query by a list of facets. Facets are separated by commas and each facet is encoded as `attributeName:value`. For example: `facetFilters=category:Book,author:John%20Doe`. You can also use a string array encoding (for example `["category:Book","author:John%20Doe"]`).
- * **facets**: List of object attributes that you want to use for faceting. <br/>Attributes are separated with a comma (for example `"category,author"` ). You can also use a JSON string array encoding (for example `["category","author"]` ). Only attributes that have been added in **attributesForFaceting** index setting can be used in this parameter. You can also use `*` to perform faceting on all attributes specified in **attributesForFaceting**.
+ * **<%= puts({'C#' => 'SetFaceFilters'}, "facetFilters") %>**: filter the query by a list of facets. Facets are separated by commas and each facet is encoded as `attributeName:value`. For example: `facetFilters=category:Book,author:John%20Doe`. You can also use a string array encoding (for example `["category:Book","author:John%20Doe"]`).
+ * **<%= puts({'C#' => 'SetFacets'}, "facets") %>**: List of object attributes that you want to use for faceting. <br/>Attributes are separated with a comma (for example `"category,author"` ). You can also use a JSON string array encoding (for example `["category","author"]` ). Only attributes that have been added in **attributesForFaceting** index setting can be used in this parameter. You can also use `*` to perform faceting on all attributes specified in **attributesForFaceting**.
 
 #### Distinct parameter
- * **distinct**: If set to 1, enable the distinct feature (disabled by default) if the `attributeForDistinct` index setting is set. This feature is similar to the SQL "distinct" keyword: when enabled in a query with the `distinct=1` parameter, all hits containing a duplicate value for the attributeForDistinct attribute are removed from results. For example, if the chosen attribute is `show_name` and several hits have the same value for `show_name`, then only the best one is kept and others are removed.
+ * **<%= puts({'C#' => 'EnableDistinct'}, "distinct") %>**: If set to <%= puts({'C#' => "YES"}, "1") %>, enable the distinct feature (disabled by default) if the `attributeForDistinct` index setting is set. This feature is similar to the SQL "distinct" keyword: when enabled in a query with the `distinct=1` parameter, all hits containing a duplicate value for the attributeForDistinct attribute are removed from results. For example, if the chosen attribute is `show_name` and several hits have the same value for `show_name`, then only the best one is kept and others are removed.
 
 <%= snippet("query") %>
 
@@ -263,7 +278,7 @@ You can delete an object using its `objectID`:
 Index Settings
 -------------
 
-You can retrieve all settings using the `<%= puts({ "Node.js" => "getSettings", "PHP" => "getSettings", "Python" => "getSettings", "Ruby" => "get_settings", "Shell" => "settings" }) %>` function. The result will contains the following attributes:
+You can retrieve all settings using the `<%= puts({ "Node.js" => "getSettings", "PHP" => "getSettings", "Python" => "getSettings", "Ruby" => "get_settings", "Shell" => "settings", 'C#' => "GetSettings" }) %>` function. The result will contains the following attributes:
 
 
 #### Indexing parameters
@@ -306,7 +321,7 @@ You can easily retrieve settings or update them:
 
 List indexes
 -------------
-You can list all your indexes with their associated information (number of entries, disk size, etc.) with the `<%= puts({ "Node.js" => "listIndexes", "PHP" => "listIndexes", "Python" => "listIndexes", "Ruby" => "list_indexes", "Shell" => "indexes" }) %>` method:
+You can list all your indexes with their associated information (number of entries, disk size, etc.) with the `<%= puts({ "Node.js" => "listIndexes", "PHP" => "listIndexes", "Python" => "listIndexes", "Ruby" => "list_indexes", "Shell" => "indexes", "C#" => "listIndexes" }) %>` method:
 
 <%= snippet("list_index") %>
 
@@ -338,9 +353,9 @@ Batch writes
 
 You may want to perform multiple operations with one API call to reduce latency.
 We expose three methods to perform batch:
- * `<%= puts({ "Node.js" => "addObjects", "PHP" => "addObjects", "Python" => "addObjects", "Ruby" => "add_objects", "Shell" => "addObject" }) %>`: add an array of object using automatic `objectID` assignement
- * `<%= puts({ "Node.js" => "saveObjects", "PHP" => "saveObjects", "Python" => "saveObjects", "Ruby" => "save_objects", "Shell" => "saveObject" }) %>`: add or update an array of object that contains an `objectID` attribute
- * `<%= puts({ "Node.js" => "partialUpdateObjects", "PHP" => "partialUpdateObjects", "Python" => "partialUpdateObjects", "Ruby" => "partial_update_objects", "Shell" => "partialUpdate" }) %>`: partially update an array of objects that contain an `objectID` attribute (only specified attributes will be updated, other will remain unchanged)
+ * `<%= puts({ "Node.js" => "addObjects", "PHP" => "addObjects", "Python" => "addObjects", "Ruby" => "add_objects", "Shell" => "addObject", 'C#' => 'AddObjects' }) %>`: add an array of object using automatic `objectID` assignement
+ * `<%= puts({ "Node.js" => "saveObjects", "PHP" => "saveObjects", "Python" => "saveObjects", "Ruby" => "save_objects", "Shell" => "saveObject", 'C#' => 'SaveObjects' }) %>`: add or update an array of object that contains an `objectID` attribute
+ * `<%= puts({ "Node.js" => "partialUpdateObjects", "PHP" => "partialUpdateObjects", "Python" => "partialUpdateObjects", "Ruby" => "partial_update_objects", "Shell" => "partialUpdate", 'C#' => "PartialUpdateObjects" }) %>`: partially update an array of objects that contain an `objectID` attribute (only specified attributes will be updated, other will remain unchanged)
 
 Example using automatic `objectID` assignement:
 <%= snippet("batch_new_objects") %>
@@ -381,7 +396,7 @@ You can also create an API Key with advanced restrictions:
 
  * Add a validity period: the key will be valid only for a specific period of time (in seconds),
  * Specify the maximum number of API calls allowed from an IP address per hour. Each time an API call is performed with this key, a check is performed. If the IP at the origin of the call did more than this number of calls in the last hour, a 403 code is returned. Defaults to 0 (no rate limit). This parameter can be used to protect you from attempts at retrieving your entire content by massively querying the index.
-<% if !cmd? %>
+<% if !cmd? && !csharp? %>
 <%= snippet("security_note_forward") %>
 <% end %>
  * Specify the maximum number of hits this API key can retrieve in one call. Defaults to 0 (unlimited). This parameter can be used to protect you from attempts at retrieving your entire content by massively querying the index.

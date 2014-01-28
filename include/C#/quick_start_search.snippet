@@ -1,0 +1,10 @@
+```csharp
+// search by firstname
+System.Diagnostics.Debug.WriteLine(await index.Search(new Query("jimmie")));
+// search a firstname with typo
+System.Diagnostics.Debug.WriteLine(await index.Search(new Query("jimie")));
+// search for a company
+System.Diagnostics.Debug.WriteLine(await index.Search(new Query("california paint")));
+// search for a firstname & company
+System.Diagnostics.Debug.WriteLine(await index.Search(new Query("jimmie paint")));
+```

@@ -1,0 +1,11 @@
+```csharp
+// Retrieves all attributes
+var res = await index.GetObject("myID");
+System.Diagnostics.Debug.WriteLine(res);
+// Retrieves firstname and lastname attributes
+res = await index.GetObject("myID", new String[] {"firstname", "lastname"});
+System.Diagnostics.Debug.WriteLine(res);
+// Retrieves only the firstname attribute
+res = await index.GetObject("myID", new String[] { "firstname" });
+System.Diagnostics.Debug.WriteLine(res);
+```

@@ -1,0 +1,8 @@
+```csharp
+var res = await index.GetSettings();
+System.Diagnostics.Debug.WriteLine(res);
+```
+
+```csharp
+await index.SetSettings(JObject.Parse(@"{""customRanking"":[""desc(followers)""]}"));
+```

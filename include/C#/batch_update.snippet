@@ -1,0 +1,11 @@
+```csharp
+List<JObject> objs = new List<JObject>();
+objs.Add(JObject.Parse(@"{""firstname"":""Jimmie"", 
+                          ""lastname"":""Barninger"",
+                          ""objectID"":""myID1""}"));
+objs.Add(JObject.Parse(@"{""firstname"":""Warren"", 
+                          ""lastname"":""Speach"",
+                          ""objectID"": ""myID2""}"));
+var res = await index.SaveObjects(objs);
+System.Diagnostics.Debug.WriteLine(res);
+```
