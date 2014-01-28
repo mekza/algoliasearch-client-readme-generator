@@ -1,0 +1,14 @@
+Without any prior-configuration, you can index some contacts in the ```contacts``` index with the following code:
+```java
+Index index = client.initIndex("contacts");
+index.addObject(new JSONObject()
+      .put("firstname", "Jimmie")
+      .put("lastname", "Barninger")
+      .put("followers", 93)
+      .put("company", "California Paint"));
+index.addObject(new JSONObject()
+      .put("firstname", "Warren")
+      .put("lastname", "Speach")
+      .put("followers", 42)
+      .put("company", "Norwalk Crmc"));
+```

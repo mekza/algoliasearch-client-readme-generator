@@ -1,0 +1,15 @@
+```java
+index.getSettingsASync(this);
+```
+
+You will get the index settings in the getSettingsResult callbacl of IndexListener:
+```java
+@Override
+public void getSettingsResult(Index index, JSONObject result) {
+  Log.d("debug", result.toString());    
+}  
+```
+
+```java
+index.setSettingsASync(new JSONObject().append("customRanking", "desc(followers)"), this);
+```

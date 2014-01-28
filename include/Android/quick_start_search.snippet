@@ -1,0 +1,18 @@
+```java
+// search by firstname
+index.searchASync(new Query("jimmie"), this);
+// search a firstname with typo
+index.searchASync(new Query("jimie"), this);
+// search for a company
+index.searchASync(new Query("california paint"), this);
+// search for a firstname & company
+index.searchASync(new Query("jimmie paint"), this);
+```
+
+You will get search results in the searchResult callback of your Activity:
+```java
+@Override
+public void searchResult(Index index, Query query, JSONObject results) {
+  Log.d("search", results.toString());
+}
+```

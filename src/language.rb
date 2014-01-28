@@ -53,6 +53,14 @@ class Language
     name == 'C#'
   end
 
+  def java?
+    name == 'Java'
+  end
+
+  def android?
+    name == 'Android'
+  end
+
   def get_binding
     binding
   end

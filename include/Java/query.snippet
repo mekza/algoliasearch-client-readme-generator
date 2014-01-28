@@ -1,0 +1,7 @@
+```java
+Index index = client.initIndex("contacts");
+System.out.println(index.search(new Query("query string")));
+System.out.println(index.search(new Query("query string").
+             setAttributesToRetrieve(Arrays.asList("firstname", "lastname")).
+             setNbHitsPerPage(50)));
+```

@@ -1,0 +1,13 @@
+```java
+index.addObjectASync(new JSONObject()
+      .put("firstname", "Jimmie")
+      .put("lastname", "Barninger"), this);
+```
+
+You will get the assigned objectID in the `addObjectResult` callback of IndexListener interface:
+```java
+@Override
+public void addObjectResult(Index index, String object, JSONObject result) {
+  Log.d("debug", result.getString("objectID"));
+}
+```

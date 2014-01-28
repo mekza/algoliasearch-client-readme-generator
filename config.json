@@ -20,6 +20,12 @@
     },
     "C#": {
       "outputDir": "../../algoliasearch-client-csharp"
+    },
+    "Java": {
+      "outputDir": "../../algoliasearch-client-java"
+    },
+    "Android": {
+      "outputDir": "../../algoliasearch-client-android"
     }
   },
   "templateFiles": [
