@@ -1,0 +1,15 @@
+```php
+$res = $index->batch(array(
+  "requests" => array(
+      array("action" => "addObject",
+            "body" => array("firstname" => "Jimmie", "lastname" => "Barninger")),
+      array("action" => "addObject",
+            "body" => array("Warren" => "Jimmie", "lastname" => "Speach")),
+      array("action" => "updateObject",
+            "objectID" => "myID3",
+            "body" => array("firstname" => "Rob")),
+    )
+  )
+);
+```
+
