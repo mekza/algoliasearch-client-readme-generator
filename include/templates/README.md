@@ -118,7 +118,7 @@ Search
 
 <% if cmd? %>To perform a search, you have just to specify the index name and the query.<% else %>To perform a search, you just need to initialize the index and perform a call to the search function.<% end %>
 
-You can use the following optional arguments <%= puts({"C#" => "on Query class", "Objective-C" => "on ASQuery class"}) %>:
+You can use the following optional arguments<%= puts({"C#" => " on Query class", "Objective-C" => " on ASQuery class"}) %>:
 
 ### Query parameters
 
