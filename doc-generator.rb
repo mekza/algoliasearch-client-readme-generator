@@ -64,7 +64,7 @@ class Generator
       templateData = File.read(File.join @pwd, INCLUDE_DIR, templateFileIn)
       @config["languages"].each do |languageName, languageData|
         lang = Language.new(languageName, languageData)
-        template = ERB.new(templateData)
+        template = ERB.new(templateData, 0, '-')
         fileOut = File.join(lang.outputDir, File.basename(templateFileIn))
         File.write(fileOut, template.result(lang.get_binding))
       end

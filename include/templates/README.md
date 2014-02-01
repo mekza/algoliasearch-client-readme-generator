@@ -1,5 +1,11 @@
-<% if cmd? %>Algolia Search Command Line API Client<% else %>Algolia Search API Client for <%= !objc? ? @name : "iOS and OS X" %><% end %>
+<% if cmd? -%>
+Algolia Search Command Line API Client
+<% else -%>
+Algolia Search API Client for <%= !objc? ? @name : "iOS and OS X" %>
+<% end -%>
 ==================
+
+<%#    ************************** INTRO ********************************** %>
 
 <% if js? %>
 This Javascript client let you easily use the [Algolia Search API](http://www.algolia.com) in a browser, it is compatible with most browsers:
@@ -27,9 +33,17 @@ Algolia’s Search API makes it easy to deliver a great search experience in you
  * 99.99% SLA
  * first-class data security
 
-<% if !js? && !cmd? %>This <%= @name %> client let you easily use the Algolia Search API from your <%= puts({'C#' => 'App', 'Java' => "Java Application", "Android" => "Android Application", 'Objective-C' => "application (iOS & OS X)"}, "backend") %>. It wraps [Algolia's REST API](http://www.algolia.com/doc/rest_api).<% elsif cmd? %>This command line API Client is a small wrapper around CURL to easily use Algolia Search's REST API.<% end %><% if csharp? %>(Compatible with .NET 4.5, SL4+, WP7.5+, Windows Store)<% end %>
-<% if android? %>It is based on our [Java API client](https://github.com/algolia/algoliasearch-client-java) and  includes an easy to use asynchronous API to avoid networks calls on UI Thread.<% end%>
+<% if !js? && !cmd? -%>
+This <%= @name %> client let you easily use the Algolia Search API from your <%= puts({'C#' => 'App', 'Java' => "Java Application", "Android" => "Android Application", 'Objective-C' => "application (iOS & OS X)"}, "backend") %>. It wraps [Algolia's REST API](http://www.algolia.com/doc/rest_api).
+<% elsif cmd? -%>
+This command line API Client is a small wrapper around CURL to easily use Algolia Search's REST API.
+<% end -%>
+<% if csharp? -%>(Compatible with .NET 4.5, SL4+, WP7.5+, Windows Store)<% end -%>
+<% if android? -%>It is based on our [Java API client](https://github.com/algolia/algoliasearch-client-java) and  includes an easy to use asynchronous API to avoid networks calls on UI Thread.<% end -%>
+
 <%= import("build_status.info") if !cmd? && !csharp? && !java? && !android? && !objc? %>
+
+<%#    ************************** TOC ********************************** %>
 
 Table of Content
 -------------
@@ -42,7 +56,7 @@ Table of Content
 **Commands reference**
 
 1. [Search](#search)
-<% if !js? %>
+<% if !js? -%>
 1. [Add a new object](#add-a-new-object-in-the-index)
 1. [Update an object](#update-an-existing-object-in-the-index)
 1. [Get an object](#get-an-object)
@@ -60,20 +74,26 @@ Table of Content
 <% if ruby? %>1. [Mock](#mock)<% end %>
 <% end %>
 
+<%#    ************************** SETUP ********************************** %>
+
 Setup
 -------------
 <% if cmd? %>To setup the command line client<% else %>To setup your project<% end %>, follow these steps:
+
 <% if java? %>If you're using Maven, add the following dependency and repository to your pom file:
 <%= snippet("setup_maven") %>
 
 Initialize the client with your ApplicationID and API-Key. You can find all of them on [your Algolia account](http://www.algolia.com/users/edit):
 <% end %>
+
 <% if android? %>
  1. Download [latest algoliasearch-client-android-*.jar](https://github.com/algolia/algoliasearch-client-android/tree/master/dist) and add it to the lib folder of your project.
  2. Initialize the client with your ApplicationID and API-Key. You can find all of them on [your Algolia account](http://www.algolia.com/users/edit).
  3. Make your Activity class implements the `IndexListener` interface to be able to use the asynchronous methods.
 <% end %>
 <%= snippet("setup") %>
+
+<%#    ************************** QUICK START ********************************** %>
 
 Quick Start
 -------------
@@ -111,6 +131,9 @@ All API calls will return the result in a callback that takes two arguments:
  2. **content**: the object containing the answer (if an error was found, you can retrieve the error message in `content.message`)
 
 <% end %>
+
+
+<%#    ************************** API CLIENT REFERENCE ********************************** %>
 
 Search
 -------------
@@ -233,6 +256,7 @@ For more details about updating an index from javascript, have a look at the [al
     ...
 ```
 <% else %>
+
 Add a new object in the Index
 -------------
 
