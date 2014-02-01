@@ -1,9 +1,9 @@
 #! /bin/sh
 
-cd `dirname $0`
+cd `dirname $0`/..
 
 if [ "$#" = "1" -a "$1" = "--revert" ] ; then
-  echo "RESET DU DERNIER COMMIT DES DEPOTS"
+  echo "ALL README.md FILES ARE GOING TO BE RESET, HIT CTRL-C TO STOP."
   sleep 10
   for dir in ../algoliasearch-client-*; do
     cd $dir
@@ -53,5 +53,5 @@ for dir in ../algoliasearch-client-*; do
   fi
 done
 
-echo "README.mds commited !"
+echo "README.mds committed !"
 exit 0
