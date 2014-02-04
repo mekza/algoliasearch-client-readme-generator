@@ -159,7 +159,7 @@ You can use the following optional arguments<%= puts({"C#" => " on Query class",
 #### Pagination parameters
 
  * **<%= puts({'C#' => 'SetPage', 'Java' => 'setPage', 'Android' => 'setPage'}, "page") %>**: (integer) Pagination parameter used to select the page to retrieve.<br/>Page is zero-based and defaults to 0. Thus, to retrieve the 10th page you need to set `page=9`
- * **<%= puts({'C#' => 'SetNbHitsPerPage', 'Java' => 'setNbHitsPerPage', 'Android' => 'setNbHitsPerPage'}, "hitsPerPage") %>**: (integer) Pagination parameter used to select the number of hits per page. Defaults to 20.
+ * **<%= puts({'C#' => 'SetNbHitsPerPage', 'Java' => 'setHitsPerPage', 'Android' => 'setHitsPerPage'}, "hitsPerPage") %>**: (integer) Pagination parameter used to select the number of hits per page. Defaults to 20.
 
 #### Geo-search parameters
 <% if csharp? || java? || android? || objc? %>
