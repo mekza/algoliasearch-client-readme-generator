@@ -55,10 +55,10 @@ Table of Content
 
 **Commands reference**
 
-1. [Search](#search)
 <% if !js? -%>
 1. [Add a new object](#add-a-new-object-in-the-index)
 1. [Update an object](#update-an-existing-object-in-the-index)
+1. [Search](#search)
 1. [Get an object](#get-an-object)
 1. [Delete an object](#delete-an-object)
 1. [Index settings](#index-settings)
@@ -72,6 +72,8 @@ Table of Content
 1. [Backup / Retrieve all index content](#backup--retrieve-all-index-content)
 1. [Logs](#logs)
 <% if ruby? %>1. [Mock](#mock)<% end %>
+<% else %>
+1. [Search](#search)
 <% end %>
 
 <%#    ************************** SETUP ********************************** %>
@@ -134,6 +136,59 @@ All API calls will return the result in a callback that takes two arguments:
 
 
 <%#    ************************** API CLIENT REFERENCE ********************************** %>
+
+<% if js? %>
+Update the index
+-------------
+
+The javascript client is dedicated to web apps searching directly from the browser. In some use-cases, it can however be interesting to perform updates to the index directly in javascript, for example in an HTML5 mobile app. Therefore, just as for other languages, the javascript client is able to add, update or delete objects, or to modify index settings.
+
+For more details about updating an index from javascript, have a look at the [algoliasearch.js](https://github.com/algolia/algoliasearch-client-js/blob/master/algoliasearch.js) source file to see details about each function.
+
+**Note:** If you use the javascript client to update the index, you need to specify `https` as the protocol in the client initialization:
+
+```javascript
+  <script src="algoliasearch.min.js"></script>
+  <script>
+    client = new AlgoliaSearch('ApplicationID', 'API-Key', 'https');
+    ...
+```
+<% else %>
+
+Add a new object in the Index
+-------------
+
+Each entry in an index has a unique identifier called `objectID`. You have two ways to add en entry in the index:
+
+ 1. Using automatic `objectID` assignement, you will be able to retrieve it in the answer.
+ 2. Passing your own `objectID`
+
+You don't need to explicitely create an index, it will be automatically created the first time you add an object.
+Objects are schema less, you don't need any configuration to start indexing. The settings section provide details about advanced settings.
+
+Example with automatic `objectID` assignement:
+
+<%= snippet("add_new_object_auto") %>
+
+Example with manual `objectID` assignement:
+
+<%= snippet("add_new_object_manual") %>
+
+Update an existing object in the Index
+-------------
+
+You have two options to update an existing object:
+
+ 1. Replace all its attributes.
+ 2. Replace only some attributes.
+
+Example to replace all the content of an existing object:
+
+<%= snippet("update_object") %>
+
+Example to update only the city attribute of an existing object:
+
+<%= snippet("update_object_partial") %>
 
 Search
 -------------
@@ -238,59 +293,6 @@ The server response will look like:
   "params": "query=jimmie+paint&attributesToRetrieve=firstname,lastname&hitsPerPage=50"
 }
 ```
-
-<% if js? %>
-Update the index
--------------
-
-The javascript client is dedicated to web apps searching directly from the browser. In some use-cases, it can however be interesting to perform updates to the index directly in javascript, for example in an HTML5 mobile app. Therefore, just as for other languages, the javascript client is able to add, update or delete objects, or to modify index settings.
-
-For more details about updating an index from javascript, have a look at the [algoliasearch.js](https://github.com/algolia/algoliasearch-client-js/blob/master/algoliasearch.js) source file to see details about each function.
-
-**Note:** If you use the javascript client to update the index, you need to specify `https` as the protocol in the client initialization:
-
-```javascript
-  <script src="algoliasearch.min.js"></script>
-  <script>
-    client = new AlgoliaSearch('ApplicationID', 'API-Key', 'https');
-    ...
-```
-<% else %>
-
-Add a new object in the Index
--------------
-
-Each entry in an index has a unique identifier called `objectID`. You have two ways to add en entry in the index:
-
- 1. Using automatic `objectID` assignement, you will be able to retrieve it in the answer.
- 2. Passing your own `objectID`
-
-You don't need to explicitely create an index, it will be automatically created the first time you add an object.
-Objects are schema less, you don't need any configuration to start indexing. The settings section provide details about advanced settings.
-
-Example with automatic `objectID` assignement:
-
-<%= snippet("add_new_object_auto") %>
-
-Example with manual `objectID` assignement:
-
-<%= snippet("add_new_object_manual") %>
-
-Update an existing object in the Index
--------------
-
-You have two options to update an existing object:
-
- 1. Replace all its attributes.
- 2. Replace only some attributes.
-
-Example to replace all the content of an existing object:
-
-<%= snippet("update_object") %>
-
-Example to update only the city attribute of an existing object:
-
-<%= snippet("update_object_partial") %>
 
 Get an object
 -------------
