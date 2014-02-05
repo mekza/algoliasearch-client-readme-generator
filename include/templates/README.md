@@ -51,7 +51,10 @@ Table of Content
 
 1. [Setup](#setup)
 1. [Quick Start](#quick-start)
-<% if nodejs? || js? %>1. [General Principle](#general-principle)"])<% end %>
+<% if nodejs? || js? -%>
+1. [General Principle](#general-principle)"])
+<% end -%>
+1. [Online documentation](#online-documentation)
 
 **Commands reference**
 
@@ -134,8 +137,25 @@ All API calls will return the result in a callback that takes two arguments:
 
 <% end %>
 
+Online Documentation
+----------------
 
-<%#    ************************** API CLIENT REFERENCE ********************************** %>
+Check our [online documentation](http://www.algolia.com/doc):
+ * [Initial Import](http://www.algolia.com/doc#InitialImport)
+ * [Ranking &amp; Relevance](http://www.algolia.com/doc#RankingRelevance)
+ * [Settings](http://www.algolia.com/doc#Settings)
+ * [Search](http://www.algolia.com/doc#Search)
+ * [Incremental Updates](http://www.algolia.com/doc#IncrementalUpdates)
+ * [Reindexing](http://www.algolia.com/doc#Reindexing)
+ * [Numeric-Search](http://www.algolia.com/doc#Numeric-Search)
+ * [Category-Search](http://www.algolia.com/doc#Category-Search)
+ * [Faceting](http://www.algolia.com/doc#Faceting)
+ * [Geo-Search](http://www.algolia.com/doc#Geo-Search)
+ * [Security](http://www.algolia.com/doc#Security)
+ * [Indexing Several Types](http://www.algolia.com/doc#IndexingSeveralTypes)
+ * [REST API](http://www.algolia.com/doc/rest)
+
+<%#    ************************** API CLIENT REFERENCE JS ********************************** %>
 
 <% if js? %>
 Update the index
@@ -154,6 +174,8 @@ For more details about updating an index from javascript, have a look at the [al
     ...
 ```
 <% else %>
+
+<%#    ************************** API CLIENT REFERENCE OTHERS ********************************** %>
 
 Add a new object in the Index
 -------------
