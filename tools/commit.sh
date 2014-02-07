@@ -24,6 +24,18 @@ if [ "$#" = "1" -a "$1" = "--show" ] ; then
   exit 0
 fi
 
+if [ "$#" = "1" -a "$1" = "--prepare" ] ; then
+  echo "prepare repos to update README.mds"
+  ./doc-generator.rb config.json
+  for dir in ../algoliasearch-client-*; do
+    cd $dir
+    echo "$dir"
+    git checkout README.md; git pull -r
+  done
+  exit 0
+fi
+
+
 if [ "$#" != "1" -o "$1" != "--push" ] ; then
   echo "Usage: ./commit {--show|--revert|--push}"
   exit 1
