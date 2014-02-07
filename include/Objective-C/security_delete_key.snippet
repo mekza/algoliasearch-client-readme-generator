@@ -1,0 +1,12 @@
+```objc
+// Deletes a global key
+[apiClient deleteUserKey:@"79710f2fbe18a06fdf12c17a16878654" success:nil 
+  failure:^(ASAPIClient *client, NSString *key, NSString *errorMessage) {
+    NSLog(@"Delete error: %@", errorMessage);
+}];    
+// Deletes an index specific key
+[index deleteUserKey:@"013464b04012cb73299395a635a2fc6c" success:nil 
+  failure:^(ASRemoteIndex *index, NSString *key, NSString *errorMessage) {
+   NSLog(@"Delete error: %@", errorMessage);
+}]; 
+```

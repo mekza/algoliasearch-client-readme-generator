@@ -1,0 +1,12 @@
+```objc
+// Retrieves all attributes
+[index getObject:@"myID" 
+  success:^(ASRemoteIndex *index, NSString *objectID, NSDictionary *result) {
+    NSLog(@"Object: %@", result);
+} failure:nil];
+// Retrieves only the firstname attribute
+[index getObject:@"myID" attributesToRetrieve:[NSArray arrayWithObject:@"firstname"] 
+  success:^(ASRemoteIndex *index, NSString *objectID, NSArray *attributesToRetrieve, NSDictionary *result) {
+    NSLog(@"Object: %@", result);
+} failure:nil];
+```

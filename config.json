@@ -26,6 +26,9 @@
     },
     "Android": {
       "outputDir": "../../algoliasearch-client-android"
+    },
+    "Objective-C": {
+      "outputDir": "../../algoliasearch-client-objc"
     }
   },
   "templateFiles": [
