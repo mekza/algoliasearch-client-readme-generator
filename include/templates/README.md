@@ -53,7 +53,7 @@ Table of Content
 1. [Setup](#setup)
 1. [Quick Start](#quick-start)
 <% if nodejs? || js? -%>
-1. [General Principle](#general-principle)"])
+1. [General Principle](#general-principle)
 <% end -%>
 1. [Online documentation](#online-documentation)
 
