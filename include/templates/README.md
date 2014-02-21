@@ -213,6 +213,8 @@ Example to update only the city attribute of an existing object:
 
 <%= snippet("update_object_partial") %>
 
+<% end %>
+
 Search
 -------------
 <% if !js? && !cmd? && !android? && !objc? %> **Opening note:** If you are building a web application, you may be more interested in using our [javascript client](https://github.com/algolia/algoliasearch-client-js) to send queries. It brings two benefits: (i) your users get a better response time by avoiding to go through your servers, and (ii) it will offload your servers of unnecessary tasks.<% end %>
@@ -318,6 +320,8 @@ The server response will look like:
 }
 ```
 
+<% if !js? %>
+
 Get an object
 -------------
 
@@ -412,6 +416,7 @@ You may want to perform multiple operations with one API call to reduce latency.
 We expose three methods to perform batch:
  * `<%= puts({ "Node.js" => "addObjects", "PHP" => "addObjects", "Python" => "addObjects", "Ruby" => "add_objects", "Shell" => "addObject", 'C#' => 'AddObjects', 'Java' => 'addObjects', 'Android' => 'addObjects', 'Objective-C' => 'addObjects' }) %>`: add an array of object using automatic `objectID` assignement
  * `<%= puts({ "Node.js" => "saveObjects", "PHP" => "saveObjects", "Python" => "saveObjects", "Ruby" => "save_objects", "Shell" => "saveObject", 'C#' => 'SaveObjects', 'Java' => 'saveObjects', 'Android' => 'saveObjects', 'Objective-C' => 'saveObjects' }) %>`: add or update an array of object that contains an `objectID` attribute
+ * `<%= puts({ "Node.js" => "deleteObjects", "PHP" => "deleteObjects", "Python" => "deleteObjects", "Ruby" => "delete_objects", "Shell" => "deleteObject", 'C#' => 'DeleteObjects', 'Java' => 'deleteObjects', 'Android' => 'deleteObjects', 'Objective-C' => 'deleteObjects' }) %>`: delete an array of objectIDs
  * `<%= puts({ "Node.js" => "partialUpdateObjects", "PHP" => "partialUpdateObjects", "Python" => "partialUpdateObjects", "Ruby" => "partial_update_objects", "Shell" => "partialUpdate", 'C#' => "PartialUpdateObjects", 'Java' => 'partialUpdateObjects', 'Android' => 'partialUpdateObjects', 'Objective-C' => 'partialUpdateObjects' }) %>`: partially update an array of objects that contain an `objectID` attribute (only specified attributes will be updated, other will remain unchanged)
 
 Example using automatic `objectID` assignement:
@@ -419,6 +424,9 @@ Example using automatic `objectID` assignement:
 
 Example with user defined `objectID` (add or update):
 <%= snippet("batch_update") %>
+
+Example that delete a set of records:
+<%= snippet("batch_delete") %>
 
 Example that update only the `firstname` attribute:
 <%= snippet("batch_update_partial") %>
