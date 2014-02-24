@@ -465,6 +465,7 @@ You can also create an API Key with advanced restrictions:
 <%= snippet("security_note_forward") %>
 <% end %>
  * Specify the maximum number of hits this API key can retrieve in one call. Defaults to 0 (unlimited). This parameter can be used to protect you from attempts at retrieving your entire content by massively querying the index.
+ * Specify the list of targeted indexes. Defaults to all indexes if empty of blank.
 
 <%= snippet("security_add_user_key") %>
 
