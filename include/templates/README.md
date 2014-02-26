@@ -536,7 +536,7 @@ Delete an existing key:
 
 You may have a single index containing per-user data. In that case, all records should be tagged with their associated user_id in order to add a `tagFilters=(public,user_42)` filter at query time to retrieve only what a user has access to. If you're using the [JavaScript client](http://github.com/algolia/algoliasearch-client-js), it will result in a security breach since the user is able to modify the `tagFilters` you've set modifying the code from the browser. To keep using the JavaScript client (recommended for optimal latency) and target secured records, you can generate secured API key from your backend:
 
-<%= snippet("generate_secured_api_key") if ruby? || python? || php? %>
+<%= snippet("generate_secured_api_key") if ruby? || python? || php? || nodejs? || java? || android? %>
 
 This public API key must then be used in your JavaScript code as follow:
 
@@ -552,7 +552,7 @@ This public API key must then be used in your JavaScript code as follow:
 
 You can mix rate limits and secured API keys setting an extra `user_token` attribute both at API key generation-time and query-time. When set, a uniq user will be identified by her `IP + user_token` instead of only her `IP`. It allows you to restrict a single user to perform maximum `N` API calls per hour, even if she share her `IP` with another user.
 
-<%= snippet("generate_secured_api_key_user_token") if ruby? || python? || php? %>
+<%= snippet("generate_secured_api_key_user_token") if ruby? || python? || php? || nodejs? || java? || android? %>
 
 This public API key must then be used in your JavaScript code as follow:
 
