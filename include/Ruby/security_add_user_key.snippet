@@ -2,8 +2,11 @@
 # Creates a new global API key that is valid for 300 seconds
 res = Algolia.add_user_key(["search"], 300)
 puts res['key']
-# Creates a new index specific API key valid for 300 seconds, with a rate limit of 100 calls per hour per IP and a maximum of 20 hits
-res = index.add_user_key(["search"], 300, 100, 20)
+# Creates a new index specific API key:
+#  - valid for 300 seconds
+#  - rate limit of 100 calls per hour per IP
+#  - maximum of 20 hits
+#  - valid on 'my_index1' and 'my_index2'
+res = index.add_user_key(["search"], 300, 100, 20, ['my_index1', 'my_index2'])
 puts res['key']
 ```
-

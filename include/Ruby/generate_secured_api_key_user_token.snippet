@@ -1,0 +1,6 @@
+```ruby
+# generate a public API key for user 42. Here, records are tagged with:
+#  - 'public' if they are visible by all users
+#  - 'user_XXXX' if they are visible by user XXXX
+public_key = Algolia.generate_secured_api_key 'YourRateLimitedApiKey', '(public,user_42)', 'user_42'
+```

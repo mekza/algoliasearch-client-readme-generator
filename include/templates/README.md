@@ -53,7 +53,7 @@ Table of Content
 1. [Setup](#setup)
 1. [Quick Start](#quick-start)
 <% if nodejs? || js? -%>
-1. [General Principle](#general-principle)"])
+1. [General Principle](#general-principle)
 <% end -%>
 1. [Online documentation](#online-documentation)
 
@@ -78,6 +78,8 @@ Table of Content
 <% if ruby? %>1. [Mock](#mock)<% end %>
 <% else %>
 1. [Search](#search)
+1. [Multi-queries](#multi-queries)
+1. [Security](#security)
 <% end %>
 
 <%#    ************************** SETUP ********************************** %>
@@ -106,7 +108,7 @@ Quick Start
 <% if js? %>
 First, index some data. For example, you can use the command line client [quick start](https://github.com/algolia/algoliasearch-client-cmd#quick-start) to index the 500 contacts sample.
 
-You can then update the ```example/autocomplete.html``` file with your ```ApplicationID```, ```API-Key``` and ```index name``` to test the autocomplete feature. This version is based on [typeahead.js](http://twitter.github.io/typeahead.js/) version 0.9.3 with a small [patch](https://github.com/algolia/typeahead.js/commit/4edb95e8beb390e92720196a29186d83b8dba9d9) to allow usage of Algolia JS client.
+You can then update the ```example/autocomplete.html``` file with your ```ApplicationID```, ```API-Key``` and ```index name``` to test the autocomplete feature.
 
 You can also update the ```example/instantsearch.html``` file with your ```ApplicationID```, ```API-Key``` and ```index name``` to test an instant-search example.
 <% else %>
@@ -164,7 +166,7 @@ Update the index
 
 The javascript client is dedicated to web apps searching directly from the browser. In some use-cases, it can however be interesting to perform updates to the index directly in javascript, for example in an HTML5 mobile app. Therefore, just as for other languages, the javascript client is able to add, update or delete objects, or to modify index settings.
 
-For more details about updating an index from javascript, have a look at the [algoliasearch.js](https://github.com/algolia/algoliasearch-client-js/blob/master/algoliasearch.js) source file to see details about each function.
+For more details about updating an index from javascript, have a look at the [algoliasearch.js](https://github.com/algolia/algoliasearch-client-js/blob/master/src/algoliasearch.js) source file to see details about each function.
 
 **Note:** If you use the javascript client to update the index, you need to specify `https` as the protocol in the client initialization:
 
@@ -212,6 +214,8 @@ Example to replace all the content of an existing object:
 Example to update only the city attribute of an existing object:
 
 <%= snippet("update_object_partial") %>
+
+<% end %>
 
 Search
 -------------
@@ -318,6 +322,65 @@ The server response will look like:
 }
 ```
 
+<% if js? %>
+
+Multi-queries
+--------------
+
+You can send multiple queries with a single API call using a batch of queries:
+
+```javascript
+// perform 3 queries in a single API call:
+//  - 1st query targets index `categories`
+//  - 2nd and 3rd queries target index `products`
+client.startQueriesBatch();
+client.addQueryInBatch('categories', $('#q').val(), { hitsPerPage: 3 });
+client.addQueryInBatch('products', $('#q').val(), { hitsPerPage: 3, tagFilters: 'promotion' });
+client.addQueryInBatch('products', $('#q').val(), { hitsPerPage: 10 });
+client.sendQueriesBatch(searchMultiCallback);
+
+function searchMultiCallback(success, content) {
+  if (success) {
+    var categories = content.results[0];
+    for (var i = 0; i < categories.hits.length; ++i) {
+      console.log(categories.hits[i]);
+    }
+
+    var products_promotion = content.results[1];
+    for (var i = 0; i < products_promotion.hits.length; ++i) {
+      console.log(products_promotion.hits[i]);
+    }
+
+    var products = content.results[2];
+    for (var i = 0; i < products.hits.length; ++i) {
+      console.log(products.hits[i]);
+    }
+  }
+}
+```
+
+Security
+---------
+
+If you're using a secured API key (see backend client documentation), you need to set the associated `tags`:
+
+```javascript
+var algolia = new AlgoliaSearch('YourApplicationID', 'YourPublicSecuredAPIKey');
+algolia.setSecurityTags('(public,user_42)'); // must be same than those used at generation-time
+```
+
+If you've specified a `userToken` while generating your secured API key, you must also specified it at query-time:
+
+```javascript
+var algolia = new AlgoliaSearch('YourApplicationID', 'YourPublicSecuredAPIKey');
+algolia.setSecurityTags('(public,user_42)'); // must be same than those used at generation-time
+algolia.setUserToken('user_42')              // must be same than the one used at generation-time
+```
+
+<% end %>
+
+<% if !js? %>
+
 Get an object
 -------------
 
@@ -412,6 +475,7 @@ You may want to perform multiple operations with one API call to reduce latency.
 We expose three methods to perform batch:
  * `<%= puts({ "Node.js" => "addObjects", "PHP" => "addObjects", "Python" => "addObjects", "Ruby" => "add_objects", "Shell" => "addObject", 'C#' => 'AddObjects', 'Java' => 'addObjects', 'Android' => 'addObjects', 'Objective-C' => 'addObjects' }) %>`: add an array of object using automatic `objectID` assignement
  * `<%= puts({ "Node.js" => "saveObjects", "PHP" => "saveObjects", "Python" => "saveObjects", "Ruby" => "save_objects", "Shell" => "saveObject", 'C#' => 'SaveObjects', 'Java' => 'saveObjects', 'Android' => 'saveObjects', 'Objective-C' => 'saveObjects' }) %>`: add or update an array of object that contains an `objectID` attribute
+ * `<%= puts({ "Node.js" => "deleteObjects", "PHP" => "deleteObjects", "Python" => "deleteObjects", "Ruby" => "delete_objects", "Shell" => "deleteObject", 'C#' => 'DeleteObjects', 'Java' => 'deleteObjects', 'Android' => 'deleteObjects', 'Objective-C' => 'deleteObjects' }) %>`: delete an array of objectIDs
  * `<%= puts({ "Node.js" => "partialUpdateObjects", "PHP" => "partialUpdateObjects", "Python" => "partialUpdateObjects", "Ruby" => "partial_update_objects", "Shell" => "partialUpdate", 'C#' => "PartialUpdateObjects", 'Java' => 'partialUpdateObjects', 'Android' => 'partialUpdateObjects', 'Objective-C' => 'partialUpdateObjects' }) %>`: partially update an array of objects that contain an `objectID` attribute (only specified attributes will be updated, other will remain unchanged)
 
 Example using automatic `objectID` assignement:
@@ -419,6 +483,9 @@ Example using automatic `objectID` assignement:
 
 Example with user defined `objectID` (add or update):
 <%= snippet("batch_update") %>
+
+Example that delete a set of records:
+<%= snippet("batch_delete") %>
 
 Example that update only the `firstname` attribute:
 <%= snippet("batch_update_partial") %>
@@ -457,6 +524,7 @@ You can also create an API Key with advanced restrictions:
 <%= snippet("security_note_forward") %>
 <% end %>
  * Specify the maximum number of hits this API key can retrieve in one call. Defaults to 0 (unlimited). This parameter can be used to protect you from attempts at retrieving your entire content by massively querying the index.
+ * Specify the list of targeted indexes. Defaults to all indexes if empty of blank.
 
 <%= snippet("security_add_user_key") %>
 
@@ -465,6 +533,43 @@ Get the rights of a given key:
 
 Delete an existing key:
 <%= snippet("security_delete_key") %>
+
+<% if !cmd? %>
+
+You may have a single index containing per-user data. In that case, all records should be tagged with their associated user_id in order to add a `tagFilters=(public,user_42)` filter at query time to retrieve only what a user has access to. If you're using the [JavaScript client](http://github.com/algolia/algoliasearch-client-js), it will result in a security breach since the user is able to modify the `tagFilters` you've set modifying the code from the browser. To keep using the JavaScript client (recommended for optimal latency) and target secured records, you can generate secured API key from your backend:
+
+<%= snippet("generate_secured_api_key") if !csharp? && !objc? %>
+
+This public API key must then be used in your JavaScript code as follow:
+
+```javascript
+<script type="text/javascript">
+  var algolia = new AlgoliaSearch('YourApplicationID', '<%%= public_api_key %>');
+  algolia.setSecurityTags('(public,user_42)'); // must be same than those used at generation-time
+  algolia.initIndex('YourIndex').search($('#q').val(), function(success, content) {
+    // [...]
+  });
+</script>
+```
+
+You can mix rate limits and secured API keys setting an extra `user_token` attribute both at API key generation-time and query-time. When set, a uniq user will be identified by her `IP + user_token` instead of only her `IP`. It allows you to restrict a single user to perform maximum `N` API calls per hour, even if she share her `IP` with another user.
+
+<%= snippet("generate_secured_api_key_user_token") if !csharp? && !objc? %>
+
+This public API key must then be used in your JavaScript code as follow:
+
+```javascript
+<script type="text/javascript">
+  var algolia = new AlgoliaSearch('YourApplicationID', '<%%= public_api_key %>');
+  algolia.setSecurityTags('(public,user_42)'); // must be same than those used at generation-time
+  algolia.setUserToken('user_42')              // must be same than the one used at generation-time
+  algolia.initIndex('YourIndex').search($('#q').val(), function(success, content) {
+    // [...]
+  });
+</script>
+```
+
+<% end %>
 
 Copy or rename an index
 -------------

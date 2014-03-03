@@ -1,0 +1,6 @@
+```js
+// generate a public API key for user 42. Here, records are tagged with:
+//  - 'public' if they are visible by all users
+//  - 'user_XXXX' if they are visible by user XXXX
+var public_key = client.generateSecuredApiKey('YourSearchOnlyApiKey', '(public,user_42)');
+```

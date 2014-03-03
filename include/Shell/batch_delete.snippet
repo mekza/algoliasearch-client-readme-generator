@@ -1,0 +1,4 @@
+```sh
+echo '{ "requests":[{"action": "deleteObject", "body": { "objectID": "myID1" }, {"action": "deleteObject", "body": { "objectID": "myID2" } ] }' > batch.json
+algoliasearch-cmd.sh batch contacts batch.json
+```
