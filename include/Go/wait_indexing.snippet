@@ -1,0 +1,7 @@
+```go
+object := make(map[string]interface{})
+object["firstname"] = "Jimmie"
+object["lastname"] = "Barninger"
+task, _ := index.AddObject(object)
+_, err := index.waitTask(task)
+```

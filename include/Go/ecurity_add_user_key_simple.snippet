@@ -1,0 +1,5 @@
+```go
+// Creates a new index specific API key valid for 300 seconds, with a rate limit of 100 calls per hour per IP and a maximum of 20 hits
+key := index.AddKey([1]string{"search"}, 300, 100, 20)
+fmt.Printf(key.(map[string]interface{})["key"])
+```
