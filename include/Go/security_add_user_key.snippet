@@ -1,9 +1,7 @@
 ```go
 // Creates a new index specific API key valid for 300 seconds, with a rate limit of 100 calls per hour per IP and a maximum of 20 hits
-acl := make([]string, 1)
-acl[0] = "search"
-indexes := make([]string, 1)
-indexes[0] = "myIndex"
+acl := []string{"search"}
+indexes := []string{"myIndex"}
 key, err := client.AddKey(acl, indexes, 300, 100, 20)
 fmt.Printf(key.(map[string]interface{})["key"].(string))
 ```

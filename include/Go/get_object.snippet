@@ -1,4 +1,8 @@
 ```go
 // Retrieves all attributes
 res, err := index.GetObject("myID")
+// Retrieves firstname and lastname attributes
+res, err = index.GetObject("myID", "firstname,lastname")
+// Retrieves only the firstname attribute
+res, err = index.GetObject("myID", "firstname")
 ```

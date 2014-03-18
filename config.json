@@ -29,6 +29,9 @@
     },
     "Objective-C": {
       "outputDir": "../../algoliasearch-client-objc"
+    },
+    "Go": {
+      "outputDir": "../../algoliasearch-client-go"
     }
   },
   "templateFiles": [

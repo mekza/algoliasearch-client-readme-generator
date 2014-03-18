@@ -1,15 +1,10 @@
 ```go
-query := make(map[string]interface{})
 // Search by firstname
-query["query"] = "jimmie"
-res, err := index.Query(query)
+res, err := index.Search("jimmie", nil)
 // Search by firstname with typo
-query["query"] = "jimie"
-res, err = index.Query(query)
+res, err = index.Search("jimie", nil)
 // Search for a company
-query["query"] = "california paint"
-res, err = index.Query(query)
+res, err = index.Search("california paint", nil)
 // Search for a firstname & company
-query["query"] = "jimmie paint"
-res, err = index.Query(query)
+res, err = index.Search("jimmie paint", nil)
 ```

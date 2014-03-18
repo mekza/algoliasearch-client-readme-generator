@@ -65,6 +65,10 @@ class Language
     name == "Objective-C"
   end
 
+  def go?
+    name == "Go"
+  end
+
   def get_binding
     binding
   end

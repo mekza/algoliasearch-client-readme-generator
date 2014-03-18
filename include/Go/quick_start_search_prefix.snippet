@@ -1,7 +1,4 @@
 ```go
-query := make(map[string]interface{})
-query["query"] = "or"
-res, err := index.Query(query)
-query["query"] = "jim"
-res, err = index.Query(query)
+res, err := index.Query("or", nil)
+res, err = index.Query("jim", nil)
 ```
