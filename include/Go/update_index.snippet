@@ -1,4 +1,4 @@
 ```go
 // Rename MyNewIndex in MyIndex (and overwrite it)
-client.InitIndex("MyNewIndex").Move("MyIndex")
+res, err := client.InitIndex("MyNewIndex").Move("MyIndex")
 ```

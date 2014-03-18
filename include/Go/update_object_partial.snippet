@@ -2,5 +2,5 @@
 object := make(map[string]interface{})
 object["city"] = "San Francisco"
 object["objectID"] = "myID"
-res := index.PartialUpdateObject(object)
+res, err := index.PartialUpdateObject(object)
 ```

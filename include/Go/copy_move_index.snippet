@@ -1,6 +1,6 @@
 ```go
 // Rename MyIndex in MyIndexName
-client.InitIndex("MyIndex").Move("MyIndexName")
+res, err := client.InitIndex("MyIndex").Move("MyIndexName")
 // Copy MyIndex in MyIndexName
-client.InitIndex("MyIndex").Copy("MyIndexName")
-``
+res, err = client.InitIndex("MyIndex").Copy("MyIndexName")
+```

@@ -1,8 +1,8 @@
 ```go
 index := client.InitIndex("contacts")
 query := make(map[string]interface{})
-res := index.Query(query)
+res, err := index.Query(query)
 query["attributesToRetrieve"] = "firstname,lastname"
 query["hitsPerPage"] = 20
-res = index.Query(query)
+res, err = index.Query(query)
 ```

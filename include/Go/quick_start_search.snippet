@@ -2,14 +2,14 @@
 query := make(map[string]interface{})
 // Search by firstname
 query["query"] = "jimmie"
-index.Query(query)
+res, err := index.Query(query)
 // Search by firstname with typo
 query["query"] = "jimie"
-index.Query(query)
+res, err = index.Query(query)
 // Search for a company
 query["query"] = "california paint"
-index.Query(query)
+res, err = index.Query(query)
 // Search for a firstname & company
 query["query"] = "jimmie paint"
-index.Query(query)
+res, err = index.Query(query)
 ```

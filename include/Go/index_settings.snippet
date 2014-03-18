@@ -5,5 +5,5 @@ settings, err := index.GetSettings()
 ```go
 settings := make(map[string]interface{})
 settings["customRanking"] = [1]string{"desc(followers)"}
-index.SetSettings(settings)
+res, err := index.SetSettings(settings)
 ```

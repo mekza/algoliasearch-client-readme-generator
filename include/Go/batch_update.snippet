@@ -4,7 +4,7 @@ object["firstname"] = "Jimmie"
 object["lastname"] = "Barninger"
 object["objectID"] = "myID"
 
-objects := make([1]interface{})
+objects := make([]interface{}, 1)
 objects[0] = object
-index.SaveObjects(objects)
+res, err := index.UpdateObjects(objects)
 ```

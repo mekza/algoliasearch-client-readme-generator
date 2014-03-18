@@ -3,7 +3,7 @@ object := make(map[string]interface{})
 object["firstname"] = "Jimmie"
 object["lastname"] = "Barninger"
 
-objects := make([1]interface{})
+objects := make([]interface{}, 1)
 objects[0] = object
-index.AddObjects(objects)
+res, err := index.AddObjects(objects)
 ```

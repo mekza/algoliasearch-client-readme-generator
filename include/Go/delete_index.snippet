@@ -1,4 +1,4 @@
 ```go
-index = client.InitIndex("contacts")
-index.delete()
-``
+index := client.InitIndex("contacts")
+res, err := index.Delete()
+```

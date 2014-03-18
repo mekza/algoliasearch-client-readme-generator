@@ -3,5 +3,5 @@ object := make(map[string]interface{})
 object["firstname"] = "Jimmie"
 object["lastname"] = "Barninger"
 object["objectID"] = "myID"
-res := index.AddObject(object)
+res, err := index.AddObject(object)
 ```

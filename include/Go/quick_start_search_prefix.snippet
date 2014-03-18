@@ -1,7 +1,7 @@
 ```go
 query := make(map[string]interface{})
 query["query"] = "or"
-index.Query(query)
+res, err := index.Query(query)
 query["query"] = "jim"
-index.Query(query)
+res, err = index.Query(query)
 ```

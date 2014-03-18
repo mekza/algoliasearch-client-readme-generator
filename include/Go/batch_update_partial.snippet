@@ -3,7 +3,7 @@ object := make(map[string]interface{})
 object["firstname"] = "Jimmie"
 object["objectID"] = "myID"
 
-objects := make([1]interface{})
+objects := make([]interface{}, 1)
 objects[0] = object
-index.PartialUpdateObjects(objects)
+res, err := index.PartialUpdateObjects(objects)
 ```
