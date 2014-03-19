@@ -42,7 +42,7 @@ This command line API Client is a small wrapper around CURL to easily use Algoli
 <% if android? -%>It is based on our [Java API client](https://github.com/algolia/algoliasearch-client-java) and  includes an easy to use asynchronous API to avoid networks calls on UI Thread.<% end -%>
 
 
-<%= import("build_status.info") if !go? && !cmd? && !csharp? && !objc? %>
+<%= import("build_status.info") if !cmd? && !csharp? && !objc? %>
 
 <%#    ************************** TOC ********************************** %>
 
