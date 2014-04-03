@@ -596,7 +596,7 @@ The move command is particularly useful is you want to update a big index atomic
 Backup / Retrieve all index content
 -------------
 
-You can retrieve all index content for backup purpose of for analytics using the browse method. 
+You can retrieve all index content for backup purpose or for analytics using the browse method. 
 This method retrieve 1000 objects by API call and support pagination.
 
 <%= snippet("backup_index") %>
