@@ -37,7 +37,7 @@ fi
 
 
 if [ "$#" != "1" -o "$1" != "--push" ] ; then
-  echo "Usage: ./commit {--show|--revert|--push}"
+  echo "Usage: ./commit {--show|--revert|--push|--prepare}"
   exit 1
 fi
 
@@ -50,6 +50,7 @@ fi
 
 for dir in ../algoliasearch-client-*; do
   echo "$dir/README.md"
+  sleep 1
   cd $dir
   git diff README.md
   git commit README.md
