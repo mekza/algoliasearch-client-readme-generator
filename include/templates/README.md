@@ -233,15 +233,17 @@ You can use the following optional arguments<%= puts({"C#" => " on Query class",
   * **<%= puts({'C#' => 'PREFIX_ALL', 'Java' => 'PREFIX_ALL', 'Android' => 'PREFIX_ALL'}, "prefixAll") %>**: all query words are interpreted as prefixes,
   * **<%= puts({'C#' => 'PREFIX_LAST', 'Java' => 'PREFIX_ALL', 'Android' => 'PREFIX_ALL'}, "prefixLast") %>**: only the last word is interpreted as a prefix (default behavior),
   * **<%= puts({'C#' => 'PREFIX_NONE', 'Java' => 'PREFIX_NONE', 'Android' => 'PREFIX_NONE'}, "prefixNone") %>**: no query word is interpreted as a prefix. This option is not recommended.
- * **<%= puts({'C#' => 'SetOptionalWords', 'Java' => 'setOptionalWords', 'Android' => 'setOptionalWords'}, "optionalWords") %>**: a string that contains the list of words that should be considered as optional when found in the query. The list of words is comma separated.
+ * **<%= puts({'C#' => 'EnableTypoTolerance', 'Java' => 'enableTypoTolerance', 'Android' => 'enableTypoTolerance'}, "typoTolerance") %>**: if set to false, disable the typo-tolerance. Defaults to true.
  * **<%= puts({'C#' => 'SetMinWordSizeToAllowOneTypo', 'Java' => 'setMinWordSizeToAllowOneTypo', 'Android' => 'setMinWordSizeToAllowOneTypo', 'Objective-C' => 'minWordSizeForApprox1'}, "minWordSizefor1Typo") %>**: the minimum number of characters in a query word to accept one typo in this word.<br/>Defaults to 3.
  * **<%= puts({'C#' => 'SetMinWordSizeToAllowTwoTypos', 'Java' => 'setMinWordSizeToAllowTwoTypos', 'Android' => 'setMinWordSizeToAllowTwoTypos', 'Objective-C' => 'minWordSizeForApprox2'}, "minWordSizefor2Typos") %>**: the minimum number of characters in a query word to accept two typos in this word.<br/>Defaults to 7.
+ * **<%= puts({'C#' => 'EnableTyposOnNumericTokens', 'Java' => 'enableTyposOnNumericTokens', 'Android' => 'enableTyposOnNumericTokens'}, "allowTyposOnNumericTokens") %>**: if set to false, disable typo-tolerance on numeric tokens (numbers). Default to true.
  * **<%= puts({'C#' => 'EnableAdvancedSyntax', 'Java' => 'enableAdvancedSyntax', 'Android' => 'enableAdvancedSyntax'}, 'advancedSyntax') %>**: Enable the advanced query syntax. Defaults to 0 (false).
     * **Phrase query**: a phrase query defines a particular sequence of terms. A phrase query is build by Algolia's query parser for words surrounded by `"`. For example, `"search engine"` will retrieve records having `search` next to `engine` only. Typo-tolerance is _disabled_ on phrase queries.
     * **Prohibit operator**: The prohibit operator excludes records that contain the term after the `-` symbol. For example `search -engine` will retrieve records containing `search` but not `engine`.
  * **<%= puts({'C#' => 'EnableAnalytics', 'Java' => 'enableAnalytics', 'Android' => 'enableAnalytics'}, 'analytics') %>**: If set to false, this query will not be taken into account in analytics feature. Default to true.
  * **<%= puts({'C#' => 'EnableSynonyms', 'Java' => 'enableSynonyms', 'Android' => 'enableSynonyms'}, 'synonyms') %>**: If set to false, this query will not use synonyms defined in configuration. Default to true.
  * **<%= puts({'C#' => 'EnableReplaceSynonymsInHighlight', 'Java' => 'enableReplaceSynonymsInHighlight', 'Android' => 'enableReplaceSynonymsInHighlight'}, 'replaceSynonymsInHighlight') %>**: If set to false, words matched via synonyms expansion will not be replaced by the matched synonym in highlight result. Default to true.
+ * **<%= puts({'C#' => 'SetOptionalWords', 'Java' => 'setOptionalWords', 'Android' => 'setOptionalWords'}, "optionalWords") %>**: a string that contains the list of words that should be considered as optional when found in the query. The list of words is comma separated.
 
 #### Pagination parameters
 
