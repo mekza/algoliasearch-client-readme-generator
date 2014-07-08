@@ -401,6 +401,10 @@ You can easily retrieve an object using its `objectID` and optionnaly a list of 
 
 <%= snippet("get_object") %>
 
+You can also retrieve a set of objects:
+
+<%= snippet("get_objects") %>
+
 Delete an object
 -------------
 

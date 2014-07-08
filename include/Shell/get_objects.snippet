@@ -1,0 +1,4 @@
+```sh
+echo '{"requests": [{"indexName":"index", "objectID":"myID1"}, {"indexName":"index", "objectID":"myID2"}]}' > ids-to-retrieve.json
+algoliasearch-cmd.sh getObjects contacts ids-to-retrieve.json
+```
