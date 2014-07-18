@@ -1,0 +1,25 @@
+```js
+// perform 3 queries in a single API call:
+//  - 1st query targets index `categories`
+//  - 2nd and 3rd queries target index `products`
+client.multipleQueries([{indexName: "categories", query: myQueryString, hitsPerPage: 3},
+    {indexName: "products", query: myQueryString, hitsPerPage: 3, tagFilters: "promotion"},
+    {indexName: "products", query: myQueryString, hitsPerPage: 10}], "indexName", function(error, content) {
+  if (success) {
+    var categories = content.results[0];
+    for (var i = 0; i < categories.hits.length; ++i) {
+      console.log(categories.hits[i]);
+    }
+
+    var products_promotion = content.results[1];
+    for (var i = 0; i < products_promotion.hits.length; ++i) {
+      console.log(products_promotion.hits[i]);
+    }
+
+    var products = content.results[2];
+    for (var i = 0; i < products.hits.length; ++i) {
+      console.log(products.hits[i]);
+    }
+  }
+});
+```

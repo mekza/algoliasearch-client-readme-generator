@@ -1,0 +1,13 @@
+```go
+// perform 3 queries in a single API call:
+//  - 1st query targets index `categories`
+//  - 2nd and 3rd queries target index `products`
+
+queries := make([]interface{}, 3)
+
+queries[0] = map[string]interface{}{"indexName": "products", "query": myQueryString, "hitsPerPage": 3}
+queries[1] = map[string]interface{}{"indexName": "products", "query": myQueryString, "hitsPerPage": 3, "tagFilters": "promotion"}
+queries[2] = map[string]interface{}{"indexName": "products", "query": myQueryString, "hitsPerPage": 10}
+
+res, err := client.MultipleQueries(queries)
+```
