@@ -64,6 +64,7 @@ Table of Content
 1. [Search](#search)
 1. [Get an object](#get-an-object)
 1. [Delete an object](#delete-an-object)
+1. [Delete by query](#delete-by-query)
 1. [Index settings](#index-settings)
 1. [List indexes](#list-indexes)
 1. [Delete an index](#delete-an-index)
@@ -411,6 +412,15 @@ Delete an object
 You can delete an object using its `objectID`:
 
 <%= snippet("delete_object") %>
+
+<% if !cmd? %>
+Delete by query
+-------------
+
+You can delete all objects matching a single query with the following code. Internally, the API client performs the query, delete all matching hits, wait until the deletions have been applied and so on.
+
+<%= snippet("delete_by_query") %>
+<% end %>
 
 Index Settings
 -------------
