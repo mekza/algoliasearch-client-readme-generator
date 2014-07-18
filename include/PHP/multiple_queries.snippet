@@ -3,7 +3,7 @@
 //  - 1st query targets index `categories`
 //  - 2nd and 3rd queries target index `products`
 $results = $this->client->multipleQueries(array(array('indexName' => "categories", 'query' => myQueryString, 'hitsPerPage' => 3)
-  , array('indexName' => "products", 'query' => myQueryString, 'hitsPerPage' => 3)
+  , array('indexName' => "products", 'query' => myQueryString, 'hitsPerPage' => 3, 'facetFilters' => "promotion")
   , array('indexName' => "products", 'query' => myQueryString, 'hitsPerPage' => 10)));
 
 var_dump(results["results"]):

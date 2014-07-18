@@ -5,7 +5,7 @@
 
 queries := make([]interface{}, 3)
 
-queries[0] = map[string]interface{}{"indexName": "products", "query": myQueryString, "hitsPerPage": 3}
+queries[0] = map[string]interface{}{"indexName": "categories", "query": myQueryString, "hitsPerPage": 3}
 queries[1] = map[string]interface{}{"indexName": "products", "query": myQueryString, "hitsPerPage": 3, "tagFilters": "promotion"}
 queries[2] = map[string]interface{}{"indexName": "products", "query": myQueryString, "hitsPerPage": 10}
 
