@@ -1,15 +1,14 @@
- 1. Use [Composer](https://getcomposer.org/doc/00-intro.md) to manage your `algoliasearch` dependency (if you don't use Composer, you can copy the `algoliasearch.php` file and the `resources` directory to your project).
+ 1. Use [Composer](https://getcomposer.org/doc/00-intro.md) to manage your `algoliasearch` dependency (if you don't use Composer, you can copy the `algoliasearch.php` file and the `src` and `resources` directories to your project).
  2. Add `algolia/algoliasearch-client-php` to your `composer.json` file:
 ```json
   "require": {
-      "algolia/algoliasearch-client-php": "1.1.*"
+      "algolia/algoliasearch-client-php": "1.2.*"
   }
 ```
  3. Initialize the client with your ApplicationID and API-Key. You can find all of them on [your Algolia account](http://www.algolia.com/users/edit).
 
 ```php
-require 'vendor/autoload.php'; // if you don't use Composer: require 'path/to/algoliasearch.php';
+// if you don't use Composer: require_once 'path/to/algoliasearch.php';
 
 $client = new \AlgoliaSearch\Client('YourApplicationID', 'YourAPIKey');
 ```
-

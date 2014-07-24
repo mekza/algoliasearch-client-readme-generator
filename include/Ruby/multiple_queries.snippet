@@ -1,0 +1,10 @@
+```ruby
+# perform 3 queries in a single API call:
+# - 1st query targets index `categories`
+# - 2nd and 3rd queries target index `products`
+res = Algolia.multiple_queries([{:index_name => "categories", "query" => my_query_string, "hitsPerPage" => 3}
+  , {:index_name => "products", "query" => my_query_string, "hitsPerPage" => 3, "tagFilters" => "promotion"}
+  , {:index_name => "products", "query" => my_query_string, "hitsPerPage" => 10}])
+
+puts res["results"]
+```

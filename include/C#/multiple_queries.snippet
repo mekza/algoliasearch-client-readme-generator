@@ -1,0 +1,15 @@
+```csharp
+// perform 3 queries in a single API call:
+//  - 1st query targets index `categories`
+//  - 2nd and 3rd queries target index `products`
+
+var indexQueries = new List<IndexQuery>();
+
+indexQuery.Add(new IndexQuery("categories", new Query(myQueryString).SetNbHitsPerPage(3)));
+indexQuery.Add(new IndexQuery("products", new Query(myQueryString).SetNbHitsPerPage(3).SetTagFilters("promotion"));
+indexQuery.Add(new IndexQuery("products", new Query(MyQueryString).SetNbHitsPerPage(10)));
+
+var res = await _client.MultipleQueries(indexQuery);
+
+System.Diagnostics.Debug.WriteLine(res["results"]);
+```
