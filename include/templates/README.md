@@ -50,6 +50,9 @@ Table of Content
 **Get started**
 
 1. [Setup](#setup)
+<% if nodejs? -%>
+1. [Setup with parse](#setup-with-parse)
+<% end -%>
 1. [Quick Start](#quick-start)
 <% if nodejs? || js? -%>
 1. [General Principle](#general-principle)
@@ -100,6 +103,17 @@ Initialize the client with your ApplicationID and API-Key. You can find all of t
  3. Make your Activity class implements the `IndexListener` interface to be able to use the asynchronous methods.
 <% end %>
 <%= snippet("setup") %>
+
+<%#    ************************** SETUP WITH PARSE ********************************** %>
+
+<% if nodejs? -%>
+Setup with parse
+--------------------
+To setup your project, follow these steps:
+
+
+<%= snippet("setup_parse") %>
+<% end %>
 
 <%#    ************************** QUICK START ********************************** %>
 
