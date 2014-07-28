@@ -7,19 +7,6 @@ Algolia Search API Client for <%= !objc? ? @name : "iOS and OS X" %>
 
 <%#    ************************** INTRO ********************************** %>
 
-<% if js? %>
-This Javascript client let you easily use the [Algolia Search API](http://www.algolia.com) in a browser, it is compatible with major browsers:
-
- * Internet Explorer &ge; 6
- * Firefox &ge; 3.0
- * Google Chrome &ge; 3
- * Safari &ge; 4
- * Opera &ge; 10
- * etc.
-
-The JavaScript client is using CORS ([Cross Origin Resource Sharing](http://en.wikipedia.org/wiki/Cross-Origin_Resource_Sharing#Browser_support)) on recent browsers and has a fallback on JSONP ([JSON with padding](http://en.wikipedia.org/wiki/JSONP)) for old browsers.
-<% end %>
-
 [Algolia Search](http://www.algolia.com) is a search API that provides hosted full-text, numerical and faceted search.
 Algolia’s Search API makes it easy to deliver a great search experience in your apps & websites providing:
 
@@ -32,14 +19,24 @@ Algolia’s Search API makes it easy to deliver a great search experience in you
  * 99.99% SLA
  * first-class data security
 
-<% if !js? && !cmd? -%>
-This <%= @name %> client let you easily use the Algolia Search API from your <%= puts({'C#' => 'App', 'Java' => "Java Application", "Android" => "Android Application", 'Objective-C' => "application (iOS & OS X)"}, "backend") %>. It wraps [Algolia's REST API](http://www.algolia.com/doc/rest_api).
+<% if js? %>
+This Javascript client let you easily use the [Algolia Search API](http://www.algolia.com) in a browser, it is compatible with major browsers:
+
+ * Internet Explorer &ge; 6
+ * Firefox &ge; 3.0
+ * Google Chrome &ge; 3
+ * Safari &ge; 4
+ * Opera &ge; 10
+ * etc.
+
+The JavaScript client is using CORS ([Cross Origin Resource Sharing](http://en.wikipedia.org/wiki/Cross-Origin_Resource_Sharing#Browser_support)) on recent browsers and has a fallback on JSONP ([JSON with padding](http://en.wikipedia.org/wiki/JSONP)) for old browsers.
 <% elsif cmd? -%>
 This command line API Client is a small wrapper around CURL to easily use Algolia Search's REST API.
+<% else -%>
+This <%= @name %> client let you easily use the Algolia Search API from your <%= puts({'C#' => 'App', 'Java' => "Java Application", "Android" => "Android Application", 'Objective-C' => "application (iOS & OS X)"}, "backend") %>. It wraps [Algolia's REST API](http://www.algolia.com/doc/rest_api).
 <% end -%>
 <% if csharp? -%>(Compatible with .NET 4.5, SL4+, WP7.5+, Windows Store)<% end -%>
 <% if android? -%>It is based on our [Java API client](https://github.com/algolia/algoliasearch-client-java) and  includes an easy to use asynchronous API to avoid networks calls on UI Thread.<% end -%>
-
 
 <%= import("build_status.info") if !cmd? %>
 
@@ -175,11 +172,11 @@ Check our [online documentation](http://www.algolia.com/doc/guides/<%= @slug %>)
 Update the index
 -------------
 
-The javascript client is dedicated to web apps searching directly from the browser. In some use-cases, it can however be interesting to perform updates to the index directly in javascript, for example in an HTML5 mobile app. Therefore, just as for other languages, the javascript client is able to add, update or delete objects, or to modify index settings.
+The JavaScript client is dedicated to web apps searching directly from the browser. In some use-cases, it can however be interesting to perform updates to the index directly in JavaScript, for example in an HTML5 mobile app. Therefore, just as for other languages, the JavaScript client is able to add, update or delete objects, or to modify index settings.
 
-For more details about updating an index from javascript, have a look at the [algoliasearch.js](https://github.com/algolia/algoliasearch-client-js/blob/master/src/algoliasearch.js) source file to see details about each function.
+For more details about updating an index from JavaScript, have a look at the [algoliasearch.js](https://github.com/algolia/algoliasearch-client-js/blob/master/src/algoliasearch.js) source file to see details about each function.
 
-**Note:** If you use the javascript client to update the index, you need to specify `https` as the protocol in the client initialization:
+**Note:** If you use the JavaScript client to update the index, you need to specify `https` as the protocol in the client initialization:
 
 ```javascript
   <script src="algoliasearch.min.js"></script>
