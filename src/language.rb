@@ -1,10 +1,34 @@
 class Language
   attr_reader :name
+  attr_reader :slug
   attr_reader :referenceLanguage
   attr_reader :outputDir
 
   def initialize(languageName, languageData)
     @name = languageName
+    @slug = if ruby?
+      'ruby'
+    elsif php?
+      'php'
+    elsif python?
+      'python'
+    elsif nodejs?
+      'node'
+    elsif cmd?
+      'shell'
+    elsif csharp?
+      'csharp'
+    elsif java?
+      'java'
+    elsif android?
+      'android'
+    elsif objc?
+      'objc'
+    elsif go?
+      'go'
+    else
+      nil
+    end
     @referenceLanguage = languageData["referenceLanguage"]
     @outputDir = languageData["outputDir"]
   end

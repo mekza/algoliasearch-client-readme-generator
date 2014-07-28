@@ -154,22 +154,19 @@ All API calls will return the result in a callback that takes two arguments:
 
 <% end %>
 
-Online Documentation
+Documentation
 ----------------
 
-Check our [online documentation](http://www.algolia.com/doc):
- * [Initial Import](http://www.algolia.com/doc#InitialImport)
- * [Ranking &amp; Relevance](http://www.algolia.com/doc#RankingRelevance)
- * [Settings](http://www.algolia.com/doc#Settings)
- * [Search](http://www.algolia.com/doc#Search)
- * [Incremental Updates](http://www.algolia.com/doc#IncrementalUpdates)
- * [Reindexing](http://www.algolia.com/doc#Reindexing)
- * [Numeric-Search](http://www.algolia.com/doc#Numeric-Search)
- * [Category-Search](http://www.algolia.com/doc#Category-Search)
- * [Faceting](http://www.algolia.com/doc#Faceting)
- * [Geo-Search](http://www.algolia.com/doc#Geo-Search)
- * [Security](http://www.algolia.com/doc#Security)
- * [Indexing Several Types](http://www.algolia.com/doc#IndexingSeveralTypes)
+Check our [online documentation](http://www.algolia.com/doc/guides/<%= @slug %>):
+ * [Initial Import](http://www.algolia.com/doc/guides/<%= @slug %>#InitialImport)
+ * [Ranking &amp; Relevance](http://www.algolia.com/doc/guides/<%= @slug %>#RankingRelevance)
+ * [Indexing](http://www.algolia.com/doc/guides/<%= @slug %>#Indexing)
+ * [Search](http://www.algolia.com/doc/guides/<%= @slug %>#Search)
+ * [Sorting](http://www.algolia.com/doc/guides/<%= @slug %>#Sorting)
+ * [Filtering](http://www.algolia.com/doc/guides/<%= @slug %>#Filtering)
+ * [Faceting](http://www.algolia.com/doc/guides/<%= @slug %>#Faceting)
+ * [Geo-Search](http://www.algolia.com/doc/guides/<%= @slug %>#Geo-Search)
+ * [Security](http://www.algolia.com/doc/guides/<%= @slug %>#Security)
  * [REST API](http://www.algolia.com/doc/rest)
 
 <%#    ************************** API CLIENT REFERENCE JS ********************************** %>
