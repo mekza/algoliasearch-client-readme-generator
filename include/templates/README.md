@@ -43,7 +43,7 @@ This <%= @name %> client let you easily use the Algolia Search API from your <%=
 <%#    ************************** TOC ********************************** %>
 
 Table of Content
--------------
+================
 **Get started**
 
 1. [Setup](#setup)
@@ -54,7 +54,8 @@ Table of Content
 <% if nodejs? || js? -%>
 1. [General Principle](#general-principle)
 <% end -%>
-1. [Online documentation](#online-documentation)
+1. [Online documentation](#documentation)
+1. [Tutorials](#tutorials)
 
 **Commands reference**
 
@@ -152,7 +153,7 @@ All API calls will return the result in a callback that takes two arguments:
 <% end %>
 
 Documentation
-----------------
+================
 
 Check our [online documentation](http://www.algolia.com/doc/guides/<%= @slug %>):
  * [Initial Import](http://www.algolia.com/doc/guides/<%= @slug %>#InitialImport)
@@ -166,7 +167,18 @@ Check our [online documentation](http://www.algolia.com/doc/guides/<%= @slug %>)
  * [Security](http://www.algolia.com/doc/guides/<%= @slug %>#Security)
  * [REST API](http://www.algolia.com/doc/rest)
 
+Tutorials
+================
+
+Check our [tutorials](http://www.algolia.com/doc/tutorials):
+ * [Searchbar with auto-completion](http://www.algolia.com/doc/tutorials/auto-complete)
+ * [Searchbar with multi-categories auto-completion](http://www.algolia.com/doc/tutorials/multi-auto-complete)
+ * [Instant-search](http://www.algolia.com/doc/tutorials/instant-search)
+
 <%#    ************************** API CLIENT REFERENCE JS ********************************** %>
+
+Commands reference
+==================
 
 <% if js? %>
 Update the index
