@@ -139,6 +139,33 @@ You can also configure the list of attributes you want to index by order of impo
 
 Since the engine is designed to suggest results as you type, you'll generally search by prefix. In this case the order of attributes is very important to decide which hit is the best:
 <%= snippet("quick_start_search_prefix") %>
+
+<% if !cmd? && !android? && !objc? %>
+**Notes:** If you are building a web application, you may be more interested in using our [JavaScript client](https://github.com/algolia/algoliasearch-client-js) to perform queries. It brings two benefits:
+  * your users get a better response time by avoiding to go through your servers,
+  * it will offload your servers of unnecessary tasks.
+
+```html
+<script type="text/javascript" src="//path/to/algoliasearch.min.js"></script>
+<script type="text/javascript">
+  var client = new AlgoliaSearch("YourApplicationID", "YourSearchOnlyAPIKey");
+  var index = client.initIndex('YourIndexName');
+
+  function searchCallback(success, content) {
+    if (success) {
+      console.log(content);
+    }
+  }
+
+  // perform query "jim"
+  index.search("jim", searchCallback);
+
+  // the last optional argument can be used to add search parameters
+  index.search("jim", searchCallback, { hitsPerPage: 5, facets: '*', maxValuesPerFacet: 10 });
+</script>
+```
+<% end %>
+
 <% end %>
 
 <% if nodejs? || js? %>
@@ -239,7 +266,11 @@ Example to update only the city attribute of an existing object:
 
 Search
 -------------
-<% if !js? && !cmd? && !android? && !objc? %> **Opening note:** If you are building a web application, you may be more interested in using our [javascript client](https://github.com/algolia/algoliasearch-client-js) to send queries. It brings two benefits: (i) your users get a better response time by avoiding to go through your servers, and (ii) it will offload your servers of unnecessary tasks.<% end %>
+<% if !js? && !cmd? && !android? && !objc? %>
+**Opening note:** If you are building a web application, you may be more interested in using our [javascript client](https://github.com/algolia/algoliasearch-client-js) to send queries. It brings two benefits:
+  * your users get a better response time by avoiding to go through your servers,
+  * and it will offload your servers of unnecessary tasks.
+<% end %>
 
 <% if cmd? %>To perform a search, you have just to specify the index name and the query.<% else %>To perform a search, you just need to initialize the index and perform a call to the search function.<% end %>
 
