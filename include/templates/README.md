@@ -296,7 +296,11 @@ You can use the following optional arguments<%= puts({"C#" => " on Query class",
  * **<%= puts({'C#' => 'EnableAnalytics', 'Java' => 'enableAnalytics', 'Android' => 'enableAnalytics'}, 'analytics') %>**: If set to false, this query will not be taken into account in analytics feature. Default to true.
  * **<%= puts({'C#' => 'EnableSynonyms', 'Java' => 'enableSynonyms', 'Android' => 'enableSynonyms'}, 'synonyms') %>**: If set to false, this query will not use synonyms defined in configuration. Default to true.
  * **<%= puts({'C#' => 'EnableReplaceSynonymsInHighlight', 'Java' => 'enableReplaceSynonymsInHighlight', 'Android' => 'enableReplaceSynonymsInHighlight'}, 'replaceSynonymsInHighlight') %>**: If set to false, words matched via synonyms expansion will not be replaced by the matched synonym in highlight result. Default to true.
+<% if objc?  -%>
+ * **optionalWords**: an array of strings that contains the list of words that should be considered as optional when found in the query.
+<% else -%>
  * **<%= puts({'C#' => 'SetOptionalWords', 'Java' => 'setOptionalWords', 'Android' => 'setOptionalWords'}, "optionalWords") %>**: a string that contains the list of words that should be considered as optional when found in the query. The list of words is comma separated.
+<% end -%>
 
 #### Pagination parameters
 
