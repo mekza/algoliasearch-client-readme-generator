@@ -181,7 +181,7 @@ All API calls will return the result in a callback that takes two arguments:
 
 Documentation
 ================
-
+<% if js? %>
 Check our [online documentation](http://www.algolia.com/doc/<%= @slug %>):
  * [Initial Import](http://www.algolia.com/doc/<%= @slug %>#InitialImport)
  * [Ranking &amp; Relevance](http://www.algolia.com/doc/<%= @slug %>#RankingRelevance)
@@ -193,6 +193,19 @@ Check our [online documentation](http://www.algolia.com/doc/<%= @slug %>):
  * [Geo-Search](http://www.algolia.com/doc/<%= @slug %>#Geo-Search)
  * [Security](http://www.algolia.com/doc/<%= @slug %>#Security)
  * [REST API](http://www.algolia.com/doc/rest)
+<% else %>
+Check our [online documentation](http://www.algolia.com/doc/guides/<%= @slug %>):
+ * [Initial Import](http://www.algolia.com/doc/guides/<%= @slug %>#InitialImport)
+ * [Ranking &amp; Relevance](http://www.algolia.com/doc/guides/<%= @slug %>#RankingRelevance)
+ * [Indexing](http://www.algolia.com/doc/guides/<%= @slug %>#Indexing)
+ * [Search](http://www.algolia.com/doc/guides/<%= @slug %>#Search)
+ * [Sorting](http://www.algolia.com/doc/guides/<%= @slug %>#Sorting)
+ * [Filtering](http://www.algolia.com/doc/guides/<%= @slug %>#Filtering)
+ * [Faceting](http://www.algolia.com/doc/guides/<%= @slug %>#Faceting)
+ * [Geo-Search](http://www.algolia.com/doc/guides/<%= @slug %>#Geo-Search)
+ * [Security](http://www.algolia.com/doc/guides/<%= @slug %>#Security)
+ * [REST API](http://www.algolia.com/doc/rest)
+<% end %>
 
 Tutorials
 ================
