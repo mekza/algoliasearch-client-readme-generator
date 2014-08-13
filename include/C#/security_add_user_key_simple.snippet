@@ -1,8 +1,12 @@
 ```csharp
 // Creates a new global API key that can only perform search actions
-var res = await client.AddUserKey(new String[] { "search" });
+var res = client.AddUserKey(new String[] { "search" });
+// Asynchronous
+// var res = await client.AddUserKeyAsync(new String[] { "search" });
 System.Diagnostics.Debug.WriteLine("Key: " + res["key"]);
 // Creates a new API key that can only perform search action on this index
-res = await index.AddUserKey(new String[] { "search" });
+res = index.AddUserKey(new String[] { "search" });
+// Asynchronous
+// res = await index.AddUserKeyAsync(new String[] { "search" });
 System.Diagnostics.Debug.WriteLine("Key: " + res["key"]);
 ```

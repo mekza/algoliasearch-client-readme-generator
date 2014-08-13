@@ -1,4 +1,7 @@
 ```csharp
-await index.PartialUpdateObject(JObject.Parse(@"{""city"":""San Francisco"", 
-                                                 ""objectID"":""myID""}"));
+index.PartialUpdateObject(JObject.Parse(@"{""city"":""San Francisco"", 
+                                           ""objectID"":""myID""}"));
+// Asynchronous
+// await index.PartialUpdateObjectAsync(JObject.Parse(@"{""city"":""San Francisco"", 
+//                                                       ""objectID"":""myID""}"));
 ```

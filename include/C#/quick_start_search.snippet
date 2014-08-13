@@ -1,10 +1,18 @@
 ```csharp
 // search by firstname
-System.Diagnostics.Debug.WriteLine(await index.Search(new Query("jimmie")));
+System.Diagnostics.Debug.WriteLine(index.Search(new Query("jimmie")));
+// Asynchronous
+// System.Diagnostics.Debug.WriteLine(await index.SearchAsync(new Query("jimmie")));
 // search a firstname with typo
-System.Diagnostics.Debug.WriteLine(await index.Search(new Query("jimie")));
+System.Diagnostics.Debug.WriteLine(index.Search(new Query("jimie")));
+// Asynchronous
+// System.Diagnostics.Debug.WriteLine(await index.SearchAsync(new Query("jimie")));
 // search for a company
-System.Diagnostics.Debug.WriteLine(await index.Search(new Query("california paint")));
+System.Diagnostics.Debug.WriteLine(index.Search(new Query("california paint")));
+// Asynchronous
+// System.Diagnostics.Debug.WriteLine(await index.SearchAsync(new Query("california paint")));
 // search for a firstname & company
-System.Diagnostics.Debug.WriteLine(await index.Search(new Query("jimmie paint")));
+System.Diagnostics.Debug.WriteLine(index.Search(new Query("jimmie paint")));
+// Asynchronous
+// System.Diagnostics.Debug.WriteLine(await index.SearchAsync(new Query("jimmie paint")));
 ```

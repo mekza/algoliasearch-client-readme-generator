@@ -9,7 +9,9 @@ indexQuery.Add(new IndexQuery("categories", new Query(myQueryString).SetNbHitsPe
 indexQuery.Add(new IndexQuery("products", new Query(myQueryString).SetNbHitsPerPage(3).SetTagFilters("promotion"));
 indexQuery.Add(new IndexQuery("products", new Query(MyQueryString).SetNbHitsPerPage(10)));
 
-var res = await _client.MultipleQueries(indexQuery);
+var res = _client.MultipleQueries(indexQuery);
+// Asynchronous
+// var res = await _client.MultipleQueriesAsync(indexQuery);
 
 System.Diagnostics.Debug.WriteLine(res["results"]);
 ```

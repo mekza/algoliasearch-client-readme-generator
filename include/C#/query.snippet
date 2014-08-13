@@ -1,9 +1,15 @@
 ```csharp
 Index index = client.InitIndex("contacts");
-res = await index.Search(new Query("query string"));
+res = index.Search(new Query("query string"));
+// Asynchronous
+// res = await index.SearchAsync(new Query("query string"));
 System.Diagnostics.Debug.WriteLine(res);
-res = await index.Search(new Query("query string").
+res = index.Search(new Query("query string").
     SetAttributesToRetrieve(new string[] {"firstname","lastname"}).
     SetNbHitsPerPage(50));
+// Asynchronous
+// res = await index.SearchAsync(new Query("query string").
+//    SetAttributesToRetrieve(new string[] {"firstname","lastname"}).
+//    SetNbHitsPerPage(50));
 System.Diagnostics.Debug.WriteLine(res);
 ```

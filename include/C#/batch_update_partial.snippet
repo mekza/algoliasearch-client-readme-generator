@@ -4,6 +4,8 @@ objs.Add(JObject.Parse(@"{""firstname"":""Jimmie"",
                           ""objectID"":""myID1""}"));
 objs.Add(JObject.Parse(@"{""firstname"":""Warren"", 
                           ""objectID"": ""myID2""}"));
-var res = await index.PartialUpdateObjects(objs);
+var res = index.PartialUpdateObjects(objs);
+// Asynchronous
+// var res = await index.PartialUpdateObjectsAsync(objs);
 System.Diagnostics.Debug.WriteLine(res);
 ```

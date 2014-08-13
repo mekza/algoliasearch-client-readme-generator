@@ -1,4 +1,9 @@
 ```csharp
-System.Diagnostics.Debug.WriteLine(await index.Search(new Query("or")));
-System.Diagnostics.Debug.WriteLine(await index.Search(new Query("jim")));
+System.Diagnostics.Debug.WriteLine(index.Search(new Query("or")));
+// Asynchronous
+// System.Diagnostics.Debug.WriteLine(await index.SearchAsync(new Query("or")));
+
+System.Diagnostics.Debug.WriteLine(index.Search(new Query("jim")));
+// Asynchronous
+// System.Diagnostics.Debug.WriteLine(await index.SearchAsync(new Query("jim")));
 ```

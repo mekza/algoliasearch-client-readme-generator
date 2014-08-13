@@ -1,6 +1,11 @@
 ```csharp
-await index.SaveObject(JObject.Parse(@"{""firstname"":""Jimmie"", 
-                                        ""lastname"":""Barninger"", 
-                                        ""city"":""New York"",
-                                        ""objectID"":""myID""}"));
+index.SaveObject(JObject.Parse(@"{""firstname"":""Jimmie"", 
+                                  ""lastname"":""Barninger"", 
+                                  ""city"":""New York"",
+                                  ""objectID"":""myID""}"));
+// Asynchronous
+// await index.SaveObjectAsync(JObject.Parse(@"{""firstname"":""Jimmie"", 
+//                                              ""lastname"":""Barninger"", 
+//                                              ""city"":""New York"",
+//                                              ""objectID"":""myID""}"));
 ```

@@ -1,11 +1,17 @@
 ```csharp
 // Retrieves all attributes
-var res = await index.GetObject("myID");
+var res = index.GetObject("myID");
+// Asynchronous
+// var res = await index.GetObjectAsync("myID");
 System.Diagnostics.Debug.WriteLine(res);
 // Retrieves firstname and lastname attributes
-res = await index.GetObject("myID", new String[] {"firstname", "lastname"});
+res = index.GetObject("myID", new String[] {"firstname", "lastname"});
+// Asynchronous
+// res = await index.GetObjectAsync("myID", new String[] {"firstname", "lastname"});
 System.Diagnostics.Debug.WriteLine(res);
 // Retrieves only the firstname attribute
-res = await index.GetObject("myID", new String[] { "firstname" });
+res = index.GetObject("myID", new String[] { "firstname" });
+// Asynchronous
+// res = await index.GetObjectAsync("myID", new String[] { "firstname" });
 System.Diagnostics.Debug.WriteLine(res);
 ```

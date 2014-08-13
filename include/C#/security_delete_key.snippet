@@ -1,6 +1,10 @@
 ```csharp
 // Deletes a global key
-await client.DeleteUserKey("f420238212c54dcfad07ea0aa6d5c45f");
+client.DeleteUserKey("f420238212c54dcfad07ea0aa6d5c45f");
+// Asynchronous
+// await client.DeleteUserKeyAsync("f420238212c54dcfad07ea0aa6d5c45f");
 // Deletes an index specific key
-await index.DeleteUserKey("71671c38001bf3ac857bc82052485107");
+  index.DeleteUserKey("71671c38001bf3ac857bc82052485107");
+// Asynchronous
+// await index.DeleteUserKeyAsync("71671c38001bf3ac857bc82052485107");
 ```

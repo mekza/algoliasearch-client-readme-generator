@@ -2,6 +2,8 @@
 List<string> ids = new List<string>();
 ids.Add(@"myID1");
 ids.Add(@"myID2");
-var res = await index.DeleteObjects(ids);
+var res = index.DeleteObjects(ids);
+// Asynchronous
+// var res = await index.DeleteObjectsAsync(ids);
 System.Diagnostics.Debug.WriteLine(res);
 ```

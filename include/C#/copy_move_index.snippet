@@ -1,6 +1,10 @@
 ```csharp
 // Rename MyIndex in MyIndexNewName
-await client.MoveIndex("MyIndex", "MyIndexNewName");
+client.MoveIndex("MyIndex", "MyIndexNewName");
+// Asynchronous
+// await client.MoveIndexAsync("MyIndex", "MyIndexNewName");
 // Copy MyIndex in MyIndexCopy
-await client.CopyIndex("MyIndex", "MyIndexCopy");
+client.CopyIndex("MyIndex", "MyIndexCopy");
+// Asynchronous
+await client.CopyIndexAsync("MyIndex", "MyIndexCopy");
 ``` 

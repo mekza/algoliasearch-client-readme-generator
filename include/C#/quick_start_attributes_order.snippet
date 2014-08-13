@@ -1,4 +1,7 @@
 ```csharp
-await index.SetSettings(JObject.Parse(@"{""attributesToIndex"":[""lastname"", ""firstname"",
-                                                                ""company"", ""email"", ""city""]}"));
+index.SetSettings(JObject.Parse(@"{""attributesToIndex"":[""lastname"", ""firstname"",
+                                                          ""company"", ""email"", ""city""]}"));
+// Asynchronous
+//await index.SetSettingsAsync(JObject.Parse(@"{""attributesToIndex"":[""lastname"", ""firstname"",
+//                                                                     ""company"", ""email"", ""city""]}"));
 ```

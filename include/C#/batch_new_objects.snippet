@@ -4,6 +4,8 @@ objs.Add(JObject.Parse(@"{""firstname"":""Jimmie"",
                           ""lastname"":""Barninger""}"));
 objs.Add(JObject.Parse(@"{""firstname"":""Warren"", 
                           ""lastname"":""Speach""}"));
-var res = await index.AddObjects(objs);
+var res = index.AddObjects(objs);
+// Asynchronous
+// var res = await index.AddObjectsAsync(objs);
 System.Diagnostics.Debug.WriteLine(res);
 ```

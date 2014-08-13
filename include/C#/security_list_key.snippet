@@ -1,7 +1,11 @@
 To list existing keys, you can use `listUserKeys` method:
 ```csharp
 // Lists global API Keys
-var keys = await client.ListUserKeys();
+var keys = client.ListUserKeys();
+// Asynchronous
+// var keys = await client.ListUserKeysAsync();
 // Lists API Keys that can access only to this index
-keys = await index.ListUserKeys();
+keys = index.ListUserKeys();
+// Asynchronous
+// keys = await index.ListUserKeysAsync();
 ```

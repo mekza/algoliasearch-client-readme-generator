@@ -6,6 +6,8 @@ objs.Add(JObject.Parse(@"{""firstname"":""Jimmie"",
 objs.Add(JObject.Parse(@"{""firstname"":""Warren"", 
                           ""lastname"":""Speach"",
                           ""objectID"": ""myID2""}"));
-var res = await index.SaveObjects(objs);
+var res = index.SaveObjects(objs);
+// Asynchronous
+var res = await index.SaveObjectsAsync(objs);
 System.Diagnostics.Debug.WriteLine(res);
 ```

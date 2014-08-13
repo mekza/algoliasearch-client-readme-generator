@@ -1,8 +1,12 @@
 ```csharp
-var res = await index.GetSettings();
+var res = index.GetSettings();
+// Asynchronous
+// var res = await index.GetSettingsAsync();
 System.Diagnostics.Debug.WriteLine(res);
 ```
 
 ```csharp
-await index.SetSettings(JObject.Parse(@"{""customRanking"":[""desc(followers)""]}"));
+index.SetSettings(JObject.Parse(@"{""customRanking"":[""desc(followers)""]}"));
+// Asynchronous
+await index.SetSettingsAsync(JObject.Parse(@"{""customRanking"":[""desc(followers)""]}"));
 ```

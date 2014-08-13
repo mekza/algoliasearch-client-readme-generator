@@ -1,6 +1,10 @@
 ```csharp
 // Get last 10 log entries
-await client.GetLogs();
+client.GetLogs();
+// Asynchronous
+// await client.GetLogsAsync();
 // Get last 100 log entries
-await client.GetLogs(0, 100);
+client.GetLogs(0, 100);
+// Asynchronous
+// await client.GetLogsAsync(0, 100);
 ```

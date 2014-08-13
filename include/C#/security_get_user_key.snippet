@@ -1,6 +1,11 @@
 ```csharp
 // Gets the rights of a global key
-var res = await client.GetUserKeyACL("f420238212c54dcfad07ea0aa6d5c45f");
+var res = client.GetUserKeyACL("f420238212c54dcfad07ea0aa6d5c45f");
+// Asynchronous
+// var res = await client.GetUserKeyACLAsync("f420238212c54dcfad07ea0aa6d5c45f");
+
 // Gets the rights of an index specific key
-res = await index.GetUserKeyACL("71671c38001bf3ac857bc82052485107");
+res = index.GetUserKeyACL("71671c38001bf3ac857bc82052485107");
+// Asynchronous
+// res = await index.GetUserKeyACLAsync("71671c38001bf3ac857bc82052485107");
 ```

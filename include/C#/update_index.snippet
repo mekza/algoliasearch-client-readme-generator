@@ -1,4 +1,6 @@
 ```csharp
 // Rename MyNewIndex in MyIndex (and overwrite it)
-await client.MoveIndex("MyNewIndex", "MyIndex");
+client.MoveIndex("MyNewIndex", "MyIndex");
+// Asynchronous
+// await client.MoveIndexAsync("MyNewIndex", "MyIndex");
 ```

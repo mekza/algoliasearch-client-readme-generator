@@ -6,5 +6,7 @@ JsonTextReader reader = new JsonTextReader(re);
 JArray batch = JArray.Load(reader);
 // Add objects 
 Index index = client.InitIndex("contacts");
-await index.AddObjects(batch);
+index.AddObjects(batch);
+// Asynchronous
+// await index.AddObjectsAsync(batch);
 ```

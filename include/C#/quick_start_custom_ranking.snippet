@@ -1,3 +1,5 @@
 ```csharp
-await index.SetSettings(JObject.Parse(@"{""customRanking"":[""desc(followers)""]}"));
+index.SetSettings(JObject.Parse(@"{""customRanking"":[""desc(followers)""]}"));
+// Asynchronous
+// await index.SetSettingsAsync(JObject.Parse(@"{""customRanking"":[""desc(followers)""]}"));
 ```
