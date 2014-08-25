@@ -7,3 +7,9 @@ using Algolia.Search;
 
 AlgoliaClient client = new AlgoliaClient("YourApplicationID", "YourAPIKey");
 ```
+
+**Note**: If you're using Algolia in an ASP.NET project you might experience some deadlocks while using our asynchronous API. You can fix it by calling the following method:
+
+```csharp
+client.ConfigureAwait(false);
+```
