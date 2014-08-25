@@ -2,7 +2,7 @@
 # perform 3 queries in a single API call:
 # - 1st query targets index `categories`
 # - 2nd and 3rd queries target index `products` 
-results = self.client.multipleQueries([{"indexName" : "categories", "query" : myQueryString, "hitsPerPage": 3}
+results = self.client.multiple_queries([{"indexName" : "categories", "query" : myQueryString, "hitsPerPage": 3}
   , {"indexName" : "categories", "query" : myQueryString, "hitsPerPage": 3, "tagFilters": "promotion"}
   , {"indexName" : "categories", "query" : myQueryString, "hitsPerPage": 10}])
 
