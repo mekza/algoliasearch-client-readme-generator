@@ -299,12 +299,12 @@ You can use the following optional arguments<%= puts({"C#" => " on Query class",
   * **<%= puts({'C#' => 'PREFIX_LAST', 'Java' => 'PREFIX_ALL', 'Android' => 'PREFIX_ALL'}, "prefixLast") %>**: only the last word is interpreted as a prefix (default behavior),
   * **<%= puts({'C#' => 'PREFIX_NONE', 'Java' => 'PREFIX_NONE', 'Android' => 'PREFIX_NONE'}, "prefixNone") %>**: no query word is interpreted as a prefix. This option is not recommended.
  * **<%= puts({'C#' => 'SetRemoveWordsIfNoResult', 'Java' => 'removeWordsIfNoResult', 'Android' => 'removeWordsIfNoResult', 'Objective-C' => 'setRemoveWordsIfNoResult'}, "removeWordsIfNoResult") %>**: This option to select a strategy to avoid having an empty result page. There is three different option:
-  * **<%= puts({'C#' => 'LAST_WORDS', 'Java' => 'REMOVE_LAST_WORDS', 'Android' => 'REMOVE_LAST_WORDS'}, "LastWords") %>**: when a query does not return any result, the final word will be removed until there is results,
-  * **<%= puts({'C#' => 'FIRST_WORDS', 'Java' => 'REMOVE_FIRST_WORDS', 'Android' => 'REMOVE_FIRST_WORDS'}, "FirstWords") %>**: when a query does not return any result, the first word will be removed until there is results,
+  * **<%= puts({'C#' => 'LAST_WORDS', 'Java' => 'REMOVE_LAST_WORDS', 'Android' => 'REMOVE_LAST_WORDS'}, "LastWords") %>**: when a query does not return any result, the last word will be added as optional (the process is repeated with n-1 word, n-2 word, ... until there is results),
+  * **<%= puts({'C#' => 'FIRST_WORDS', 'Java' => 'REMOVE_FIRST_WORDS', 'Android' => 'REMOVE_FIRST_WORDS'}, "FirstWords") %>**: when a query does not return any result, the first word will be added as optional (the process is repeated with second word, third word, ... until there is results),
   * **<%= puts({'C#' => 'NONE', 'Java' => 'REMOVE_NONE', 'Android' => 'REMOVE_NONE'}, "None") %>**: No specific processing is done when a query does not return any result (default behavior).
  * **<%= puts({'C#' => 'EnableTypoTolerance', 'Java' => 'enableTypoTolerance', 'Android' => 'enableTypoTolerance'}, "typoTolerance") %>**: if set to false, disable the typo-tolerance. Defaults to true.
- * **<%= puts({'C#' => 'SetMinWordSizeToAllowOneTypo', 'Java' => 'setMinWordSizeToAllowOneTypo', 'Android' => 'setMinWordSizeToAllowOneTypo', 'Objective-C' => 'minWordSizeForApprox1'}, "minWordSizefor1Typo") %>**: the minimum number of characters in a query word to accept one typo in this word.<br/>Defaults to 3.
- * **<%= puts({'C#' => 'SetMinWordSizeToAllowTwoTypos', 'Java' => 'setMinWordSizeToAllowTwoTypos', 'Android' => 'setMinWordSizeToAllowTwoTypos', 'Objective-C' => 'minWordSizeForApprox2'}, "minWordSizefor2Typos") %>**: the minimum number of characters in a query word to accept two typos in this word.<br/>Defaults to 7.
+ * **<%= puts({'C#' => 'SetMinWordSizeToAllowOneTypo', 'Java' => 'setMinWordSizeToAllowOneTypo', 'Android' => 'setMinWordSizeToAllowOneTypo', 'Objective-C' => 'minWordSizeForApprox1'}, "minWordSizefor1Typo") %>**: the minimum number of characters in a query word to accept one typo in this word.<br/>Defaults to 4.
+ * **<%= puts({'C#' => 'SetMinWordSizeToAllowTwoTypos', 'Java' => 'setMinWordSizeToAllowTwoTypos', 'Android' => 'setMinWordSizeToAllowTwoTypos', 'Objective-C' => 'minWordSizeForApprox2'}, "minWordSizefor2Typos") %>**: the minimum number of characters in a query word to accept two typos in this word.<br/>Defaults to 8.
  * **<%= puts({'C#' => 'EnableTyposOnNumericTokens', 'Java' => 'enableTyposOnNumericTokens', 'Android' => 'enableTyposOnNumericTokens'}, "allowTyposOnNumericTokens") %>**: if set to false, disable typo-tolerance on numeric tokens (numbers). Default to true.
  * **<%= puts({'C#' => 'RestrictSearchableAttributes', 'Java' => 'restrictSearchableAttributes', 'Android' => 'restrictSearchableAttributes'}, "restrictSearchableAttributes") %>** List of attributes you want to use for textual search (must be a subset of the `attributesToIndex` index setting). Attributes are separated with a comma (for example `"name,address"`), you can also use a JSON string array encoding (for example encodeURIComponent("[\"name\",\"address\"]")). By default, all attributes specified in `attributesToIndex` settings are used to search.
  * **<%= puts({'C#' => 'EnableAdvancedSyntax', 'Java' => 'enableAdvancedSyntax', 'Android' => 'enableAdvancedSyntax'}, 'advancedSyntax') %>**: Enable the advanced query syntax. Defaults to 0 (false).
@@ -524,8 +524,8 @@ For example `"customRanking" => ["desc(population)", "asc(name)"]`
   For example `"altCorrections": [ { "word" : "foot", "correction": "feet", "nbTypos": 1}, { "word": "feet", "correction": "foot", "nbTypos": 1}].`
 
 #### Default query parameters (can be overwrite by query)
- * **minWordSizefor1Typo**: (integer) the minimum number of characters to accept one typo (default = 3).
- * **minWordSizefor2Typos**: (integer) the minimum number of characters to accept two typos (default = 7).
+ * **minWordSizefor1Typo**: (integer) the minimum number of characters to accept one typo (default = 4).
+ * **minWordSizefor2Typos**: (integer) the minimum number of characters to accept two typos (default = 8).
  * **hitsPerPage**: (integer) the number of hits per page (default = 10).
  * **attributesToRetrieve**: (array of strings) default list of attributes to retrieve in objects. If set to null, all attributes are retrieved.
  * **attributesToHighlight**: (array of strings) default list of attributes to highlight. If set to null, all indexed attributes are highlighted.
