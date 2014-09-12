@@ -627,6 +627,10 @@ You can also create an API Key with advanced restrictions:
 
 <%= snippet("security_add_user_key") %>
 
+<% if !cmd? -%>
+Update the rights of an existing key:
+<%= snippet("security_update_user_key") %>
+<% end -%>
 Get the rights of a given key:
 <%= snippet("security_get_user_key") %>
 
