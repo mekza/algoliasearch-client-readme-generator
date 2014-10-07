@@ -179,6 +179,23 @@ All API calls will return the result in a callback that takes two arguments:
 
 <% end %>
 
+<% if js? %>
+Cache
+-------------
+
+Queries will be stored in a ```cache``` inside your JavaScript ```Index``` object to avoid performing the same API calls twice. It's particularly useful when your users are deleting letters/words from the current query but may end in some outdated results if the page isn't refreshed for some time.
+
+Just clear the cache every X minutes to work-around 
+```js
+// clear the queries cache
+index.clearCache();
+
+// if you're performing multi-queries using the API client instead of the index
+// you'll need to use the following code
+algoliaClient.clearCache();
+```
+<% end %>
+
 Documentation
 ================
 <% if js? %>
