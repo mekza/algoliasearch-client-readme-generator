@@ -52,7 +52,9 @@ Table of Content
 <% end -%>
 1. [Quick Start](#quick-start)
 <% if nodejs? || js? -%>
-1. [General Principle](#general-principle)
+1. [General Principle](#general-principle)<% if js? %>
+1. [Cache](#cache)
+<% end -%>
 <% end -%>
 1. [Online documentation](#documentation)
 1. [Tutorials](#tutorials)
