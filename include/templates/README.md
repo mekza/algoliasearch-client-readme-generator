@@ -350,11 +350,11 @@ You can use the following optional arguments<%= puts({"C#" => " on Query class",
  * **<%= puts({'C#' => 'SetMinWordSizeToAllowOneTypo', 'Java' => 'setMinWordSizeToAllowOneTypo', 'Android' => 'setMinWordSizeToAllowOneTypo', 'Objective-C' => 'minWordSizeForApprox1'}, "minWordSizefor1Typo") %>**: the minimum number of characters in a query word to accept one typo in this word.<br/>Defaults to 4.
  * **<%= puts({'C#' => 'SetMinWordSizeToAllowTwoTypos', 'Java' => 'setMinWordSizeToAllowTwoTypos', 'Android' => 'setMinWordSizeToAllowTwoTypos', 'Objective-C' => 'minWordSizeForApprox2'}, "minWordSizefor2Typos") %>**: the minimum number of characters in a query word to accept two typos in this word.<br/>Defaults to 8.
  * **<%= puts({'C#' => 'EnableTyposOnNumericTokens', 'Java' => 'enableTyposOnNumericTokens', 'Android' => 'enableTyposOnNumericTokens'}, "allowTyposOnNumericTokens") %>**: if set to false, disable typo-tolerance on numeric tokens (numbers). Default to false.
- * **<%= puts({'C#' => 'SetTypoTolerance', 'Java' => 'setTypoTolerance', 'Android' => 'setTypoTolerance', 'Objective-C' => 'setTypoTolerance'}, 'typoTolerance') %>**:  This option allow to control the number of typo in the results set:
-  * **<%= puts({'C#' => 'TYPO_TRUE', 'Java' => 'TYPO_TRUE', 'Android' => 'TYPO_TRUE'}, "true") %>**: the typotolerance is enabled and all typos are retrieved. (Default behavior)
-  * **<%= puts({'C#' => 'TYPO_FALSE', 'Java' => 'TYPO_FALSE', 'Android' => 'TYPO_FALSE'}, "false") %>**: the typotolerance is disabled.
-  * **<%= puts({'C#' => 'TYPO_MIN', 'Java' => 'TYPO_MIN', 'Android' => 'TYPO_MIN'}, "min") %>**: only keep results with the minimum number of typos.
-  * **<%= puts({'C#' => 'TYPO_STRICT', 'Java' => 'TYPO_STRICT', 'Android' => 'TYPO_STRICT'}, "strict") %>**: the typotolerance with a distance=2 is disabled if the results contain hits without typo.
+ * **<%= puts({'C#' => 'SetTypoTolerance', 'Java' => 'setTypoTolerance', 'Android' => 'setTypoTolerance', 'Objective-C' => 'setTypoTolerance'}, 'typoTolerance') %>**:  This option allows you to control the number of typos in the result set:
+  * **<%= puts({'C#' => 'TYPO_TRUE', 'Java' => 'TYPO_TRUE', 'Android' => 'TYPO_TRUE'}, "true") %>**: the typo-tolerance is enabled and all matching hits are retrieved. (Default behavior)
+  * **<%= puts({'C#' => 'TYPO_FALSE', 'Java' => 'TYPO_FALSE', 'Android' => 'TYPO_FALSE'}, "false") %>**: the typo-tolerance is disabled.
+  * **<%= puts({'C#' => 'TYPO_MIN', 'Java' => 'TYPO_MIN', 'Android' => 'TYPO_MIN'}, "min") %>**: only keep the results with the minimum number of typos.
+  * **<%= puts({'C#' => 'TYPO_STRICT', 'Java' => 'TYPO_STRICT', 'Android' => 'TYPO_STRICT'}, "strict") %>**: hits matching with 2 typos are not retrieved if there are some matching without typos.
  * **<%= puts({'C#' => 'EnableTyposOnNumericTokens', 'Java' => 'enableTyposOnNumericTokens', 'Android' => 'enableTyposOnNumericTokens'}, "allowTyposOnNumericTokens") %>**: if set to false, disable typo-tolerance on numeric tokens (numbers). Default to true.
  * **<%= puts({'C#' => 'IgnorePlural', 'Java' => 'ignorePlural', 'Android' => 'ignorePlural'}, "ignorePlural") %>**: If set to true, plural won't be considered as a typo (for example car/cars will be considered as equals). Default to false.
  * **<%= puts({'C#' => 'RestrictSearchableAttributes', 'Java' => 'restrictSearchableAttributes', 'Android' => 'restrictSearchableAttributes'}, "restrictSearchableAttributes") %>** List of attributes you want to use for textual search (must be a subset of the `attributesToIndex` index setting). Attributes are separated with a comma (for example `"name,address"`), you can also use a JSON string array encoding (for example encodeURIComponent("[\"name\",\"address\"]")). By default, all attributes specified in `attributesToIndex` settings are used to search.
@@ -665,7 +665,7 @@ Each key is defined by a set of rights that specify the authorized actions. The 
  * **settings**: allows to get index settings,
  * **editSettings**: allows to change index settings.
  * **analytics**: allows to retrieve the analytics through the analytics API.
- * **listIndexes**: allows to list to list all accessible indexes.
+ * **listIndexes**: allows to list all accessible indexes.
 
 Example of API Key creation:
 <%= snippet("security_add_user_key_simple") %>
@@ -768,11 +768,11 @@ You can retrieve the last logs via this API. Each log entry contains:
 You can retrieve the logs of your last 1000 API calls and browse them using the offset/length parameters:
  * ***offset***: Specify the first entry to retrieve (0-based, 0 is the most recent log entry). Default to 0.
  * ***length***: Specify the maximum number of entries to retrieve starting at offset. Defaults to 10. Maximum allowed value: 1000.
- * ***onlyErrors***: Retrieve only logs with an httpCode different than 200 and 201
+ * ***onlyErrors***: Retrieve only logs with an httpCode different than 200 and 201. (deprecated)
  * ***type***: Specify the type of logs to retrieve:
   * ***query***: Retrieve only the queries.
   * ***build***: Retrieve only the build operations.
-  * ***error***: Retrieve only the error. (same as ***onlyErrors*** parameters)
+  * ***error***: Retrieve only the errors. (same as ***onlyErrors*** parameters)
 
 <%= snippet("logs_get") %>
 
