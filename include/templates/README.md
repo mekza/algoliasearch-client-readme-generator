@@ -747,6 +747,11 @@ You can retrieve the last logs via this API. Each log entry contains:
 You can retrieve the logs of your last 1000 API calls and browse them using the offset/length parameters:
  * ***offset***: Specify the first entry to retrieve (0-based, 0 is the most recent log entry). Default to 0.
  * ***length***: Specify the maximum number of entries to retrieve starting at offset. Defaults to 10. Maximum allowed value: 1000.
+ * ***onlyErrors***: Retrieve only logs with an httpCode different than 200 and 201
+ * ***type***: Specify the type of logs to retrieve:
+  * ***query***: Retrieve only the queries.
+  * ***build***: Retrieve only the build operations.
+  * ***error***: Retrieve only the error. (same as ***onlyErrors*** parameters)
 
 <%= snippet("logs_get") %>
 
