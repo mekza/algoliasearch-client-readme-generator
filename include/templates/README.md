@@ -643,6 +643,8 @@ Each key is defined by a set of rights that specify the authorized actions. The 
  * **deleteIndex**: allows to delete index content,
  * **settings**: allows to get index settings,
  * **editSettings**: allows to change index settings.
+ * **analytics**: allows to retrieve the analytics through the analytics API.
+ * **listIndexes**: allows to list to list all accessible indexes.
 
 Example of API Key creation:
 <%= snippet("security_add_user_key_simple") %>
