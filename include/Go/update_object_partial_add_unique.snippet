@@ -1,0 +1,9 @@
+```go
+object := make(map[string]interface{})
+operation := make(map[string]interface{})
+operation["value"] = "MyTags"
+operation["_operation"] = "AddUnique"
+object["_tags"] = operation
+object["objectID"] = "myID"
+res, err := index.PartialUpdateObject(object)
+```

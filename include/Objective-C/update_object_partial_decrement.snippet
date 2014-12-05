@@ -1,0 +1,7 @@
+```objc
+NSMutableDictionary *operation = [NSMutableDictionary dictionary];
+[operation set:Object:42 forKey:@"value"]
+[operation set:Object:@"Decrement" forKey:@"_operation"]
+NSDictionary *partialObject = [NSDictionary dictionaryWithObjectsAndKeys:operation, @"price", nil];
+[index partialUpdateObject:partialObject objectID:@"myID" success:nil failure:nil];
+```

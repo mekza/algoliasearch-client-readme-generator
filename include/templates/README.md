@@ -281,10 +281,11 @@ Example with manual `objectID` assignement:
 Update an existing object in the Index
 -------------
 
-You have two options to update an existing object:
+You have three options to update an existing object:
 
  1. Replace all its attributes.
  2. Replace only some attributes.
+ 3. Apply an operation to some attributes
 
 Example to replace all the content of an existing object:
 
@@ -293,6 +294,26 @@ Example to replace all the content of an existing object:
 Example to update only the city attribute of an existing object:
 
 <%= snippet("update_object_partial") %>
+
+Example to add a tag:
+
+<%= snippet("update_object_partial_add") %>
+
+Example to remove a tag:
+
+<%= snippet("update_object_partial_remove") %>
+
+Example to add a tag if it doesn't exist:
+
+<%= snippet("update_object_partial_add_unique") %>
+
+Example to increment a numeric value:
+
+<%= snippet("update_object_partial_increment") %>
+
+Example to decrement a numeric value:
+
+<%= snippet("update_object_partial_decrement") %>
 
 <% end %>
 
