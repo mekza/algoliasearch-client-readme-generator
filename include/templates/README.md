@@ -35,7 +35,7 @@ This command line API Client is a small wrapper around CURL to easily use Algoli
 <% else -%>
 This <%= @name %> client let you easily use the Algolia Search API from your <%= puts({'C#' => 'App', 'Java' => "Java Application", "Android" => "Android Application", 'Objective-C' => "application (iOS & OS X)"}, "backend") %>. It wraps [Algolia's REST API](http://www.algolia.com/doc/rest_api).
 <% end -%>
-<% if csharp? -%>(Compatible with .NET 4.5, SL4+, WP7.5+, Windows Store)<% end -%>
+<% if csharp? -%>Compatible with .NET 4.0, .NET 4.5, ASP.NET vNext 1.0, Mono 4.5, Windows 8, Windows 8.1, Windows Phone 8.1, Xamarin iOS, and Xamarin Android.<% end -%>
 <% if android? -%>It is based on our [Java API client](https://github.com/algolia/algoliasearch-client-java) and  includes an easy to use asynchronous API to avoid networks calls on UI Thread.<% end -%>
 
 <%= import("build_status.info") if !cmd? %>
