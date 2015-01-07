@@ -83,6 +83,7 @@ Table of Content
 <% else %>
 1. [Search](#search)
 1. [Multi-queries](#multi-queries)
+1. [Get an object](#get-an-object)
 1. [Security](#security)
 <% end %>
 
@@ -472,6 +473,18 @@ You can send multiple queries with a single API call using a batch of queries:
 <%= snippet("multiple_queries") %>
 
 <% end %>
+
+Get an object
+-------------
+
+You can easily retrieve an object using its `objectID` and optionnaly a list of attributes you want to retrieve (using comma as separator):
+
+<%= snippet("get_object") %>
+
+You can also retrieve a set of objects:
+
+<%= snippet("get_objects") %>
+
 <% if js? %>
 
 Security
@@ -495,17 +508,6 @@ algolia.setUserToken('user_42')              // must be same than the one used a
 <% end %>
 
 <% if !js? %>
-
-Get an object
--------------
-
-You can easily retrieve an object using its `objectID` and optionnaly a list of attributes you want to retrieve (using comma as separator):
-
-<%= snippet("get_object") %>
-
-You can also retrieve a set of objects:
-
-<%= snippet("get_objects") %>
 
 Delete an object
 -------------

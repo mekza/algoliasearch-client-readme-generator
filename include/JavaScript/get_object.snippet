@@ -1,0 +1,14 @@
+```javascript
+// Retrieves all attributes
+index.getObject('myID', function(success, content) {
+  console.log(content.objectID + ": ", content;
+});
+// Retrieves firstname and lastname attributes
+index.getObject('myID', function(success, content) {
+  console.log(content.objectID + ": ", content);
+}, "firstname,lastname");
+// Retrieves only the firstname attribute
+index.getObject('myID', function(success, content) {
+  console.log(content.objectID + ": ", content);
+}, "firstname");
+```
