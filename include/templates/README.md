@@ -293,6 +293,15 @@ Example to replace all the content of an existing object:
 
 <%= snippet("update_object") %>
 
+You have three ways to update an attribute of an object:
+
+ 1. Set the attribute value
+ 2. Add an element to an array
+ 3. Remove an element to an array
+ 4. Add an element to an array if it doesn't exist
+ 5. increment an attribute
+ 6. decrement an attribute
+
 Example to update only the city attribute of an existing object:
 
 <%= snippet("update_object_partial") %>
