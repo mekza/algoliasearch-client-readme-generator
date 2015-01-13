@@ -1,3 +1,5 @@
+##### Default
+
 ```javascript
 // Retrieves all attributes
 index.getObject('myID', function(success, content) {
@@ -11,4 +13,31 @@ index.getObject('myID', function(success, content) {
 index.getObject('myID', function(success, content) {
   console.log(content.objectID + ": ", content);
 }, "firstname");
+```
+
+##### jQuery
+
+```javascript
+// Retrieves all attributes
+index.getObject('myID').done(function(content) {
+  console.log(content.objectID + ": ", content;
+});
+// Retrieves firstname and lastname attributes
+index.getObject('myID', "firstname,lastname").done(function(content) {
+  console.log(content.objectID + ": ", content);
+});
+```
+
+
+##### Angular.js
+
+```javascript
+// Retrieves all attributes
+index.getObject('myID').then(function(content) {
+  console.log(content.objectID + ": ", content;
+});
+// Retrieves firstname and lastname attributes
+index.getObject('myID', "firstname,lastname").then(function(content) {
+  console.log(content.objectID + ": ", content);
+});
 ```

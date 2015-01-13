@@ -1,3 +1,5 @@
+##### Default
+
 ```javascript
 index = client.initIndex('contacts');
 index.search('query string', function(success, content) {
@@ -18,5 +20,49 @@ index.search('query string', function(success, content) {
     for (var h in content.hits) {
         console.log('Hit(' + content.hits[h].objectID + '): ' + content.hits[h].toString());
     }
-}, {'attributesToRetrieve': 'firstname,lastname', 'hitsPerPage': 50});
+}, {attributesToRetrieve: 'firstname,lastname', hitsPerPage: 50});
+```
+
+##### jQuery
+
+```javascript
+index = client.initIndex('contacts');
+index.search('query string')
+    .done(function(content) {
+        for (var h in content.hits) {
+            console.log('Hit(' + content.hits[h].objectID + '): ' + content.hits[h].toString());
+        }
+    })
+    .fail(function(content) {
+        console.log('Error: ' + content.message);
+    });
+
+index.search('query string', { attributesToRetrieve: 'firstname,lastname', hitsPerPage: 50})
+    .done(function(content) {
+        for (var h in content.hits) {
+            console.log('Hit(' + content.hits[h].objectID + '): ' + content.hits[h].toString());
+        }
+    })
+    .fail(function(content) {
+        console.log('Error: ' + content.message);
+    });
+```
+
+##### Angular.js
+
+```javascript
+index = client.initIndex('contacts');
+index.search('query string')
+    .then(function(content) {
+        $scope.hits = content.hits;
+    }, function(content) {
+        console.log('Error: ' + content.message);
+    });
+
+index.search('query string', { attributesToRetrieve: 'firstname,lastname', hitsPerPage: 50})
+    .then(function(content) {
+        $scope.hits = content.hits;
+    }, function(content) {
+        console.log('Error: ' + content.message);
+    });
 ```

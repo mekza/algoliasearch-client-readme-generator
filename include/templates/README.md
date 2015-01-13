@@ -187,9 +187,9 @@ All API calls will return the result in a callback that takes two arguments:
 Cache
 -------------
 
-Queries will be stored in a ```cache``` inside your JavaScript ```Index``` object to avoid performing the same API calls twice. It's particularly useful when your users are deleting letters/words from the current query but may end in some outdated results if the page isn't refreshed for some time.
+Queries will be stored in a ```cache``` inside your JavaScript ```Index``` and ```AlgoliaSearch``` objects to avoid performing the same API calls twice. It's particularly useful when your users are deleting letters/words from the current query but may end in some outdated results if the page isn't refreshed for some time.
 
-Just clear the cache every X minutes to work-around 
+Just clear the cache every X minutes to ensure you've always up-to-date results:
 ```js
 // clear the queries cache
 index.clearCache();
@@ -242,19 +242,17 @@ Commands reference
 ==================
 
 <% if js? %>
-Update the index
+Updating the index
 -------------
 
-The JavaScript client is dedicated to web apps searching directly from the browser. In some use-cases, it can however be interesting to perform updates to the index directly in JavaScript, for example in an HTML5 mobile app. Therefore, just as for other languages, the JavaScript client is able to add, update or delete objects, or to modify index settings.
+The JavaScript client is dedicated to web apps searching directly from the browser. To add, remove or delete your objects please consider using a backend API client.
 
-For more details about updating an index from JavaScript, have a look at the [algoliasearch.js](https://github.com/algolia/algoliasearch-client-js/blob/master/src/algoliasearch.js) source file to see details about each function.
-
-**Note:** If you use the JavaScript client to update the index, you need to specify `https` as the protocol in the client initialization:
+In some use-cases, it can however be interesting to perform updates to the index directly in JavaScript, for example in an HTML5 mobile app. Therefore, just as for other languages, the JavaScript client is able to add, update or delete objects, or to modify index settings. For more details about updating an index from JavaScript, have a look at the [algoliasearch.js](https://github.com/algolia/algoliasearch-client-js/blob/master/src/algoliasearch.js) source file to see details about each function. If you use the JavaScript client to update the index, you need to specify `https` as the protocol during the client initialization:
 
 ```javascript
   <script src="algoliasearch.min.js"></script>
   <script>
-    client = new AlgoliaSearch('ApplicationID', 'API-Key', 'https');
+    client = new AlgoliaSearch('ApplicationID', 'API-Key', { method: 'https' });
     ...
 ```
 <% else %>
