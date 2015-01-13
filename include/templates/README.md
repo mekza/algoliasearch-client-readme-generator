@@ -122,7 +122,7 @@ To setup your project, follow these steps:
 Quick Start
 -------------
 <% if js? %>
-First, index some data. For example, you can use the command line client [quick start](https://github.com/algolia/algoliasearch-client-cmd#quick-start) to index the 500 contacts sample.
+The JavaScript API client is dedicated to web apps searching directly from the browser. To add, remove or delete your objects please consider using a backend API client.
 
 You can then update the ```example/autocomplete.html``` file with your ```ApplicationID```, ```API-Key``` and ```index name``` to test the autocomplete feature.
 
@@ -241,21 +241,7 @@ Check our [tutorials](http://www.algolia.com/doc/tutorials):
 Commands reference
 ==================
 
-<% if js? %>
-Updating the index
--------------
-
-The JavaScript client is dedicated to web apps searching directly from the browser. To add, remove or delete your objects please consider using a backend API client.
-
-In some use-cases, it can however be interesting to perform updates to the index directly in JavaScript, for example in an HTML5 mobile app. Therefore, just as for other languages, the JavaScript client is able to add, update or delete objects, or to modify index settings. For more details about updating an index from JavaScript, have a look at the [algoliasearch.js](https://github.com/algolia/algoliasearch-client-js/blob/master/src/algoliasearch.js) source file to see details about each function. If you use the JavaScript client to update the index, you need to specify `https` as the protocol during the client initialization:
-
-```javascript
-  <script src="algoliasearch.min.js"></script>
-  <script>
-    client = new AlgoliaSearch('ApplicationID', 'API-Key', { method: 'https' });
-    ...
-```
-<% else %>
+<% if !js? %>
 
 <%#    ************************** API CLIENT REFERENCE OTHERS ********************************** %>
 
@@ -514,7 +500,21 @@ algolia.setUserToken('user_42')              // must be same than the one used a
 
 <% end %>
 
-<% if !js? %>
+<% if js? %>
+
+Updating the index
+-------------
+
+In some use-cases, it can however be interesting to perform updates to the index directly in JavaScript, for example in an HTML5 mobile app. Therefore, just as for other languages, the JavaScript client is able to add, update or delete objects, or to modify index settings. For more details about updating an index from JavaScript, have a look at the [algoliasearch.js](https://github.com/algolia/algoliasearch-client-js/blob/master/src/algoliasearch.js) source file to see details about each function. If you use the JavaScript client to update the index, you need to specify `https` as the protocol during the client initialization:
+
+```javascript
+  <script src="algoliasearch.min.js"></script>
+  <script>
+    client = new AlgoliaSearch('ApplicationID', 'API-Key', { method: 'https' });
+    ...
+```
+
+<% else %>
 
 Delete an object
 -------------
