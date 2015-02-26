@@ -1,7 +1,7 @@
 <% if cmd? -%>
 # Algolia Search Command Line API Client
 <% else -%>
-# Algolia Search API Client for <%= !objc? ? @name : "iOS and OS X" %> <%= import("version_badge.info") if js? %>
+# Algolia Search API Client for <%= !objc? ? @name : "iOS and OS X" %>
 <% end -%>
 
 <%#    ************************** INTRO ********************************** %>
