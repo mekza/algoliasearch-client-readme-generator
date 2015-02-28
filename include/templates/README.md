@@ -6,20 +6,23 @@
 
 <%#    ************************** INTRO ********************************** %>
 
-[Algolia Search](http://www.algolia.com) is a search API that provides hosted full-text, numerical and faceted search.
-Algolia’s Search API makes it easy to deliver a great search experience in your apps & websites providing:
+[Algolia Search](http://www.algolia.com) is a hosted full-text, numerical, and faceted search engine capable of delivering realtime results from the first keystroke.
+Algolia's Search API makes it easy to deliver a great search experience in your websites and mobile applications by providing:
 
- * REST and JSON-based API
- * search among infinite attributes from a single searchbox
- * instant-search after each keystroke
- * relevance & popularity combination
- * typo-tolerance in any language
- * faceting
+ * REST and JSON based API
+ * Search against infinite attributes from a single search box
+ * Instant search as you type experience
+ * Relevance and popularity ranking
+ * Global language support
+ * Typo tolerance in any language
+ * Smart highlighting
+ * Facet as you type
+ * Geo awareness
  * 99.99% SLA
- * first-class data security
+ * First class data security
 
 <% if js? %>
-This Javascript client let you easily use the [Algolia Search API](http://www.algolia.com) in a browser, it is compatible with major browsers:
+Our JavaScript client lets you easily use the [Algolia Search API](http://www.algolia.com) in a browser. It is compatible with the major browsers:
 
  * Internet Explorer &ge; 6
  * Firefox &ge; 3.0
@@ -28,12 +31,13 @@ This Javascript client let you easily use the [Algolia Search API](http://www.al
  * Opera &ge; 10
  * etc.
 
-The JavaScript client is using CORS ([Cross Origin Resource Sharing](http://en.wikipedia.org/wiki/Cross-Origin_Resource_Sharing#Browser_support)) on recent browsers and has a fallback on JSONP ([JSON with padding](http://en.wikipedia.org/wiki/JSONP)) for old browsers.
+The JavaScript client uses CORS ([Cross Origin Resource Sharing](http://en.wikipedia.org/wiki/Cross-Origin_Resource_Sharing#Browser_support)) on modern browsers and falls back to JSONP ([JSON with padding](http://en.wikipedia.org/wiki/JSONP)) for older browsers.
 <% elsif cmd? -%>
-This command line API Client is a small wrapper around CURL to easily use Algolia Search's REST API.
+Our command line API client is a small wrapper around CURL to make it easier to use the [Algolia Search REST API](http://www.algolia.com/doc/rest_api).
 <% else -%>
-This <%= @name %> client let you easily use the Algolia Search API from your <%= puts({'C#' => 'App', 'Java' => "Java Application", "Android" => "Android Application", 'Objective-C' => "application (iOS & OS X)"}, "backend") %>. It wraps [Algolia's REST API](http://www.algolia.com/doc/rest_api).
+Our <%= @name %> client lets you easily use the [Algolia Search API](http://www.algolia.com) from your <%= puts({'C#' => 'App', 'Java' => "Java Application", "Android" => "Android Application", 'Objective-C' => "iOS & OS X applications"}, "backend") %>. It wraps the [Algolia Search REST API](http://www.algolia.com/doc/rest_api).
 <% end -%>
+
 <% if csharp? -%>Compatible with .NET 4.0, .NET 4.5, ASP.NET vNext 1.0, Mono 4.5, Windows 8, Windows 8.1, Windows Phone 8.1, Xamarin iOS, and Xamarin Android.<% end -%>
 <% if android? -%>It is based on our [Java API client](https://github.com/algolia/algoliasearch-client-java) and  includes an easy to use asynchronous API to avoid networks calls on UI Thread.<% end -%>
 
@@ -41,9 +45,9 @@ This <%= @name %> client let you easily use the Algolia Search API from your <%=
 
 <%#    ************************** TOC ********************************** %>
 
-Table of Content
-================
-**Get started**
+Table of Contents
+=================
+**Getting Started**
 
 1. [Setup](#setup)
 <% if nodejs? -%>
@@ -51,7 +55,7 @@ Table of Content
 <% end -%>
 1. [Quick Start](#quick-start)
 <% if nodejs? || js? -%>
-1. [General Principle](#general-principle)
+1. [General Principles](#general-principle)
 <% if js? -%>
 1. [Cache](#cache)
 <% end -%>
@@ -59,7 +63,7 @@ Table of Content
 1. [Online documentation](#documentation)
 1. [Tutorials](#tutorials)
 
-**Commands reference**
+**Commands Reference**
 
 <% if !js? -%>
 1. [Add a new object](#add-a-new-object-in-the-index)
@@ -81,7 +85,7 @@ Table of Content
 <% if ruby? %>1. [Mock](#mock)<% end %>
 <% else %>
 1. [Search](#search)
-1. [Multi-queries](#multi-queries)
+1. [Multiple queries](#multi-queries)
 1. [Get an object](#get-an-object)
 1. [Security](#security)
 <% end %>
@@ -95,22 +99,22 @@ Setup
 <% if java? %>If you're using Maven, add the following dependency and repository to your pom file:
 <%= snippet("setup_maven") %>
 
-Initialize the client with your ApplicationID and API-Key. You can find all of them on [your Algolia account](http://www.algolia.com/users/edit):
+Initialize the client with your Application ID and API Key. You can find them on [your Algolia account](http://www.algolia.com/users/edit):
 <% end %>
 
 <% if android? %>
- 1. Download [latest algoliasearch-client-android-*.jar](https://github.com/algolia/algoliasearch-client-android/tree/master/dist) and add it to the lib folder of your project.
- 2. Initialize the client with your ApplicationID and API-Key. You can find all of them on [your Algolia account](http://www.algolia.com/users/edit).
- 3. Make your Activity class implements the `IndexListener` interface to be able to use the asynchronous methods.
+ 1. Download the [latest algoliasearch-client-android-*.jar](https://github.com/algolia/algoliasearch-client-android/tree/master/dist) and add it to the lib folder of your project.
+ 2. Initialize the client with your Application ID and API Key. You can find them on [your Algolia account](http://www.algolia.com/users/edit).
+ 3. Make your Activity class implement the `IndexListener` interface to be able to use the asynchronous methods.
 <% end %>
 <%= snippet("setup") %>
 
 <%#    ************************** SETUP WITH PARSE ********************************** %>
 
 <% if nodejs? -%>
-Setup with parse
+Setup with Parse
 --------------------
-To setup your project, follow these steps:
+To setup your project with Parse, follow these steps:
 
 
 <%= snippet("setup_parse") %>
@@ -121,20 +125,20 @@ To setup your project, follow these steps:
 Quick Start
 -------------
 <% if js? %>
-The JavaScript API client is dedicated to web apps searching directly from the browser. To add, remove or delete your objects please consider using a backend API client.
+The JavaScript API client is designed for web applications performing searches directly from the browser. To add, remove or delete objects from your indices, please consider using a backend API client.
 
-You can then update the ```example/autocomplete.html``` file with your ```ApplicationID```, ```API-Key``` and ```index name``` to test the autocomplete feature.
+To try out an autocomplete menu example, update ```example/autocomplete.html``` with your ```Application ID```, ```API Key``` and ```index name```.
 
-You can also update the ```example/instantsearch.html``` file with your ```ApplicationID```, ```API-Key``` and ```index name``` to test an instant-search example.
+To try out an instant search results page example, update ```example/instantsearch.html``` with your ```Application ID```, ```API Key``` and ```index name```
 <% else %>
-This quick start is a 30 seconds tutorial where you can discover how to index and search objects.
+In 30 seconds, this quick start tutorial will show you how to index and search objects.
 
 <%= snippet("quick_start_new_index") %>
 
-You can then start to search for a contact firstname, lastname, company, ... (even with typos):
+You can now search for contacts using firstname, lastname, company, etc. (even with typos):
 <%= snippet("quick_start_search") %>
 
-Settings can be customized to tune the search behavior. For example you can add a custom sort by number of followers to the already good out-of-the-box relevance:
+Settings can be customized to tune the search behavior. For example, you can add a custom sort by number of followers to the already great built-in relevance:
 <%= snippet("quick_start_custom_ranking") %>
 
 You can also configure the list of attributes you want to index by order of importance (first = most important):
@@ -145,8 +149,8 @@ Since the engine is designed to suggest results as you type, you'll generally se
 
 <% if !cmd? && !android? && !objc? %>
 **Notes:** If you are building a web application, you may be more interested in using our [JavaScript client](https://github.com/algolia/algoliasearch-client-js) to perform queries. It brings two benefits:
-  * your users get a better response time by avoiding to go through your servers,
-  * it will offload your servers of unnecessary tasks.
+  * Your users get a better response time by not going through your servers
+  * It will offload unnecessary tasks from your servers.
 
 ```html
 <script type="text/javascript" src="//path/to/algoliasearch.min.js"></script>
@@ -172,12 +176,12 @@ Since the engine is designed to suggest results as you type, you'll generally se
 <% end %>
 
 <% if nodejs? || js? %>
-General Principle
+General Principles
 -------------
 
 All API calls will return the result in a callback that takes two arguments:
 
- 1. **<%= js? ? 'success' : 'error' %>**: a boolean that is set to <%= js? ? 'false' : 'true' %> when an error was found.
+ 1. **<%= js? ? 'success' : 'error' %>**: a boolean that is set to <%= js? ? 'false' : 'true' %> when an error occurs.
  2. **content**: the object containing the answer (if an error was found, you can retrieve the error message in `content.message`)
 
 <% end %>
@@ -186,9 +190,9 @@ All API calls will return the result in a callback that takes two arguments:
 Cache
 -------------
 
-Queries will be stored in a ```cache``` inside your JavaScript ```Index``` and ```AlgoliaSearch``` objects to avoid performing the same API calls twice. It's particularly useful when your users are deleting letters/words from the current query but may end in some outdated results if the page isn't refreshed for some time.
+Queries will be stored in a ```cache``` inside your JavaScript ```Index``` and ```AlgoliaSearch``` objects to avoid performing the same API calls twice. It's particularly useful when your users are deleting characters or words from the current query but has a chance of ending up with outdated results if the page isn't refreshed for some time.
 
-Just clear the cache every X minutes to ensure you've always up-to-date results:
+To address this issue, be sure to clear the cache every X minutes to ensure you have up to date results:
 ```js
 // clear the queries cache
 index.clearCache();
@@ -230,60 +234,60 @@ Check our [online documentation](http://www.algolia.com/doc/guides/<%= @slug %>)
 Tutorials
 ================
 
-Check our [tutorials](http://www.algolia.com/doc/tutorials):
- * [Searchbar with auto-completion](http://www.algolia.com/doc/tutorials/auto-complete)
- * [Searchbar with multi-categories auto-completion](http://www.algolia.com/doc/tutorials/multi-auto-complete)
- * [Instant-search](http://www.algolia.com/doc/tutorials/instant-search)
+Check out our [tutorials](http://www.algolia.com/doc/tutorials):
+ * [Search bar with autocomplete menu](http://www.algolia.com/doc/tutorials/auto-complete)
+ * [Search bar with multi category autocomplete menu](http://www.algolia.com/doc/tutorials/multi-auto-complete)
+ * [Instant search result pages](http://www.algolia.com/doc/tutorials/instant-search)
 
 <%#    ************************** API CLIENT REFERENCE JS ********************************** %>
 
-Commands reference
+Commands Reference
 ==================
 
 <% if !js? %>
 
 <%#    ************************** API CLIENT REFERENCE OTHERS ********************************** %>
 
-Add a new object in the Index
+Add a new object to the Index
 -------------
 
-Each entry in an index has a unique identifier called `objectID`. You have two ways to add en entry in the index:
+Each entry in an index has a unique identifier called `objectID`. There are two ways to add en entry to the index:
 
- 1. Using automatic `objectID` assignement, you will be able to retrieve it in the answer.
- 2. Passing your own `objectID`
+ 1. Using automatic `objectID` assignment. You will be able to access it in the answer.
+ 2. Supplying your own `objectID`.
 
-You don't need to explicitely create an index, it will be automatically created the first time you add an object.
-Objects are schema less, you don't need any configuration to start indexing. The settings section provide details about advanced settings.
+You don't need to explicitly create an index, it will be automatically created the first time you add an object.
+Objects are schema less so you don't need any configuration to start indexing. If you wish to configure things, the settings section provides details about advanced settings.
 
-Example with automatic `objectID` assignement:
+Example with automatic `objectID` assignment:
 
 <%= snippet("add_new_object_auto") %>
 
-Example with manual `objectID` assignement:
+Example with manual `objectID` assignment:
 
 <%= snippet("add_new_object_manual") %>
 
 Update an existing object in the Index
 -------------
 
-You have three options to update an existing object:
+You have three options when updating an existing object:
 
  1. Replace all its attributes.
  2. Replace only some attributes.
- 3. Apply an operation to some attributes
+ 3. Apply an operation to some attributes.
 
-Example to replace all the content of an existing object:
+Example on how to replace all attributes of an existing object:
 
 <%= snippet("update_object") %>
 
-You have three ways to update an attribute of an object:
+You have many ways to update an object's attributes:
 
  1. Set the attribute value
  2. Add an element to an array
- 3. Remove an element to an array
+ 3. Remove an element from an array
  4. Add an element to an array if it doesn't exist
- 5. increment an attribute
- 6. decrement an attribute
+ 5. Increment an attribute
+ 6. Decrement an attribute
 
 Example to update only the city attribute of an existing object:
 
@@ -314,111 +318,111 @@ Example to decrement a numeric value:
 Search
 -------------
 <% if !js? && !cmd? && !android? && !objc? %>
-**Opening note:** If you are building a web application, you may be more interested in using our [javascript client](https://github.com/algolia/algoliasearch-client-js) to send queries. It brings two benefits:
-  * your users get a better response time by avoiding to go through your servers,
-  * and it will offload your servers of unnecessary tasks.
+**Notes:** If you are building a web application, you may be more interested in using our [JavaScript client](https://github.com/algolia/algoliasearch-client-js) to perform queries. It brings two benefits:
+  * Your users get a better response time by not going through your servers
+  * It will offload unnecessary tasks from your servers.
 <% end %>
 
-<% if cmd? %>To perform a search, you have just to specify the index name and the query.<% else %>To perform a search, you just need to initialize the index and perform a call to the search function.<% end %>
+<% if cmd? %>To perform a search, you only need to specify the index name and query.<% else %>To perform a search, you only need to initialize the index and perform a call to the search function.<% end %>
 
 You can use the following optional arguments<%= puts({"C#" => " on Query class", "Objective-C" => " on ASQuery class"}) %>:
 
-### Query parameters
+### Query Parameters
 
-#### Full Text Search parameters
+#### Full Text Search Parameters
 
- * **<%= puts({'C#' => 'SetQueryString', 'Java' => 'setQueryString', 'Android' => 'setQueryString', 'Objective-C' => 'fullTextQuery'  }, "query") %>**: (string) The instant-search query string, all words of the query are interpreted as prefixes (for example "John Mc" will match "John Mccamey" and "Johnathan Mccamey"). If no query parameter is set, retrieves all objects.
- * **<%= puts({'C#' => 'SetQueryType', 'Java' => 'setQueryType', 'Android' => 'setQueryType', 'Objective-C' => 'setQueryType'}, "queryType") %>**: select how the query words are interpreted, it can be one of the following value:
-  * **<%= puts({'C#' => 'PREFIX_ALL', 'Java' => 'PREFIX_ALL', 'Android' => 'PREFIX_ALL'}, "prefixAll") %>**: all query words are interpreted as prefixes,
-  * **<%= puts({'C#' => 'PREFIX_LAST', 'Java' => 'PREFIX_ALL', 'Android' => 'PREFIX_ALL'}, "prefixLast") %>**: only the last word is interpreted as a prefix (default behavior),
-  * **<%= puts({'C#' => 'PREFIX_NONE', 'Java' => 'PREFIX_NONE', 'Android' => 'PREFIX_NONE'}, "prefixNone") %>**: no query word is interpreted as a prefix. This option is not recommended.
- * **<%= puts({'C#' => 'SetRemoveWordsIfNoResults', 'Java' => 'removeWordsIfNoResults', 'Android' => 'removeWordsIfNoResults', 'Objective-C' => 'setRemoveWordsIfNoResults'}, "removeWordsIfNoResults") %>**: This option to select a strategy to avoid having an empty result page. There is three different option:
-  * **<%= puts({'C#' => 'LAST_WORDS', 'Java' => 'REMOVE_LAST_WORDS', 'Android' => 'REMOVE_LAST_WORDS'}, "lastWords") %>**: when a query does not return any result, the last word will be added as optional (the process is repeated with n-1 word, n-2 word, ... until there is results),
-  * **<%= puts({'C#' => 'FIRST_WORDS', 'Java' => 'REMOVE_FIRST_WORDS', 'Android' => 'REMOVE_FIRST_WORDS'}, "firstWords") %>**: when a query does not return any result, the first word will be added as optional (the process is repeated with second word, third word, ... until there is results),
-  * **<%= puts({'C#' => 'ALL_OPTIONAL', 'Java' => 'REMOVE_ALL_OPTIONAL', 'Android' => 'REMOVE_ALL_OPTIONAL'}, "allOptional") %>**: When a query does not return any result, a second trial will be made with all words as optional (which is equivalent to transforming the AND operand between query terms in a OR operand) 
-  * **<%= puts({'C#' => 'NONE', 'Java' => 'REMOVE_NONE', 'Android' => 'REMOVE_NONE'}, "none") %>**: No specific processing is done when a query does not return any result (default behavior).
- * **<%= puts({'C#' => 'SetMinWordSizeToAllowOneTypo', 'Java' => 'setMinWordSizeToAllowOneTypo', 'Android' => 'setMinWordSizeToAllowOneTypo', 'Objective-C' => 'minWordSizeForApprox1'}, "minWordSizefor1Typo") %>**: the minimum number of characters in a query word to accept one typo in this word.<br/>Defaults to 4.
- * **<%= puts({'C#' => 'SetMinWordSizeToAllowTwoTypos', 'Java' => 'setMinWordSizeToAllowTwoTypos', 'Android' => 'setMinWordSizeToAllowTwoTypos', 'Objective-C' => 'minWordSizeForApprox2'}, "minWordSizefor2Typos") %>**: the minimum number of characters in a query word to accept two typos in this word.<br/>Defaults to 8.
- * **<%= puts({'C#' => 'EnableTyposOnNumericTokens', 'Java' => 'enableTyposOnNumericTokens', 'Android' => 'enableTyposOnNumericTokens'}, "allowTyposOnNumericTokens") %>**: if set to false, disable typo-tolerance on numeric tokens (numbers). Default to false.
- * **<%= puts({'C#' => 'SetTypoTolerance', 'Java' => 'setTypoTolerance', 'Android' => 'setTypoTolerance', 'Objective-C' => 'setTypoTolerance'}, 'typoTolerance') %>**:  This option allows you to control the number of typos in the result set:
-  * **<%= puts({'C#' => 'TYPO_TRUE', 'Java' => 'TYPO_TRUE', 'Android' => 'TYPO_TRUE'}, "true") %>**: the typo-tolerance is enabled and all matching hits are retrieved. (Default behavior)
-  * **<%= puts({'C#' => 'TYPO_FALSE', 'Java' => 'TYPO_FALSE', 'Android' => 'TYPO_FALSE'}, "false") %>**: the typo-tolerance is disabled. For example if one result match without typos, then all results with typos will be hidden.
-  * **<%= puts({'C#' => 'TYPO_MIN', 'Java' => 'TYPO_MIN', 'Android' => 'TYPO_MIN'}, "min") %>**: only keep the results with the minimum number of typos.
-  * **<%= puts({'C#' => 'TYPO_STRICT', 'Java' => 'TYPO_STRICT', 'Android' => 'TYPO_STRICT'}, "strict") %>**: hits matching with 2 typos are not retrieved if there are some matching without typos. This option is useful if you want to avoid as much as possible false positive.
- * **<%= puts({'C#' => 'EnableTyposOnNumericTokens', 'Java' => 'enableTyposOnNumericTokens', 'Android' => 'enableTyposOnNumericTokens'}, "allowTyposOnNumericTokens") %>**: if set to false, disable typo-tolerance on numeric tokens (numbers). Default to true.
- * **<%= puts({'C#' => 'IgnorePlural', 'Java' => 'ignorePlural', 'Android' => 'ignorePlural'}, "ignorePlural") %>**: If set to true, plural won't be considered as a typo (for example car/cars will be considered as equals). Default to false.
- * **<%= puts({'C#' => 'RestrictSearchableAttributes', 'Java' => 'restrictSearchableAttributes', 'Android' => 'restrictSearchableAttributes'}, "restrictSearchableAttributes") %>** List of attributes you want to use for textual search (must be a subset of the `attributesToIndex` index setting). Attributes are separated with a comma (for example `"name,address"`), you can also use a JSON string array encoding (for example encodeURIComponent("[\"name\",\"address\"]")). By default, all attributes specified in `attributesToIndex` settings are used to search.
- * **<%= puts({'C#' => 'EnableAdvancedSyntax', 'Java' => 'enableAdvancedSyntax', 'Android' => 'enableAdvancedSyntax'}, 'advancedSyntax') %>**: Enable the advanced query syntax. Defaults to 0 (false).
-    * **Phrase query**: a phrase query defines a particular sequence of terms. A phrase query is build by Algolia's query parser for words surrounded by `"`. For example, `"search engine"` will retrieve records having `search` next to `engine` only. Typo-tolerance is _disabled_ on phrase queries.
-    * **Prohibit operator**: The prohibit operator excludes records that contain the term after the `-` symbol. For example `search -engine` will retrieve records containing `search` but not `engine`.
- * **<%= puts({'C#' => 'EnableAnalytics', 'Java' => 'enableAnalytics', 'Android' => 'enableAnalytics'}, 'analytics') %>**: If set to false, this query will not be taken into account in analytics feature. Default to true.
- * **<%= puts({'C#' => 'EnableSynonyms', 'Java' => 'enableSynonyms', 'Android' => 'enableSynonyms'}, 'synonyms') %>**: If set to false, this query will not use synonyms defined in configuration. Default to true.
- * **<%= puts({'C#' => 'EnableReplaceSynonymsInHighlight', 'Java' => 'enableReplaceSynonymsInHighlight', 'Android' => 'enableReplaceSynonymsInHighlight'}, 'replaceSynonymsInHighlight') %>**: If set to false, words matched via synonyms expansion will not be replaced by the matched synonym in highlight result. Default to true.
+ * **<%= puts({'C#' => 'SetQueryString', 'Java' => 'setQueryString', 'Android' => 'setQueryString', 'Objective-C' => 'fullTextQuery'  }, "query") %>**: (string) The instant search query string. All words of the query are interpreted as prefixes (for example "John Mc" will match "John Mccamey" and "Johnathan Mccamey"). If no query parameter is set all objects are retrieved.
+ * **<%= puts({'C#' => 'SetQueryType', 'Java' => 'setQueryType', 'Android' => 'setQueryType', 'Objective-C' => 'setQueryType'}, "queryType") %>**: Selects how the query words are interpreted. It can be one of the following values:
+  * **<%= puts({'C#' => 'PREFIX_ALL', 'Java' => 'PREFIX_ALL', 'Android' => 'PREFIX_ALL'}, "prefixAll") %>**: All query words are interpreted as prefixes.
+  * **<%= puts({'C#' => 'PREFIX_LAST', 'Java' => 'PREFIX_ALL', 'Android' => 'PREFIX_ALL'}, "prefixLast") %>**: Only the last word is interpreted as a prefix (default behavior).
+  * **<%= puts({'C#' => 'PREFIX_NONE', 'Java' => 'PREFIX_NONE', 'Android' => 'PREFIX_NONE'}, "prefixNone") %>**: No query word is interpreted as a prefix. This option is not recommended.
+ * **<%= puts({'C#' => 'SetRemoveWordsIfNoResults', 'Java' => 'removeWordsIfNoResults', 'Android' => 'removeWordsIfNoResults', 'Objective-C' => 'setRemoveWordsIfNoResults'}, "removeWordsIfNoResults") %>**: This option is used to select a strategy in order to avoid having an empty result page. There are three different options:
+  * **<%= puts({'C#' => 'LAST_WORDS', 'Java' => 'REMOVE_LAST_WORDS', 'Android' => 'REMOVE_LAST_WORDS'}, "lastWords") %>**: When a query does not return any results, the last word will be added as optional. The process is repeated with n-1 word, n-2 word, ... until there are results.
+  * **<%= puts({'C#' => 'FIRST_WORDS', 'Java' => 'REMOVE_FIRST_WORDS', 'Android' => 'REMOVE_FIRST_WORDS'}, "firstWords") %>**: When a query does not return any results, the first word will be added as optional. The process is repeated with second word, third word, ... until there are results.
+  * **<%= puts({'C#' => 'ALL_OPTIONAL', 'Java' => 'REMOVE_ALL_OPTIONAL', 'Android' => 'REMOVE_ALL_OPTIONAL'}, "allOptional") %>**: When a query does not return any results, a second trial will be made with all words as optional. This is equivalent to transforming the AND operand between query terms to an OR operand. 
+  * **<%= puts({'C#' => 'NONE', 'Java' => 'REMOVE_NONE', 'Android' => 'REMOVE_NONE'}, "none") %>**: No specific processing is done when a query does not return any results (default behavior).
+ * **<%= puts({'C#' => 'SetMinWordSizeToAllowOneTypo', 'Java' => 'setMinWordSizeToAllowOneTypo', 'Android' => 'setMinWordSizeToAllowOneTypo', 'Objective-C' => 'minWordSizeForApprox1'}, "minWordSizefor1Typo") %>**: The minimum number of characters in a query word to accept one typo in this word.<br/>Defaults to 4.
+ * **<%= puts({'C#' => 'SetMinWordSizeToAllowTwoTypos', 'Java' => 'setMinWordSizeToAllowTwoTypos', 'Android' => 'setMinWordSizeToAllowTwoTypos', 'Objective-C' => 'minWordSizeForApprox2'}, "minWordSizefor2Typos") %>**: The minimum number of characters in a query word to accept two typos in this word.<br/>Defaults to 8.
+ * **<%= puts({'C#' => 'EnableTyposOnNumericTokens', 'Java' => 'enableTyposOnNumericTokens', 'Android' => 'enableTyposOnNumericTokens'}, "allowTyposOnNumericTokens") %>**: If set to false, it disables typo tolerance on numeric tokens (numbers). Defaults to false.
+ * **<%= puts({'C#' => 'SetTypoTolerance', 'Java' => 'setTypoTolerance', 'Android' => 'setTypoTolerance', 'Objective-C' => 'setTypoTolerance'}, 'typoTolerance') %>**: This option allows you to control the number of typos in the result set:
+  * **<%= puts({'C#' => 'TYPO_TRUE', 'Java' => 'TYPO_TRUE', 'Android' => 'TYPO_TRUE'}, "true") %>**: The typo tolerance is enabled and all matching hits are retrieved (default behavior).
+  * **<%= puts({'C#' => 'TYPO_FALSE', 'Java' => 'TYPO_FALSE', 'Android' => 'TYPO_FALSE'}, "false") %>**: The typo tolerance is disabled. For example, if one result matches without typos, then all results with typos will be hidden.
+  * **<%= puts({'C#' => 'TYPO_MIN', 'Java' => 'TYPO_MIN', 'Android' => 'TYPO_MIN'}, "min") %>**: Only keep results with the minimum number of typos.
+  * **<%= puts({'C#' => 'TYPO_STRICT', 'Java' => 'TYPO_STRICT', 'Android' => 'TYPO_STRICT'}, "strict") %>**: Hits matching with 2 typos are not retrieved if there are some matching without typos. This option is useful if you want to avoid false positives as much as possible.
+ * **<%= puts({'C#' => 'EnableTyposOnNumericTokens', 'Java' => 'enableTyposOnNumericTokens', 'Android' => 'enableTyposOnNumericTokens'}, "allowTyposOnNumericTokens") %>**: If set to false, disables typo tolerance on numeric tokens (numbers). Defaults to true.
+ * **<%= puts({'C#' => 'IgnorePlural', 'Java' => 'ignorePlural', 'Android' => 'ignorePlural'}, "ignorePlural") %>**: If set to true, plural won't be considered as a typo. For example, car and cars will be considered as equals. Defaults to false.
+ * **<%= puts({'C#' => 'RestrictSearchableAttributes', 'Java' => 'restrictSearchableAttributes', 'Android' => 'restrictSearchableAttributes'}, "restrictSearchableAttributes") %>** List of attributes you want to use for textual search (must be a subset of the `attributesToIndex` index setting). Attributes are separated with a comma such as `"name,address"`. You can also use JSON string array encoding such as `encodeURIComponent("[\"name\",\"address\"]")`. By default, all attributes specified in `attributesToIndex` settings are used to search.
+ * **<%= puts({'C#' => 'EnableAdvancedSyntax', 'Java' => 'enableAdvancedSyntax', 'Android' => 'enableAdvancedSyntax'}, 'advancedSyntax') %>**: Enables the advanced query syntax. Defaults to 0 (false).
+    * **Phrase query**: A phrase query defines a particular sequence of terms. A phrase query is built by Algolia's query parser for words surrounded by `"`. For example, `"search engine"` will retrieve records having `search` next to `engine` only. Typo tolerance is _disabled_ on phrase queries.
+    * **Prohibit operator**: The prohibit operator excludes records that contain the term after the `-` symbol. For example, `search -engine` will retrieve records containing `search` but not `engine`.
+ * **<%= puts({'C#' => 'EnableAnalytics', 'Java' => 'enableAnalytics', 'Android' => 'enableAnalytics'}, 'analytics') %>**: If set to false, this query will not be taken into account in the analytics feature. Defaults to true.
+ * **<%= puts({'C#' => 'EnableSynonyms', 'Java' => 'enableSynonyms', 'Android' => 'enableSynonyms'}, 'synonyms') %>**: If set to false, this query will not use synonyms defined in the configuration. Defaults to true.
+ * **<%= puts({'C#' => 'EnableReplaceSynonymsInHighlight', 'Java' => 'enableReplaceSynonymsInHighlight', 'Android' => 'enableReplaceSynonymsInHighlight'}, 'replaceSynonymsInHighlight') %>**: If set to false, words matched via synonym expansion will not be replaced by the matched synonym in the highlight results. Defaults to true.
 <% if objc?  -%>
- * **optionalWords**: an array of strings that contains the list of words that should be considered as optional when found in the query.
+ * **optionalWords**: An array of strings that contain the list of words that should be considered as optional when found in the query.
 <% else -%>
- * **<%= puts({'C#' => 'SetOptionalWords', 'Java' => 'setOptionalWords', 'Android' => 'setOptionalWords'}, "optionalWords") %>**: a string that contains the list of words that should be considered as optional when found in the query. The list of words is comma separated.
+ * **<%= puts({'C#' => 'SetOptionalWords', 'Java' => 'setOptionalWords', 'Android' => 'setOptionalWords'}, "optionalWords") %>**: A string that contains the comma separated list of words that should be considered as optional when found in the query.
 <% end -%>
 
-#### Pagination parameters
+#### Pagination Parameters
 
- * **<%= puts({'C#' => 'SetPage', 'Java' => 'setPage', 'Android' => 'setPage'}, "page") %>**: (integer) Pagination parameter used to select the page to retrieve.<br/>Page is zero-based and defaults to 0. Thus, to retrieve the 10th page you need to set `page=9`
+ * **<%= puts({'C#' => 'SetPage', 'Java' => 'setPage', 'Android' => 'setPage'}, "page") %>**: (integer) Pagination parameter used to select the page to retrieve.<br/>Page is zero based and defaults to 0. Thus, to retrieve the 10th page you need to set `page=9`.
  * **<%= puts({'C#' => 'SetNbHitsPerPage', 'Java' => 'setHitsPerPage', 'Android' => 'setHitsPerPage'}, "hitsPerPage") %>**: (integer) Pagination parameter used to select the number of hits per page. Defaults to 20.
 
-#### Geo-search parameters
+#### Geo-search Parameters
 <% if csharp? || java? || android? || objc? %>
- * **<%= puts ({'C#' => 'AroundLatitudeLongitude(float, float, int)', 'Java' => 'aroundLatitudeLongitude(float, float, int)', 'Android' => 'aroundLatitudeLongitude(float, float, int)', 'Objective-C' => 'searchAroundLatitude:longitude:maxDist'}) %>**: search for entries around a given latitude/longitude.<br/>You specify the maximum distance in meters with the **<%= puts({'Objective-C' => 'maxDist'}, "radius") %>** parameter (in meters).<br/>At indexing, you should specify geoloc of an object with the `_geoloc` attribute (in the form ` {"_geoloc":{"lat":48.853409, "lng":2.348800}} `)
- * **<%= puts ({'C#' => 'AroundLatitudeLongitude(float, float, int, int)', 'Java' => 'aroundLatitudeLongitude(float, float, int, int)', 'Android' => 'aroundLatitudeLongitude(float, float, int, int)', 'Objective-C' => 'searchAroundLatitude:longitude:maxDist:precision'}) %>**: search for entries around a given latitude/longitude with a given precision for ranking (for example if you set precision=100, two objects that are distant of less than 100m will be considered as identical for "geo" ranking parameter).
+ * **<%= puts ({'C#' => 'AroundLatitudeLongitude(float, float, int)', 'Java' => 'aroundLatitudeLongitude(float, float, int)', 'Android' => 'aroundLatitudeLongitude(float, float, int)', 'Objective-C' => 'searchAroundLatitude:longitude:maxDist'}) %>**: Search for entries around a given latitude/longitude.<br/>You specify the maximum distance in meters with the **<%= puts({'Objective-C' => 'maxDist'}, "radius") %>** parameter.<br/>At indexing, you should specify the geo location of an object with the `_geoloc` attribute in the form ` {"_geoloc":{"lat":48.853409, "lng":2.348800}} `.
+ * **<%= puts ({'C#' => 'AroundLatitudeLongitude(float, float, int, int)', 'Java' => 'aroundLatitudeLongitude(float, float, int, int)', 'Android' => 'aroundLatitudeLongitude(float, float, int, int)', 'Objective-C' => 'searchAroundLatitude:longitude:maxDist:precision'}) %>**: Search for entries around a given latitude/longitude with a given precision for ranking. For example, if you set precision=100, two objects that are a distance of less than 100 meters will be considered as identical for the "geo" ranking parameter.
 <% else %>
- * **aroundLatLng**: search for entries around a given latitude/longitude (specified as two floats separated by a comma).<br/>For example `aroundLatLng=47.316669,5.016670`).<br/>You can specify the maximum distance in meters with the **aroundRadius** parameter (in meters) and the precision for ranking with **aroundPrecision** (for example if you set aroundPrecision=100, two objects that are distant of less than 100m will be considered as identical for "geo" ranking parameter).<br/>At indexing, you should specify geoloc of an object with the `_geoloc` attribute (in the form `{"_geoloc":{"lat":48.853409, "lng":2.348800}}`)<% end %>
+ * **aroundLatLng**: Search for entries around a given latitude/longitude (specified as two floats separated by a comma).<br/>For example, `aroundLatLng=47.316669,5.016670`.<br/>You can specify the maximum distance in meters with the **aroundRadius** parameter and the precision for ranking with **aroundPrecision**. For example, if you set aroundPrecision=100, two objects that are a distance of less than 100 meters will be considered as identical for the "geo" ranking parameter).<br/>At indexing, you should specify the geo location of an object with the `_geoloc` attribute in the form `{"_geoloc":{"lat":48.853409, "lng":2.348800}}`.<% end %>
 <% if csharp? || java? || android? || objc? %>
- * **<%= puts ({'C#' => 'AroundLatitudeLongitudeViaIP(int)', 'Java' => 'aroundLatitudeLongitudeViaIP(int)', 'Android' => 'aroundLatitudeLongitudeViaIP(int)', 'Objective-C' => 'searchAroundLatitudeLongitudeViaIP:'}) %>**: search for entries around latitude/longitude (automatically computed from user IP address).<br/>You specify the maximum distance in meters with the **<%= puts({'Objective-C' => 'maxDist'}, "radius") %>** parameter (in meters).<br/>At indexing, you should specify geoloc of an object with the `_geoloc` attribute (in the form ` {"_geoloc":{"lat":48.853409, "lng":2.348800}} `)
- * **<%= puts ({'C#' => 'AroundLatitudeLongitudeViaIP(int, int)', 'Java' => 'aroundLatitudeLongitudeViaIP(int, int)', 'Android' => 'aroundLatitudeLongitudeViaIP(int, int)', 'Objective-C' => 'searchAroundLatitudeLlongitude:precision'}) %>**: search for entries around a latitude/longitude (automatically computed from user IP address) with a given precision for ranking (for example if you set precision=100, two objects that are distant of less than 100m will be considered as identical for "geo" ranking parameter).
+ * **<%= puts ({'C#' => 'AroundLatitudeLongitudeViaIP(int)', 'Java' => 'aroundLatitudeLongitudeViaIP(int)', 'Android' => 'aroundLatitudeLongitudeViaIP(int)', 'Objective-C' => 'searchAroundLatitudeLongitudeViaIP:'}) %>**: Search for entries around the latitude/longitude automatically computed from user IP address.<br/>You specify the maximum distance in meters with the **<%= puts({'Objective-C' => 'maxDist'}, "radius") %>** parameter.<br/>At indexing, you should specify the geo location of an object with the `_geoloc` attribute in the form ` {"_geoloc":{"lat":48.853409, "lng":2.348800}} `.
+ * **<%= puts ({'C#' => 'AroundLatitudeLongitudeViaIP(int, int)', 'Java' => 'aroundLatitudeLongitudeViaIP(int, int)', 'Android' => 'aroundLatitudeLongitudeViaIP(int, int)', 'Objective-C' => 'searchAroundLatitudeLlongitude:precision'}) %>**: Search for entries around a latitude/longitude automatically computed from user IP address with a given precision for ranking. For example if you set precision=100, two objects that are a distance of less than 100 meters will be considered as identical for the "geo" ranking parameter.
 <% else %>
- * **aroundLatLngViaIP**: search for entries around a given latitude/longitude (automatically computed from user IP address).<br/>For example `aroundLatLng=47.316669,5.016670`).<br/>You can specify the maximum distance in meters with the **aroundRadius** parameter (in meters) and the precision for ranking with **aroundPrecision** (for example if you set aroundPrecision=100, two objects that are distant of less than 100m will be considered as identical for "geo" ranking parameter).<br/>At indexing, you should specify geoloc of an object with the `_geoloc` attribute (in the form `{"_geoloc":{"lat":48.853409, "lng":2.348800}}`)<% end %>
+ * **aroundLatLngViaIP**: Search for entries around a given latitude/longitude automatically computed from user IP address.<br/>For example, `aroundLatLng=47.316669,5.016670`.<br/>You can specify the maximum distance in meters with the **aroundRadius** parameter and the precision for ranking with **aroundPrecision**. For example, if you set aroundPrecision=100, two objects that are a distance of less than 100 meters will be considered as identical for the "geo" ranking parameter.<br/>At indexing, you should specify the geo location of an object with the `_geoloc` attribute in the form `{"_geoloc":{"lat":48.853409, "lng":2.348800}}`.<% end %>
 
 
- * **<%= puts({'C#' => 'InsideBoundingBox', 'Objective-C' => "searchInsideBoundingBoxWithLatitudeP1:longitudeP1:latitudeP2:longitudeP2"}, "insideBoundingBox") %>**: search entries inside a given area defined by the two extreme points of a rectangle (defined by 4 floats: p1Lat,p1Lng,p2Lat,p2Lng).<br/>For example `<%= puts({'C#' => 'insideBoundingBox(47.3165, 4.9665, 47.3424, 5.0201)', 'Objective-C' => "searchInsideBoundingBoxWithLatitudeP1(47.3165, 4.9665, 47.3424, 5.0201)"}, "insideBoundingBox=47.3165,4.9665,47.3424,5.0201") %>`).<br/>At indexing, you should specify geoloc of an object with the _geoloc attribute (in the form `{"_geoloc":{"lat":48.853409, "lng":2.348800}}`)
+ * **<%= puts({'C#' => 'InsideBoundingBox', 'Objective-C' => "searchInsideBoundingBoxWithLatitudeP1:longitudeP1:latitudeP2:longitudeP2"}, "insideBoundingBox") %>**: Search entries inside a given area defined by the two extreme points of a rectangle (defined by 4 floats: p1Lat,p1Lng,p2Lat,p2Lng).<br/>For example, `<%= puts({'C#' => 'insideBoundingBox(47.3165, 4.9665, 47.3424, 5.0201)', 'Objective-C' => "searchInsideBoundingBoxWithLatitudeP1(47.3165, 4.9665, 47.3424, 5.0201)"}, "insideBoundingBox=47.3165,4.9665,47.3424,5.0201") %>`).<br/>At indexing, you should specify the geo location of an object with the _geoloc attribute in the form `{"_geoloc":{"lat":48.853409, "lng":2.348800}}`.
 
-#### Parameters to control results content
+#### Parameters to Control Results Content
 <% if csharp? || java? || android? || objc? %>
- * **<%= puts({'C#' => 'SetAttributesToRetrieve', 'Java' => 'setAttributesToRetrieve', 'Android' => 'setAttributesToRetrieve', 'Objective-C' => 'attributesToRetrieve'}) %>**: The list of object attributes you want to retrieve (let you minimize the answer size). By default, all attributes are retrieved. You can also use `*` to retrieve all values when an **attributesToRetrieve** setting is specified for your index.
- * **<%= puts({'C#' => 'SetAttributesToHighlight', 'Java' => 'setAttributesToHighlight', 'Android' => 'setAttributesToHighlight', 'Objective-C' => 'attributesToHighlight'}) %>**: The list of attributes you want to highlight according to the query. If an attribute has no match for the query, the raw value is returned. By default all indexed text attributes are highlighted. You can use `*` if you want to highlight all textual attributes. Numerical attributes are not highlighted. A matchLevel is returned for each highlighted attribute and can contain:
-  * **full**: if all the query terms were found in the attribute,
-  * **partial**: if only some of the query terms were found,
-  * **none**: if none of the query terms were found.
- * **<%= puts({'C#' => 'SetAttributesToSnippet', 'Java' => 'setAttributesToSnippet', 'Android' => 'setAttributesToSnippet', 'Objective-C' => 'attributesToSnippet'}) %>**: The list of attributes to snippet alongside the number of words to return (syntax is `attributeName:nbWords`). By default no snippet is computed.
- * **<%= puts({'C#' => 'GetRankingInfo', 'Java' => 'getRankingInfo', 'Android' => 'getRankingInfo', 'Objective-C' => 'getRankingInfo'}) %>**: if set to <%= puts({'Objective-C' => 'YES'}, "true") %>, the result hits will contain ranking information in **_rankingInfo** attribute.
+ * **<%= puts({'C#' => 'SetAttributesToRetrieve', 'Java' => 'setAttributesToRetrieve', 'Android' => 'setAttributesToRetrieve', 'Objective-C' => 'attributesToRetrieve'}) %>**: The list of object attributes you want to retrieve in order to minimize the answer size. By default, all attributes are retrieved. You can also use `*` to retrieve all values when an **attributesToRetrieve** setting is specified for your index.
+ * **<%= puts({'C#' => 'SetAttributesToHighlight', 'Java' => 'setAttributesToHighlight', 'Android' => 'setAttributesToHighlight', 'Objective-C' => 'attributesToHighlight'}) %>**: The list of attributes you want to highlight according to the query. If an attribute has no match for the query, the raw value is returned. By default, all indexed text attributes are highlighted. You can use `*` if you want to highlight all textual attributes. Numerical attributes are not highlighted. A matchLevel is returned for each highlighted attribute and can contain:
+  * **full**: If all the query terms were found in the attribute.
+  * **partial**: If only some of the query terms were found.
+  * **none**: If none of the query terms were found.
+ * **<%= puts({'C#' => 'SetAttributesToSnippet', 'Java' => 'setAttributesToSnippet', 'Android' => 'setAttributesToSnippet', 'Objective-C' => 'attributesToSnippet'}) %>**: The list of attributes to snippet alongside the number of words to return (syntax is `attributeName:nbWords`). By default, no snippet is computed.
+ * **<%= puts({'C#' => 'GetRankingInfo', 'Java' => 'getRankingInfo', 'Android' => 'getRankingInfo', 'Objective-C' => 'getRankingInfo'}) %>**: If set to <%= puts({'Objective-C' => 'YES'}, "true") %>, the result hits will contain ranking information in the **_rankingInfo** attribute.
 <% else %>
- * **attributesToRetrieve**: a string that contains the list of object attributes you want to retrieve (let you minimize the answer size).<br/> Attributes are separated with a comma (for example `"name,address"`), you can also use a string array encoding (for example `["name","address"]` ). By default, all attributes are retrieved. You can also use `*` to retrieve all values when an **attributesToRetrieve** setting is specified for your index.
- * **attributesToHighlight**: a string that contains the list of attributes you want to highlight according to the query. Attributes are separated by a comma. You can also use a string array encoding (for example `["name","address"]`). If an attribute has no match for the query, the raw value is returned. By default all indexed text attributes are highlighted. You can use `*` if you want to highlight all textual attributes. Numerical attributes are not highlighted. A matchLevel is returned for each highlighted attribute and can contain:
-  * **full**: if all the query terms were found in the attribute,
-  * **partial**: if only some of the query terms were found,
-  * **none**: if none of the query terms were found.
- * **attributesToSnippet**: a string that contains the list of attributes to snippet alongside the number of words to return (syntax is `attributeName:nbWords`). Attributes are separated by a comma (Example: `attributesToSnippet=name:10,content:10`). <br/>You can also use a string array encoding (Example: `attributesToSnippet: ["name:10","content:10"]`). By default no snippet is computed.
- * **getRankingInfo**: if set to 1, the result hits will contain ranking information in **_rankingInfo** attribute.
+ * **attributesToRetrieve**: A string that contains the list of object attributes you want to retrieve in order to minimize the answer size.<br/> Attributes are separated with a comma (for example `"name,address"`). You can also use a string array encoding (for example `["name","address"]` ). By default, all attributes are retrieved. You can also use `*` to retrieve all values when an **attributesToRetrieve** setting is specified for your index.
+ * **attributesToHighlight**: A string that contains the list of attributes you want to highlight according to the query. Attributes are separated by commas. You can also use a string array encoding (for example `["name","address"]`). If an attribute has no match for the query, the raw value is returned. By default all indexed text attributes are highlighted. You can use `*` if you want to highlight all textual attributes. Numerical attributes are not highlighted. A matchLevel is returned for each highlighted attribute and can contain:
+  * **full**: If all the query terms were found in the attribute.
+  * **partial**: If only some of the query terms were found.
+  * **none**: If none of the query terms were found.
+ * **attributesToSnippet**: A string that contains the list of attributes to snippet alongside the number of words to return (syntax is `attributeName:nbWords`). Attributes are separated by commas (Example: `attributesToSnippet=name:10,content:10`). <br/>You can also use a string array encoding (Example: `attributesToSnippet: ["name:10","content:10"]`). By default, no snippet is computed.
+ * **getRankingInfo**: If set to 1, the result hits will contain ranking information in the **_rankingInfo** attribute.
  <% end %>
 
-#### Numeric search parameters
- * **<%= puts({'C#' => 'SetNumericFilters', 'Java' => 'setNumericFilters', 'Android' => 'setNumericFilters'}, "numericFilters") %>**: a string that contains the list of numeric filters you want to apply separated by a comma. The syntax of one filter is `attributeName` followed by `operand` followed by `value`. Supported operands are `<`, `<=`, `=`, `>` and `>=`.
+#### Numeric Search Parameters
+ * **<%= puts({'C#' => 'SetNumericFilters', 'Java' => 'setNumericFilters', 'Android' => 'setNumericFilters'}, "numericFilters") %>**: A string that contains the comma separated list of numeric filters you want to apply. The filter syntax is `attributeName` followed by `operand` followed by `value`. Supported operands are `<`, `<=`, `=`, `>` and `>=`.
 
-You can easily perform range queries via the `:` operator (equivalent to combining a `>=` and `<=` operand), for example `numericFilters=price:10 to 1000`.
+You can easily perform range queries via the `:` operator. This is equivalent to combining a `>=` and `<=` operand. For example, `numericFilters=price:10 to 1000`.
 
-You can also mix OR and AND operators. The OR operator is defined with a parenthesis syntax. For example `(code=1 AND (price:[0-100] OR price:[1000-2000]))` translates in `encodeURIComponent("code=1,(price:0 to 10,price:1000 to 2000)")`.
+You can also mix OR and AND operators. The OR operator is defined with a parenthesis syntax. For example, `(code=1 AND (price:[0-100] OR price:[1000-2000]))` translates to `encodeURIComponent("code=1,(price:0 to 10,price:1000 to 2000)")`.
 
 You can also use a string array encoding (for example `numericFilters: ["price>100","price<1000"]`).
 
-#### Category search parameters
- * **<%= puts({'C#' => 'SetTagFilters', 'Java' => 'setTagFilters', 'Android' => 'setTagFilters'}, "tagFilters") %>**: filter the query by a set of tags. You can AND tags by separating them by commas. To OR tags, you must add parentheses. For example, `tags=tag1,(tag2,tag3)` means *tag1 AND (tag2 OR tag3)*. You can also use a string array encoding, for example `tagFilters: ["tag1",["tag2","tag3"]]` means *tag1 AND (tag2 OR tag3)*.<br/>At indexing, tags should be added in the **_tags** attribute of objects (for example `{"_tags":["tag1","tag2"]}`).
+#### Category Search Parameters
+ * **<%= puts({'C#' => 'SetTagFilters', 'Java' => 'setTagFilters', 'Android' => 'setTagFilters'}, "tagFilters") %>**: Filter the query by a set of tags. You can AND tags by separating them with commas. To OR tags, you must add parentheses. For example, `tags=tag1,(tag2,tag3)` means *tag1 AND (tag2 OR tag3)*. You can also use a string array encoding. For example, `tagFilters: ["tag1",["tag2","tag3"]]` means *tag1 AND (tag2 OR tag3)*.<br/>At indexing, tags should be added in the **_tags** attribute of objects. For example `{"_tags":["tag1","tag2"]}`.
 
-#### Faceting parameters
- * **<%= puts({'C#' => 'SetFaceFilters', 'Java' => 'setFacetFilters', 'Android' => 'setFacetFilters'}, "facetFilters") %>**: filter the query by a list of facets. Facets are separated by commas and each facet is encoded as `attributeName:value`. To OR facets, you must add parentheses. For example: `facetFilters=(category:Book,category:Movie),author:John%20Doe`. You can also use a string array encoding (for example `[["category:Book","category:Movie"],"author:John%20Doe"]`).
- * **<%= puts({'C#' => 'SetFacets', 'Java' => 'setFacets', 'Android' => 'setFacets'}, "facets") %>**: List of object attributes that you want to use for faceting. <br/>Attributes are separated with a comma (for example `"category,author"` ). You can also use a JSON string array encoding (for example `["category","author"]` ). Only attributes that have been added in **attributesForFaceting** index setting can be used in this parameter. You can also use `*` to perform faceting on all attributes specified in **attributesForFaceting**.
- * **<%= puts({'C#' => 'SetMaxValuesPerFacet', 'Java' => 'setMaxValuesPerFacet', 'Android' => 'setMaxValuesPerFacet'}, "maxValuesPerFacet") %>**: Limit the number of facet values returned for each facet. For example: `maxValuesPerFacet=10` will retrieve max 10 values per facet.
+#### Faceting Parameters
+ * **<%= puts({'C#' => 'SetFaceFilters', 'Java' => 'setFacetFilters', 'Android' => 'setFacetFilters'}, "facetFilters") %>**: Filter the query with a list of facets. Facets are separated by commas and is encoded as `attributeName:value`. To OR facets, you must add parentheses. For example: `facetFilters=(category:Book,category:Movie),author:John%20Doe`. You can also use a string array encoding. For example, `[["category:Book","category:Movie"],"author:John%20Doe"]`.
+ * **<%= puts({'C#' => 'SetFacets', 'Java' => 'setFacets', 'Android' => 'setFacets'}, "facets") %>**: List of object attributes that you want to use for faceting. <br/>Attributes are separated with a comma. For example, `"category,author"`. You can also use JSON string array encoding. For example, `["category","author"]`. Only the attributes that have been added in **attributesForFaceting** index setting can be used in this parameter. You can also use `*` to perform faceting on all attributes specified in **attributesForFaceting**.
+ * **<%= puts({'C#' => 'SetMaxValuesPerFacet', 'Java' => 'setMaxValuesPerFacet', 'Android' => 'setMaxValuesPerFacet'}, "maxValuesPerFacet") %>**: Limit the number of facet values returned for each facet. For example, `maxValuesPerFacet=10` will retrieve a maximum of 10 values per facet.
 
-#### Distinct parameter
- * **<%= puts({'C#' => 'EnableDistinct', 'Java' => 'setDistinct', 'Android' => 'setDistinct'}, "distinct") %>**: If set to <%= puts({'C#' => "YES", 'Java' => 'true', 'Android' => 'true', 'Objective-C' => 'YES'}, "1") %>, enable the distinct feature (disabled by default) if the `attributeForDistinct` index setting is set. This feature is similar to the SQL "distinct" keyword: when enabled in a query with the `distinct=1` parameter, all hits containing a duplicate value for the attributeForDistinct attribute are removed from results. For example, if the chosen attribute is `show_name` and several hits have the same value for `show_name`, then only the best one is kept and others are removed.
-**Note**: This feature is disabled if the query string is empty and there isn't any `tagFilters`, nor any `facetFilters`, nor any `numericFilters` parameters.
+#### Distinct Parameter
+ * **<%= puts({'C#' => 'EnableDistinct', 'Java' => 'setDistinct', 'Android' => 'setDistinct'}, "distinct") %>**: If set to <%= puts({'C#' => "YES", 'Java' => 'true', 'Android' => 'true', 'Objective-C' => 'YES'}, "1") %>, enables the distinct feature, disabled by default, if the `attributeForDistinct` index setting is set. This feature is similar to the SQL "distinct" keyword. When enabled in a query with the `distinct=1` parameter, all hits containing a duplicate value for the attributeForDistinct attribute are removed from results. For example, if the chosen attribute is `show_name` and several hits have the same value for `show_name`, then only the best one is kept and the others are removed.
+**Note**: This feature is disabled if the query string is empty and there aren't any `tagFilters`, `facetFilters`, nor `numericFilters` parameters.
 
 <%= snippet("query") %>
 
@@ -458,7 +462,7 @@ The server response will look like:
 ```
 <% if !cmd? %>
 
-Multi-queries
+Multiple queries
 --------------
 
 You can send multiple queries with a single API call using a batch of queries:
@@ -470,7 +474,7 @@ You can send multiple queries with a single API call using a batch of queries:
 Get an object
 -------------
 
-You can easily retrieve an object using its `objectID` and optionnaly a list of attributes you want to retrieve (using comma as separator):
+You can easily retrieve an object using its `objectID` and optionally specify a comma separated list of attributes you want:
 
 <%= snippet("get_object") %>
 
@@ -483,7 +487,7 @@ You can also retrieve a set of objects:
 Security
 ---------
 
-If you're using a secured API key (see backend client documentation), you need to set the associated `tags`:
+If you're using a secured API Key (see backend client documentation), you need to set the associated `tags`:
 
 ```javascript
 var algolia = new AlgoliaSearch('YourApplicationID', 'YourPublicSecuredAPIKey');
@@ -494,8 +498,8 @@ If you've specified a `userToken` while generating your secured API key, you mus
 
 ```javascript
 var algolia = new AlgoliaSearch('YourApplicationID', 'YourPublicSecuredAPIKey');
-algolia.setSecurityTags('(public,user_42)'); // must be same than those used at generation-time
-algolia.setUserToken('user_42')              // must be same than the one used at generation-time
+algolia.setSecurityTags('(public,user_42)'); // must be the same as the ones used at generation-time
+algolia.setUserToken('user_42')              // must be the same as the one used at generation-time
 ```
 
 <% end %>
@@ -505,7 +509,7 @@ algolia.setUserToken('user_42')              // must be same than the one used a
 Updating the index
 -------------
 
-In some use-cases, it can however be interesting to perform updates to the index directly in JavaScript, for example in an HTML5 mobile app. Therefore, just as for other languages, the JavaScript client is able to add, update or delete objects, or to modify index settings. For more details about updating an index from JavaScript, have a look at the [algoliasearch.js](https://github.com/algolia/algoliasearch-client-js/blob/master/src/algoliasearch.js) source file to see details about each function. If you use the JavaScript client to update the index, you need to specify `https` as the protocol during the client initialization:
+In some use cases, such as an HTML5 mobile application, it may be necessary to perform updates to the index directly in JavaScript. Therefore, just like other languages, the JavaScript client is able to add, update & delete objects, and modify index settings. For more details about updating an index from JavaScript, take a look at the [algoliasearch.js](https://github.com/algolia/algoliasearch-client-js/blob/master/src/algoliasearch.js) source file to see details about each function. If you use the JavaScript client to update the index, you need to specify `https` as the protocol during client initialization:
 
 ```javascript
   <script src="algoliasearch.min.js"></script>
@@ -527,7 +531,7 @@ You can delete an object using its `objectID`:
 Delete by query
 -------------
 
-You can delete all objects matching a single query with the following code. Internally, the API client performs the query, delete all matching hits, wait until the deletions have been applied and so on.
+You can delete all objects matching a single query with the following code. Internally, the API client performs the query, deletes all matching hits, and waits until the deletions have been applied.
 
 <%= snippet("delete_by_query") %>
 <% end %>
@@ -535,63 +539,62 @@ You can delete all objects matching a single query with the following code. Inte
 Index Settings
 -------------
 
-You can retrieve all settings using the `<%= puts({ "Node.js" => "getSettings", "PHP" => "getSettings", "Python" => "get_settings", "Ruby" => "get_settings", "Shell" => "settings", 'C#' => "GetSettings", 'Java' => 'getSettings', 'Android' => 'getSettings' , 'Objective-C' => 'getSettings', 'GO' => "GetSettings"}) %>` function. The result will contains the following attributes:
+You can retrieve all settings using the `<%= puts({ "Node.js" => "getSettings", "PHP" => "getSettings", "Python" => "get_settings", "Ruby" => "get_settings", "Shell" => "settings", 'C#' => "GetSettings", 'Java' => 'getSettings', 'Android' => 'getSettings' , 'Objective-C' => 'getSettings', 'GO' => "GetSettings"}) %>` function. The result will contain the following attributes:
 
 
 #### Indexing parameters
- * **attributesToIndex**: (array of strings) the list of fields you want to index.<br/>If set to null, all textual and numerical attributes of your objects are indexed, but you should update it to get optimal results.<br/>This parameter has two important uses:
-  * *Limit the attributes to index*.<br/>For example if you store a binary image in base64, you want to store it and be able to retrieve it but you don't want to search in the base64 string.
-  * *Control part of the ranking*.<br/>(see the ranking parameter for full explanation) Matches in attributes at the beginning of the list will be considered more important than matches in attributes further down the list. In one attribute, matching text at the beginning of the attribute will be considered more important than text after, you can disable this behavior if you add your attribute inside `unordered(AttributeName)`, for example `attributesToIndex: ["title", "unordered(text)"]`.
+ * **attributesToIndex**: (array of strings) The list of fields you want to index.<br/>If set to null, all textual and numerical attributes of your objects are indexed. Be sure to update it to get optimal results.<br/>This parameter has two important uses:
+  * *Limit the attributes to index*.<br/>For example, if you store a binary image in base64, you want to store it and be able to retrieve it, but you don't want to search in the base64 string.
+  * *Control part of the ranking*.<br/>(see the ranking parameter for full explanation) Matches in attributes at the beginning of the list will be considered more important than matches in attributes further down the list. In one attribute, matching text at the beginning of the attribute will be considered more important than text after. You can disable this behavior if you add your attribute inside `unordered(AttributeName)`. For example, `attributesToIndex: ["title", "unordered(text)"]`.
 **Notes**: All numerical attributes are automatically indexed as numerical filters. If you don't need filtering on some of your numerical attributes, please consider sending them as strings to speed up the indexing.<br/>
-You can decide to have the same priority for two attributes by passing them in the same string using comma as separator. For example `title` and `alternative_title` have the same priority in this example, which is different than text priority: `attributesToIndex:["title,alternative_title", "text"]`
+You can decide to have the same priority for two attributes by passing them in the same string using a comma as a separator. For example `title` and `alternative_title` have the same priority in this example, which is different than text priority: `attributesToIndex:["title,alternative_title", "text"]`.
  * **attributesForFaceting**: (array of strings) The list of fields you want to use for faceting. All strings in the attribute selected for faceting are extracted and added as a facet. If set to null, no attribute is used for faceting.
- * **attributeForDistinct**: The attribute name used for the `Distinct` feature. This feature is similar to the SQL "distinct" keyword: when enabled in query with the `distinct=1` parameter, all hits containing a duplicate value for this attribute are removed from results. For example, if the chosen attribute is `show_name` and several hits have the same value for `show_name`, then only the best one is kept and others are removed. **Note**: This feature is disabled if the query string is empty and there isn't any `tagFilters`, nor any `facetFilters`, nor any `numericFilters` parameters.
- * **ranking**: (array of strings) controls the way results are sorted.<br/>We have nine available criteria:
-  * **typo**: sort according to number of typos,
-  * **geo**: sort according to decreassing distance when performing a geo-location based search,
-  * **words**: sort according to the number of query words matched by decreasing order. This parameter is useful when you use `optionalWords` query parameter to have results with the most matched words first.
-  * **proximity**: sort according to the proximity of query words in hits,
-  * **attribute**: sort according to the order of attributes defined by attributesToIndex,
+ * **attributeForDistinct**: The attribute name used for the `Distinct` feature. This feature is similar to the SQL "distinct" keyword. When enabled in queries with the `distinct=1` parameter, all hits containing a duplicate value for this attribute are removed from results. For example, if the chosen attribute is `show_name` and several hits have the same value for `show_name`, then only the best one is kept and others are removed. **Note**: This feature is disabled if the query string is empty and there aren't any `tagFilters`, `facetFilters`, nor `numericFilters` parameters.
+ * **ranking**: (array of strings) Controls the way results are sorted.<br/>We have nine available criteria:
+  * **typo**: Sort according to number of typos.
+  * **geo**: Sort according to decreasing distance when performing a geo location based search.
+  * **words**: Sort according to the number of query words matched by decreasing order. This parameter is useful when you use the `optionalWords` query parameter to have results with the most matched words first.
+  * **proximity**: Sort according to the proximity of the query words in hits.
+  * **attribute**: Sort according to the order of attributes defined by attributesToIndex.
   * **exact**:
-    * if the user query contains one word: sort objects having an attribute that is exactly the query word before others. For example if you search for the "V" TV show, you want to find it with the "V" query and avoid to have all popular TV show starting by the v letter before it.
-    * if the user query contains multiple words: sort according to the number of words that matched exactly (and not as a prefix).
-  * **custom**: sort according to a user defined formula set in **customRanking** attribute.
-  * **asc(attributeName)**: sort according to a numeric attribute by ascending order. **attributeName** can be the name of any numeric attribute of your records (integer, a double or boolean).
-  * **desc(attributeName)**: sort according to a numeric attribute by descending order. **attributeName** can be the name of any numeric attribute of your records (integer, a double or boolean). <br/>The standard order is ["typo", "geo", "words", "proximity", "attribute", "exact", "custom"]
- * **customRanking**: (array of strings) lets you specify part of the ranking.<br/>The syntax of this condition is an array of strings containing attributes prefixed by asc (ascending order) or desc (descending order) operator.
-For example `"customRanking" => ["desc(population)", "asc(name)"]`
- * **queryType**: Select how the query words are interpreted, it can be one of the following value:
-  * **prefixAll**: all query words are interpreted as prefixes,
-  * **prefixLast**: only the last word is interpreted as a prefix (default behavior),
-  * **prefixNone**: no query word is interpreted as a prefix. This option is not recommended.
+    * If the user query contains one word: sort objects having an attribute that is exactly the query word before others. For example, if you search for the TV show "V", you want to find it with the "V" query and avoid getting all popular TV shows starting by the letter V before it.
+    * If the user query contains multiple words: sort according to the number of words that matched exactly (not as a prefix).
+  * **custom**: Sort according to a user defined formula set in the **customRanking** attribute.
+  * **asc(attributeName)**: Sort according to a numeric attribute using ascending order. **attributeName** can be the name of any numeric attribute in your records (integer, double or boolean).
+  * **desc(attributeName)**: Sort according to a numeric attribute using descending order. **attributeName** can be the name of any numeric attribute in your records (integer, double or boolean). <br/>The standard order is ["typo", "geo", "words", "proximity", "attribute", "exact", "custom"].
+ * **customRanking**: (array of strings) Lets you specify part of the ranking.<br/>The syntax of this condition is an array of strings containing attributes prefixed by the asc (ascending order) or desc (descending order) operator. For example, `"customRanking" => ["desc(population)", "asc(name)"]`.
+ * **queryType**: Select how the query words are interpreted. It can be one of the following values:
+  * **prefixAll**: All query words are interpreted as prefixes.
+  * **prefixLast**: Only the last word is interpreted as a prefix (default behavior).
+  * **prefixNone**: No query word is interpreted as a prefix. This option is not recommended.
  * **separatorsToIndex**: Specify the separators (punctuation characters) to index. By default, separators are not indexed. Use `+#` to be able to search Google+ or C#.
- * **slaves**: The list of indices on which you want to replicate all write operations. In order to get response times in milliseconds, we pre-compute part of the ranking during indexing. If you want to use different ranking configurations depending of the use-case, you need to create one index per ranking configuration. This option enables you to perform write operations only on this index, and to automatically update slave indices with the same operations.
- * **unretrievableAttributes**: The list of attributes that cannot be retrieved at query time. This feature allow to have an attribute that is used for indexing and/or ranking but cannot be retrieved. Default to null.
- * **allowCompressionOfIntegerArray**: Allows compression of big integer arrays. We recommended to store the list of user ID or rights as an integer array and enable this setting. When enabled the integer array are reordered to reach a better compression ratio. Default to false.
+ * **slaves**: The list of indices on which you want to replicate all write operations. In order to get response times in milliseconds, we pre-compute part of the ranking during indexing. If you want to use different ranking configurations depending of the use case, you need to create one index per ranking configuration. This option enables you to perform write operations only on this index and automatically update slave indices with the same operations.
+ * **unretrievableAttributes**: The list of attributes that cannot be retrieved at query time. This feature allows you to have attributes that are used for indexing and/or ranking but cannot be retrieved. Defaults to null.
+ * **allowCompressionOfIntegerArray**: Allows compression of big integer arrays. We recommended enabling this feature and then storing the list of user IDs or rights as an integer array. When enabled, the integer array is reordered to reach a better compression ratio. Defaults to false.
 
 #### Query expansion
- * **synonyms**: (array of array of words considered as equals). For example, you may want to retrieve your **black ipad** record when your users are searching for **dark ipad**, even if the **dark** word is not part of the record: so you need to configure **black** as a synonym of **dark**. For example `"synomyms": [ [ "black", "dark" ], [ "small", "little", "mini" ], ... ]`.
- * **placeholders**: (hash of array of words). This is an advanced use case to define a token substitutable by a list of words without having the original token searchable. It is defined by a hash associating placeholders to lists of substitutable words. For example `"placeholders": { "<streetnumber>": ["1", "2", "3", ..., "9999"]}` placeholder to be able to match all street numbers (we use the `< >` tag syntax to define placeholders in an attribute). For example:
-  * Push a record with the placeholder: `{ "name" : "Apple Store", "address" : "&lt;streetnumber&gt; Opera street, Paris" }`
+ * **synonyms**: (array of array of words considered as equals). For example, you may want to retrieve the **black ipad** record when your users are searching for **dark ipad**, even if the word **dark** is not part of the record. To do this, you need to configure **black** as a synonym of **dark**. For example, `"synomyms": [ [ "black", "dark" ], [ "small", "little", "mini" ], ... ]`.
+ * **placeholders**: (hash of array of words). This is an advanced use case to define a token substitutable by a list of words without having the original token searchable. It is defined by a hash associating placeholders to lists of substitutable words. For example, `"placeholders": { "<streetnumber>": ["1", "2", "3", ..., "9999"]}` would allow it to be able to match all street numbers. We use the `< >` tag syntax to define placeholders in an attribute. For example:
+  * Push a record with the placeholder: `{ "name" : "Apple Store", "address" : "&lt;streetnumber&gt; Opera street, Paris" }`.
   * Configure the placeholder in your index settings: `"placeholders": { "<streetnumber>" : ["1", "2", "3", "4", "5", ... ], ... }`.
- * **disableTypoToleranceOn**: (string array). Specify a list of words on which the automatic typo tolerance will be disabled.
- * **altCorrections**: (object array). Specify alternative corrections that you want to consider. Each alternative correction is described by an object containing three attributes:
-  * **word**: the word to correct
-  * **correction**: the corrected word
-  * **nbTypos** the number of typos (1 or 2) that will be considered for the ranking algorithm (1 typo is better than 2 typos)
+ * **disableTypoToleranceOn**: (string array) Specify a list of words on which automatic typo tolerance will be disabled.
+ * **altCorrections**: (object array) Specify alternative corrections that you want to consider. Each alternative correction is described by an object containing three attributes:
+  * **word**: The word to correct.
+  * **correction**: The corrected word.
+  * **nbTypos** The number of typos (1 or 2) that will be considered for the ranking algorithm (1 typo is better than 2 typos).
 
-  For example `"altCorrections": [ { "word" : "foot", "correction": "feet", "nbTypos": 1}, { "word": "feet", "correction": "foot", "nbTypos": 1}].`
+  For example `"altCorrections": [ { "word" : "foot", "correction": "feet", "nbTypos": 1 }, { "word": "feet", "correction": "foot", "nbTypos": 1 } ]`.
 
-#### Default query parameters (can be overwrite by query)
- * **minWordSizefor1Typo**: (integer) the minimum number of characters to accept one typo (default = 4).
- * **minWordSizefor2Typos**: (integer) the minimum number of characters to accept two typos (default = 8).
- * **hitsPerPage**: (integer) the number of hits per page (default = 10).
- * **attributesToRetrieve**: (array of strings) default list of attributes to retrieve in objects. If set to null, all attributes are retrieved.
- * **attributesToHighlight**: (array of strings) default list of attributes to highlight. If set to null, all indexed attributes are highlighted.
- * **attributesToSnippet**: (array of strings) default list of attributes to snippet alongside the number of words to return (syntax is 'attributeName:nbWords')<br/>By default no snippet is computed. If set to null, no snippet is computed.
- * **highlightPreTag**: (string) Specify the string that is inserted before the highlighted parts in the query result (default to "&lt;em&gt;").
- * **highlightPostTag**: (string) Specify the string that is inserted after the highlighted parts in the query result (default to "&lt;/em&gt;").
- * **optionalWords**: (array of strings) Specify a list of words that should be considered as optional when found in the query.
+#### Default query parameters (can be overwritten by queries)
+ * **minWordSizefor1Typo**: (integer) The minimum number of characters needed to accept one typo (default = 4).
+ * **minWordSizefor2Typos**: (integer) The minimum number of characters needed to accept two typos (default = 8).
+ * **hitsPerPage**: (integer) The number of hits per page (default = 10).
+ * **attributesToRetrieve**: (array of strings) Default list of attributes to retrieve in objects. If set to null, all attributes are retrieved.
+ * **attributesToHighlight**: (array of strings) Default list of attributes to highlight. If set to null, all indexed attributes are highlighted.
+ * **attributesToSnippet**: (array of strings) Default list of attributes to snippet alongside the number of words to return (syntax is 'attributeName:nbWords').<br/>By default, no snippet is computed. If set to null, no snippet is computed.
+ * **highlightPreTag**: (string) Specify the string that is inserted before the highlighted parts in the query result (defaults to "&lt;em&gt;").
+ * **highlightPostTag**: (string) Specify the string that is inserted after the highlighted parts in the query result (defaults to "&lt;/em&gt;").
+ * **optionalWords**: (array of strings) Specify a list of words that should be considered optional when found in the query.
 
 You can easily retrieve settings or update them:
 
@@ -599,7 +602,7 @@ You can easily retrieve settings or update them:
 
 List indices
 -------------
-You can list all your indices with their associated information (number of entries, disk size, etc.) with the `<%= puts({ "Node.js" => "listIndexes", "PHP" => "listIndexes", "Python" => "list_indexes", "Ruby" => "list_indexes", "Shell" => "indexes", "C#" => "listIndexes", "Java" => "listIndexes", "Android" => "listIndexes", "Objective-C" => "listIndexes", "GO" => "ListIndexes" }) %>` method:
+You can list all your indices along with their associated information (number of entries, disk size, etc.) with the `<%= puts({ "Node.js" => "listIndexes", "PHP" => "listIndexes", "Python" => "list_indexes", "Ruby" => "list_indexes", "Shell" => "indexes", "C#" => "listIndexes", "Java" => "listIndexes", "Android" => "listIndexes", "Objective-C" => "listIndexes", "GO" => "ListIndexes" }) %>` method:
 
 <%= snippet("list_index") %>
 
@@ -611,7 +614,7 @@ You can delete an index using its name:
 
 Clear an index
 -------------
-You can delete the index content without removing settings and index specific API keys with the clearIndex command:
+You can delete the index contents without removing settings and index specific API keys by using the clearIndex command:
 
 <%= snippet("clear_index") %>
 
@@ -624,28 +627,28 @@ For example, to wait for indexing of a new object:
 <%= snippet("wait_indexing") %>
 
 
-If you want to ensure multiple objects have been indexed, you can only check the biggest taskID<%= puts({ "Ruby" => " with `wait_task`" }) %>.
+If you want to ensure multiple objects have been indexed, you only need check the biggest taskID<%= puts({ "Ruby" => " with `wait_task`" }) %>.
 
 Batch writes
 -------------
 
 You may want to perform multiple operations with one API call to reduce latency.
-We expose three methods to perform batch:
- * `<%= puts({ "Node.js" => "addObjects", "PHP" => "addObjects", "Python" => "add_objects", "Ruby" => "add_objects", "Shell" => "addObject", 'C#' => 'AddObjects', 'Java' => 'addObjects', 'Android' => 'addObjects', 'Objective-C' => 'addObjects', 'GO' => 'AddObjects' }) %>`: add an array of object using automatic `objectID` assignement
- * `<%= puts({ "Node.js" => "saveObjects", "PHP" => "saveObjects", "Python" => "save_objects", "Ruby" => "save_objects", "Shell" => "saveObject", 'C#' => 'SaveObjects', 'Java' => 'saveObjects', 'Android' => 'saveObjects', 'Objective-C' => 'saveObjects', 'GO' => 'UpdateObjects' }) %>`: add or update an array of object that contains an `objectID` attribute
- * `<%= puts({ "Node.js" => "deleteObjects", "PHP" => "deleteObjects", "Python" => "delete_objects", "Ruby" => "delete_objects", "Shell" => "deleteObject", 'C#' => 'DeleteObjects', 'Java' => 'deleteObjects', 'Android' => 'deleteObjects', 'Objective-C' => 'deleteObjects', 'GO' => "DeleteObjects" }) %>`: delete an array of objectIDs
- * `<%= puts({ "Node.js" => "partialUpdateObjects", "PHP" => "partialUpdateObjects", "Python" => "partial_update_objects", "Ruby" => "partial_update_objects", "Shell" => "partialUpdate", 'C#' => "PartialUpdateObjects", 'Java' => 'partialUpdateObjects', 'Android' => 'partialUpdateObjects', 'Objective-C' => 'partialUpdateObjects', 'GO' => 'PartialUpdateObjects' }) %>`: partially update an array of objects that contain an `objectID` attribute (only specified attributes will be updated, other will remain unchanged)
+We expose three methods to perform batch operations:
+ * `<%= puts({ "Node.js" => "addObjects", "PHP" => "addObjects", "Python" => "add_objects", "Ruby" => "add_objects", "Shell" => "addObject", 'C#' => 'AddObjects', 'Java' => 'addObjects', 'Android' => 'addObjects', 'Objective-C' => 'addObjects', 'GO' => 'AddObjects' }) %>`: Add an array of objects using automatic `objectID` assignment.
+ * `<%= puts({ "Node.js" => "saveObjects", "PHP" => "saveObjects", "Python" => "save_objects", "Ruby" => "save_objects", "Shell" => "saveObject", 'C#' => 'SaveObjects', 'Java' => 'saveObjects', 'Android' => 'saveObjects', 'Objective-C' => 'saveObjects', 'GO' => 'UpdateObjects' }) %>`: Add or update an array of objects that contains an `objectID` attribute.
+ * `<%= puts({ "Node.js" => "deleteObjects", "PHP" => "deleteObjects", "Python" => "delete_objects", "Ruby" => "delete_objects", "Shell" => "deleteObject", 'C#' => 'DeleteObjects', 'Java' => 'deleteObjects', 'Android' => 'deleteObjects', 'Objective-C' => 'deleteObjects', 'GO' => "DeleteObjects" }) %>`: Delete an array of objectIDs.
+ * `<%= puts({ "Node.js" => "partialUpdateObjects", "PHP" => "partialUpdateObjects", "Python" => "partial_update_objects", "Ruby" => "partial_update_objects", "Shell" => "partialUpdate", 'C#' => "PartialUpdateObjects", 'Java' => 'partialUpdateObjects', 'Android' => 'partialUpdateObjects', 'Objective-C' => 'partialUpdateObjects', 'GO' => 'PartialUpdateObjects' }) %>`: Partially update an array of objects that contain an `objectID` attribute (only specified attributes will be updated).
 
-Example using automatic `objectID` assignement:
+Example using automatic `objectID` assignment:
 <%= snippet("batch_new_objects") %>
 
 Example with user defined `objectID` (add or update):
 <%= snippet("batch_update") %>
 
-Example that delete a set of records:
+Example that deletes a set of records:
 <%= snippet("batch_delete") %>
 
-Example that update only the `firstname` attribute:
+Example that updates only the `firstname` attribute:
 <%= snippet("batch_update_partial") %>
 
 <% if php? %>
@@ -662,37 +665,37 @@ These API keys can be restricted to a set of operations or/and restricted to a g
 
 <%= snippet("security_list_key") %>
 
-Each key is defined by a set of rights that specify the authorized actions. The different rights are:
- * **search**: allows to search,
- * **browse**: allow to retrieve all index content via the browse API,
- * **addObject**: allows to add/update an object in the index,
- * **deleteObject**: allows to delete an existing object,
- * **deleteIndex**: allows to delete index content,
- * **settings**: allows to get index settings,
- * **editSettings**: allows to change index settings.
- * **analytics**: allows to retrieve the analytics through the analytics API.
- * **listIndexes**: allows to list all accessible indexes.
+Each key is defined by a set of permissions that specify the authorized actions. The different permissions are:
+ * **search**: Allowed to search.
+ * **browse**: Allowed to retrieve all index contents via the browse API.
+ * **addObject**: Allowed to add/update an object in the index.
+ * **deleteObject**: Allowed to delete an existing object.
+ * **deleteIndex**: Allowed to delete index content.
+ * **settings**: allows to get index settings.
+ * **editSettings**: Allowed to change index settings.
+ * **analytics**: Allowed to retrieve analytics through the analytics API.
+ * **listIndexes**: Allowed to list all accessible indexes.
 
 Example of API Key creation:
 <%= snippet("security_add_user_key_simple") %>
 
 You can also create an API Key with advanced restrictions:
 
- * Add a validity period: the key will be valid only for a specific period of time (in seconds),
- * Specify the maximum number of API calls allowed from an IP address per hour. Each time an API call is performed with this key, a check is performed. If the IP at the origin of the call did more than this number of calls in the last hour, a 403 code is returned. Defaults to 0 (no rate limit). This parameter can be used to protect you from attempts at retrieving your entire content by massively querying the index.
+ * Add a validity period. The key will be valid for a specific period of time (in seconds).
+ * Specify the maximum number of API calls allowed from an IP address per hour. Each time an API call is performed with this key, a check is performed. If the IP at the source of the call did more than this number of calls in the last hour, a 403 code is returned. Defaults to 0 (no rate limit). This parameter can be used to protect you from attempts at retrieving your entire index contents by massively querying the index.
 <% if !cmd? && !csharp? && !android? && !objc? %>
 <%= snippet("security_note_forward") %>
 <% end %>
- * Specify the maximum number of hits this API key can retrieve in one call. Defaults to 0 (unlimited). This parameter can be used to protect you from attempts at retrieving your entire content by massively querying the index.
- * Specify the list of targeted indices, you can target all indices starting by a prefix or finishing by a suffix with the '*' character (for example "dev_*" matches all indices starting by "dev_" and "*_dev" matches all indices finishing by "_dev"). Defaults to all indices if empty of blank.
+ * Specify the maximum number of hits this API key can retrieve in one call. Defaults to 0 (unlimited). This parameter can be used to protect you from attempts at retrieving your entire index contents by massively querying the index.
+ * Specify the list of targeted indices. You can target all indices starting with a prefix or ending with a suffix using the '*' character. For example, "dev_*" matches all indices starting with "dev_" and "*_dev" matches all indices ending with "_dev". Defaults to all indices if empty or blank.
 
 <%= snippet("security_add_user_key") %>
 
 <% if !cmd? -%>
-Update the rights of an existing key:
+Update the permissions of an existing key:
 <%= snippet("security_update_user_key") %>
 <% end -%>
-Get the rights of a given key:
+Get the permissions of a given key:
 <%= snippet("security_get_user_key") %>
 
 Delete an existing key:
@@ -700,7 +703,7 @@ Delete an existing key:
 
 <% if !cmd? && !csharp? && !objc? %>
 
-You may have a single index containing per-user data. In that case, all records should be tagged with their associated user_id in order to add a `tagFilters=(public,user_42)` filter at query time to retrieve only what a user has access to. If you're using the [JavaScript client](http://github.com/algolia/algoliasearch-client-js), it will result in a security breach since the user is able to modify the `tagFilters` you've set modifying the code from the browser. To keep using the JavaScript client (recommended for optimal latency) and target secured records, you can generate secured API key from your backend:
+You may have a single index containing per user data. In that case, all records should be tagged with their associated user_id in order to add a `tagFilters=(public,user_42)` filter at query time to retrieve only what a user has access to. If you're using the [JavaScript client](http://github.com/algolia/algoliasearch-client-js), it will result in a security breach since the user is able to modify the `tagFilters` you've set by modifying the code from the browser. To keep using the JavaScript client (recommended for optimal latency) and target secured records, you can generate a secured API key from your backend:
 
 <%= snippet("generate_secured_api_key") if !csharp? && !objc? %>
 
@@ -716,7 +719,7 @@ This public API key must then be used in your JavaScript code as follow:
 </script>
 ```
 
-You can mix rate limits and secured API keys setting an extra `user_token` attribute both at API key generation-time and query-time. When set, a uniq user will be identified by her `IP + user_token` instead of only her `IP`. It allows you to restrict a single user to perform maximum `N` API calls per hour, even if she share her `IP` with another user.
+You can mix rate limits and secured API keys by setting an extra `user_token` attribute both at API key generation time and query time. When set, a unique user will be identified by her `IP + user_token` instead of only by her `IP`. This allows you to restrict a single user to performing a maximum of `N` API calls per hour, even if she shares her `IP` with another user.
 
 <%= snippet("generate_secured_api_key_user_token") if !csharp? && !objc? %>
 
@@ -739,31 +742,31 @@ Copy or rename an index
 -------------
 
 You can easily copy or rename an existing index using the `copy` and `move` commands.
-**Note**: Move and copy commands overwrite destination index.
+**Note**: Move and copy commands overwrite the destination index.
 
 <%= snippet("copy_move_index") %>
 
-The move command is particularly useful is you want to update a big index atomically from one version to another. For example, if you recreate your index `MyIndex` each night from a database by batch, you just have to:
- 1. Import your database in a new index using [batches](#batch-writes). Let's call this new index `MyNewIndex`.
- 1. Rename `MyNewIndex` in `MyIndex` using the move command. This will automatically override the old index and new queries will be served on the new one.
+The move command is particularly useful if you want to update a big index atomically from one version to another. For example, if you recreate your index `MyIndex` each night from a database by batch, you only need to:
+ 1. Import your database into a new index using [batches](#batch-writes). Let's call this new index `MyNewIndex`.
+ 1. Rename `MyNewIndex` to `MyIndex` using the move command. This will automatically override the old index and new queries will be served on the new one.
 
 <%= snippet("update_index") %>
 
-Backup / Retrieve all index content
+Backup / Retrieve of all index content
 -------------
 
-You can retrieve all index content for backup purpose or for SEO using the browse method.
-This method retrieve 1000 objects by API call and support pagination.
+You can retrieve all index content for backup purposes or for SEO using the browse method.
+This method retrieves 1,000 objects via an API call and supports pagination.
 
 <%= snippet("backup_index") %>
 
 Logs
 -------------
 
-You can retrieve the last logs via this API. Each log entry contains:
+You can retrieve the latest logs via this API. Each log entry contains:
  * Timestamp in ISO-8601 format
  * Client IP
- * Request Headers (API-Key is obfuscated)
+ * Request Headers (API Key is obfuscated)
  * Request URL
  * Request method
  * Request body
@@ -771,21 +774,21 @@ You can retrieve the last logs via this API. Each log entry contains:
  * Answer body
  * SHA1 ID of entry
 
-You can retrieve the logs of your last 1000 API calls and browse them using the offset/length parameters:
- * ***offset***: Specify the first entry to retrieve (0-based, 0 is the most recent log entry). Default to 0.
- * ***length***: Specify the maximum number of entries to retrieve starting at offset. Defaults to 10. Maximum allowed value: 1000.
- * ***onlyErrors***: Retrieve only logs with an httpCode different than 200 and 201. (deprecated)
+You can retrieve the logs of your last 1,000 API calls and browse them using the offset/length parameters:
+ * ***offset***: Specify the first entry to retrieve (0-based, 0 is the most recent log entry). Defaults to 0.
+ * ***length***: Specify the maximum number of entries to retrieve starting at the offset. Defaults to 10. Maximum allowed value: 1,000.
+ * ***onlyErrors***: Retrieve only logs with an HTTP code different than 200 or 201. (deprecated)
  * ***type***: Specify the type of logs to retrieve:
   * ***query***: Retrieve only the queries.
   * ***build***: Retrieve only the build operations.
-  * ***error***: Retrieve only the errors. (same as ***onlyErrors*** parameters)
+  * ***error***: Retrieve only the errors (same as ***onlyErrors*** parameters).
 
 <%= snippet("logs_get") %>
 
 <% if ruby? %>Mock
 -------------
 
-For testing purpose, you may want to mock Algolia's API calls. We provide a [WebMock](https://github.com/bblimke/webmock) configuration that you can use including `algolia/webmock`:
+For testing purposes, you may want to mock Algolia's API calls. We provide a [WebMock](https://github.com/bblimke/webmock) configuration that you can use including `algolia/webmock`:
 
 <%= snippet("mock") %><% end %>
 <% end %>
@@ -796,7 +799,7 @@ MongoDB
 
 You can use the `mongodb/crawler` tool to export a MongoDB collection and add all items to an Algolia index. This script is based on `mongoexport` and `algoliasearch-client-cmd`.
 
-For example, to export the collection `users` of your `myapp` database running on the default port and localhost to a `users` index, use:
+For example, to export the `users` collection of your `myapp` database running on the default port and localhost to a `users` index, use:
 
 ```sh
 ./mongodb/crawler -d myapp -c users --applicationID YourApplicationID --apiKey YourAPIKey --index users
