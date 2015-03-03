@@ -96,7 +96,7 @@ Setup
 -------------
 <% if cmd? %>To setup the command line client<% else %>To setup your project<% end %>, follow these steps:
 
-<% if java? %>If you're using Maven, add the following dependency and repository to your pom file:
+<% if java? %>If you're using Maven, add the following dependency to your pom file:
 <%= snippet("setup_maven") %>
 
 Initialize the client with your Application ID and API Key. You can find them on [your Algolia account](http://www.algolia.com/users/edit):
