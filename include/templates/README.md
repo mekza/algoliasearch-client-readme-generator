@@ -18,26 +18,29 @@ Algolia’s Search API makes it easy to deliver a great search experience in you
  * 99.99% SLA
  * first-class data security
 
-<% if js? %>
-This Javascript client let you easily use the [Algolia Search API](http://www.algolia.com) in a browser, it is compatible with major browsers:
-
- * Internet Explorer &ge; 6
- * Firefox &ge; 3.0
- * Google Chrome &ge; 3
- * Safari &ge; 4
- * Opera &ge; 10
- * etc.
-
-The JavaScript client is using CORS ([Cross Origin Resource Sharing](http://en.wikipedia.org/wiki/Cross-Origin_Resource_Sharing#Browser_support)) on recent browsers and has a fallback on JSONP ([JSON with padding](http://en.wikipedia.org/wiki/JSONP)) for old browsers.
-<% elsif cmd? -%>
+<% if cmd? -%>
 This command line API Client is a small wrapper around CURL to easily use Algolia Search's REST API.
-<% else -%>
+<% elseif !js? -%>
 This <%= @name %> client let you easily use the Algolia Search API from your <%= puts({'C#' => 'App', 'Java' => "Java Application", "Android" => "Android Application", 'Objective-C' => "application (iOS & OS X)"}, "backend") %>. It wraps [Algolia's REST API](http://www.algolia.com/doc/rest_api).
 <% end -%>
 <% if csharp? -%>Compatible with .NET 4.0, .NET 4.5, ASP.NET vNext 1.0, Mono 4.5, Windows 8, Windows 8.1, Windows Phone 8.1, Xamarin iOS, and Xamarin Android.<% end -%>
 <% if android? -%>It is based on our [Java API client](https://github.com/algolia/algoliasearch-client-java) and  includes an easy to use asynchronous API to avoid networks calls on UI Thread.<% end -%>
 
 <%= import("build_status.info") if !cmd? %>
+
+<% if js? -%>
+Our JavaScript client lets you easily use the [Algolia Search API](http://www.algolia.com) in a browser.
+
+It works and has been tested in all the major browsers.
+
+Our JavaScript client uses either:
+
+- [CORS](http://en.wikipedia.org/wiki/Cross-Origin_Resource_Sharing#Browser_support) for modern browsers
+- [XDomainRequest](https://msdn.microsoft.com/en-us/library/ie/cc288060%28v=vs.85%29.aspx) for IE <= 10
+- [JSONP](http://en.wikipedia.org/wiki/JSONP) in any situation where Ajax requests are unavailabe or blocked.
+
+The JavaScript API client is dedicated to web apps searching directly from the browser. To add, remove or delete your objects please consider using a backend API client.
+<% end -%>
 
 <%#    ************************** TOC ********************************** %>
 
@@ -51,7 +54,7 @@ Table of Content
 <% end -%>
 1. [Quick Start](#quick-start)
 <% if nodejs? || js? -%>
-1. [General Principle](#general-principle)
+1. [Callback convention](#callback-convention)
 <% if js? -%>
 1. [Cache](#cache)
 <% end -%>
@@ -101,7 +104,7 @@ Initialize the client with your ApplicationID and API-Key. You can find all of t
 <% if android? %>
  1. Download [latest algoliasearch-client-android-*.jar](https://github.com/algolia/algoliasearch-client-android/tree/master/dist) and add it to the lib folder of your project.
  2. Initialize the client with your ApplicationID and API-Key. You can find all of them on [your Algolia account](http://www.algolia.com/users/edit).
- 3. Make your Activity class implements the `IndexListener` interface to be able to use the asynchronous methods.
+ 3. Make sure your Activity class implements the `IndexListener` interface to be able to use the asynchronous methods.
 <% end %>
 <%= snippet("setup") %>
 
@@ -121,11 +124,28 @@ To setup your project, follow these steps:
 Quick Start
 -------------
 <% if js? %>
-The JavaScript API client is dedicated to web apps searching directly from the browser. To add, remove or delete your objects please consider using a backend API client.
 
-You can then update the ```example/autocomplete.html``` file with your ```ApplicationID```, ```API-Key``` and ```index name``` to test the autocomplete feature.
+We have easy to run [examples](./examples/) for you to try. First, setup the repository:
 
-You can also update the ```example/instantsearch.html``` file with your ```ApplicationID```, ```API-Key``` and ```index name``` to test an instant-search example.
+```sh
+  git clone https://github.com/algolia/algoliasearch-client-js.git
+  cd algoliasearch-client-js
+  npm install
+  npm run examples
+```
+
+Then open either:
+- http://127.0.0.1:8081/examples/ to see a list of examples
+- http://127.0.0.1:8081/examples/autocomplete.html
+- http://127.0.0.1:8081/examples/instantsearch.html
+
+To hack and use your own indexes and data, open one of the example file and replace:
+
+```js
+var client = new AlgoliaSearch(ApplicationID, Search-Only-API-Key);
+var index = client.initIndex(indexName);
+```
+
 <% else %>
 This quick start is a 30 seconds tutorial where you can discover how to index and search objects.
 
@@ -172,7 +192,7 @@ Since the engine is designed to suggest results as you type, you'll generally se
 <% end %>
 
 <% if nodejs? || js? %>
-General Principle
+Callback convention
 -------------
 
 All API calls will return the result in a callback that takes two arguments:
