@@ -1,0 +1,18 @@
+```swift
+// Rename MyIndex in MyIndexNewName
+client.moveIndex("MyIndex", dstIndexName: "MyIndexNewName", block: { (JSON, error) -> Void in
+	if let error = error {
+		println("Move failure: \(error)")
+	} else {
+		println("Move success: \(JSON)")
+	}
+})
+// Copy MyIndex in MyIndexCopy
+client.copyIndex("MyIndex", dstIndexName: "MyIndexCopy", block: { (JSON, error) -> Void in
+	if let error = error {
+		println("Copy failure: \(error)")
+	} else {
+		println("Copy success: \(JSON)")
+	}
+})
+```

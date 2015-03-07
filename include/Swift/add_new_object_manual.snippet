@@ -1,0 +1,9 @@
+```swift
+let newObject = ["firstname": "Jimmie", "lastname": "Barninger"]
+index.addObject(object, withID: "myID", block: { (JSON, error) -> Void in
+	if error == nil {
+		let objectID = JSON!["objectID"] as String
+		println("Object ID: \(objectID)")
+	}
+)
+```

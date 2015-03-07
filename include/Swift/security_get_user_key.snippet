@@ -1,0 +1,14 @@
+```swift
+// Gets the rights of a global key
+client.getUserKeyACL("myAPIKey", block: { (JSON, error) -> Void in
+	if error == nil {
+		println("Key details: \(JSON)")
+	}
+})
+// Gets the rights of an index specific key
+index.getUserKeyACL("myAPIKey", block: { (JSON, error) -> Void in
+	if error == nil {
+		println("Key details: \(JSON)")
+	}
+})
+```

@@ -1,0 +1,13 @@
+```swift
+index.getSettings(block: { (JSON, error) -> Void in
+	if error == nil 
+		println("Settings: \(JSON)")
+	}
+})
+```
+
+```swift
+let customRanking = ["desc(followers)", "asc(name)"]
+let settings = ["customRanking": customRanking]
+index.setSettings(settings, block: nil)
+```

@@ -1,0 +1,9 @@
+```swift
+let customRanking = ["lastname", "firstname", "company", "email", "city", "address"]
+let settings = ["attributesToIndex": customRanking]
+index.setSettings(settings, block: { (JSON, error) -> Void in
+	if let error = error {
+		println("Error when applying settings: \(error)")
+	}
+})
+```

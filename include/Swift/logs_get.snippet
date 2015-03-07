@@ -1,0 +1,18 @@
+```swift
+// Get last 10 log entries
+client.getLogs(block: { (JSON, error) -> Void in
+	if let error = error {
+		println("GetLogs failure: \(error)")
+	} else {
+		println("GetLogs success: \(JSON)")
+	}
+})
+// Get last 100 log entries
+client.getLogsWithOffset(0, length: 100, block: { (JSON, error) -> Void in
+	if let error = error {
+		println("GetLogs failure: \(error)")
+	} else {
+		println("GetLogs success: \(JSON)")
+	}
+})
+```

@@ -30,6 +30,9 @@
     "Objective-C": {
       "outputDir": "../../algoliasearch-client-objc"
     },
+    "Swift": {
+      "outputDir": "../../algoliasearch-client-swift"
+    },
     "Go": {
       "outputDir": "../../algoliasearch-client-go"
     }

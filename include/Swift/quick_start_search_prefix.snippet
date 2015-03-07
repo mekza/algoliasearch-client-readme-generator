@@ -1,0 +1,13 @@
+```swift
+index.search(Query(fullTextQuery: "or"), block: { (JSON, error) -> Void in
+	if error == nil {
+		println("Result: \(JSON)")
+	}
+})
+
+index.search(Query(fullTextQuery: "jim"), block: { (JSON, error) -> Void in
+	if error == nil {
+		println("Result: \(JSON)")
+	}
+})
+```

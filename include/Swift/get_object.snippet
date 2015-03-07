@@ -1,0 +1,14 @@
+```swift
+// Retrieves all attributes
+index.getObject("myID", block: { (JSON, error) -> Void in
+	if error == nil {
+		println("Object: \(JSON)")
+	}
+})
+// Retrieves only the firstname attribute
+index.getObject("myID", attributesToRetrieve: ["firstname"], block: { (JSON, error) -> Void in
+	if error == nil {
+		println("Object: \(JSON)")
+	}
+})
+```

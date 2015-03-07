@@ -1,0 +1,17 @@
+```swift
+let index = client.getIndex("contacts")
+index.search(Query(fullTextQuery: "s"), block: { (JSON, error) -> Void in
+	if error == nil {
+		println("Result: \(JSON)")
+	}
+})
+
+let query = Query(fullTextQuery: "s")
+query.attributesToRetrieve = ["firstname", "lastname"]
+query.hitsPerPage = 50
+index.search(query, block: { (JSON, error) -> Void in
+	if error == nil {
+		println("Result: \(JSON)")
+	}
+})
+```

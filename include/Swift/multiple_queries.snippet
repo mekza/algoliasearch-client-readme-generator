@@ -1,0 +1,15 @@
+```swift
+// Perform 3 queries in a single API call:
+// 		- 1st query target index `categories`
+//		- 2nd and 3rd queries target index `products`
+let queries = [
+	["indexName": "categories", "query": aQueryObject],
+	["indexName": "products", "query": anotherQueryObject],
+	["indexName": "products", "query": anotherQueryObject]
+]
+client.multipleQueries(queries, block: { (JSON, error) -> Void in
+	if error == nil {
+		println("Result: \(JSON)")
+	}
+})
+```

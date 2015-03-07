@@ -1,0 +1,11 @@
+```swift
+index.addObject(newObject, block: { (JSON, error) -> Void in
+	if error == nil {
+		self.index.waitTask(JSON!["taskID"] as Int, block: { (JSON, error) -> Void in
+			if error == nil {
+				println("New object is indexed!")
+			}
+		})
+	}
+})
+```
