@@ -1,1 +1,4 @@
 [![Build Status](https://travis-ci.org/algolia/algoliasearch-client-objc.svg?branch=master)](https://travis-ci.org/algolia/algoliasearch-client-objc)
+[![CocoaPods](https://img.shields.io/cocoapods/v/AlgoliaSearch-Client.svg)]()
+[![CocoaPods](https://img.shields.io/cocoapods/p/AlgoliaSearch-Client.svg)]()
+[![CocoaPods](https://img.shields.io/cocoapods/l/AlgoliaSearch-Client.svg)]()

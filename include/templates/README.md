@@ -165,7 +165,7 @@ You can also configure the list of attributes you want to index by order of impo
 Since the engine is designed to suggest results as you type, you'll generally search by prefix. In this case the order of attributes is very important to decide which hit is the best:
 <%= snippet("quick_start_search_prefix") %>
 
-<% if !cmd? && !android? && !objc? %>
+<% if !cmd? && !android? && !objc? && !swift? %>
 **Notes:** If you are building a web application, you may be more interested in using our [JavaScript client](https://github.com/algolia/algoliasearch-client-js) to perform queries. It brings two benefits:
   * Your users get a better response time by not going through your servers
   * It will offload unnecessary tasks from your servers.
@@ -335,7 +335,7 @@ Example to decrement a numeric value:
 
 Search
 -------------
-<% if !js? && !cmd? && !android? && !objc? %>
+<% if !js? && !cmd? && !android? && !objc? && !swift? %>
 **Notes:** If you are building a web application, you may be more interested in using our [JavaScript client](https://github.com/algolia/algoliasearch-client-js) to perform queries. It brings two benefits:
   * Your users get a better response time by not going through your servers
   * It will offload unnecessary tasks from your servers.
@@ -701,7 +701,7 @@ You can also create an API Key with advanced restrictions:
 
  * Add a validity period. The key will be valid for a specific period of time (in seconds).
  * Specify the maximum number of API calls allowed from an IP address per hour. Each time an API call is performed with this key, a check is performed. If the IP at the source of the call did more than this number of calls in the last hour, a 403 code is returned. Defaults to 0 (no rate limit). This parameter can be used to protect you from attempts at retrieving your entire index contents by massively querying the index.
-<% if !cmd? && !csharp? && !android? && !objc? %>
+<% if !cmd? && !csharp? && !android? && !objc? && !swift? %>
 <%= snippet("security_note_forward") %>
 <% end %>
  * Specify the maximum number of hits this API key can retrieve in one call. Defaults to 0 (unlimited). This parameter can be used to protect you from attempts at retrieving your entire index contents by massively querying the index.
@@ -719,11 +719,11 @@ Get the permissions of a given key:
 Delete an existing key:
 <%= snippet("security_delete_key") %>
 
-<% if !cmd? && !csharp? && !objc? %>
+<% if !cmd? && !csharp? && !objc? && !swift? %>
 
 You may have a single index containing per user data. In that case, all records should be tagged with their associated user_id in order to add a `tagFilters=(public,user_42)` filter at query time to retrieve only what a user has access to. If you're using the [JavaScript client](http://github.com/algolia/algoliasearch-client-js), it will result in a security breach since the user is able to modify the `tagFilters` you've set by modifying the code from the browser. To keep using the JavaScript client (recommended for optimal latency) and target secured records, you can generate a secured API key from your backend:
 
-<%= snippet("generate_secured_api_key") if !csharp? && !objc? %>
+<%= snippet("generate_secured_api_key") if !csharp? && !objc? && !swift? %>
 
 This public API key must then be used in your JavaScript code as follow:
 
@@ -739,7 +739,7 @@ This public API key must then be used in your JavaScript code as follow:
 
 You can mix rate limits and secured API keys by setting an extra `user_token` attribute both at API key generation time and query time. When set, a unique user will be identified by her `IP + user_token` instead of only by her `IP`. This allows you to restrict a single user to performing a maximum of `N` API calls per hour, even if she shares her `IP` with another user.
 
-<%= snippet("generate_secured_api_key_user_token") if !csharp? && !objc? %>
+<%= snippet("generate_secured_api_key_user_token") if !csharp? && !objc? && !swift? %>
 
 This public API key must then be used in your JavaScript code as follow:
 
