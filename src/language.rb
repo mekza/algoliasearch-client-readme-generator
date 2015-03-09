@@ -26,6 +26,8 @@ class Language
       'objc'
     elsif go?
       'go'
+    elsif swift?
+      'swift'
     else
       nil
     end
@@ -91,6 +93,10 @@ class Language
 
   def go?
     name == "Go"
+  end
+
+  def swift?
+    name == "Swift"
   end
 
   def get_binding
