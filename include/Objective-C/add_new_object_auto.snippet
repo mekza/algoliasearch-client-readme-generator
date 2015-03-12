@@ -1,8 +1,7 @@
 ```objc
-NSDictionary *newObject = [NSDictionary dictionaryWithObjectsAndKeys:@"Jimmie", @"firstname",
-                                        @"Barninger", @"lastname", nil];
+NSDictionary *newObject = @{@"firstname": @"Jimmie", @"lastname": @"Barninger"};
 [index addObject:newObject 
   success:^(ASRemoteIndex *index, NSDictionary *object, NSDictionary *result) {
-    NSLog(@"Object ID:%@", [result valueForKey:@"objectID"]);
+  	NSLog(@"Object ID: %@", result[@"objectID"]);
 } failure:nil];
 ```

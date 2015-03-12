@@ -2,21 +2,21 @@
 // search by firstname
 [index search:[ASQuery queryWithFullTextQuery:@"jimmie"] 
   success:^(ASRemoteIndex *index, ASQuery *query, NSDictionary *result) {
-    NSLog(@"Result:%@", result);
+    NSLog(@"Result: %@", result);
 } failure:nil];
 // search a firstname with typo
 [index search:[ASQuery queryWithFullTextQuery:@"jimie"] 
   success:^(ASRemoteIndex *index, ASQuery *query, NSDictionary *result) {
-    NSLog(@"Result:%@", result);
+    NSLog(@"Result: %@", result);
 } failure:nil];
 // search for a company
 [index search:[ASQuery queryWithFullTextQuery:@"california paint"] 
   success:^(ASRemoteIndex *index, ASQuery *query, NSDictionary *result) {
-    NSLog(@"Result:%@", result);
+    NSLog(@"Result: %@", result);
 } failure:nil];
 // search for a firstname & company
 [index search:[ASQuery queryWithFullTextQuery:@"jimmie paint"] 
   success:^(ASRemoteIndex *index, ASQuery *query, NSDictionary *result) {
-    NSLog(@"Result:%@", result);
+    NSLog(@"Result: %@", result);
 } failure:nil];
 ```

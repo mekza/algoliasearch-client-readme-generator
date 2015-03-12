@@ -1,4 +1,4 @@
 ```objc
-NSDictionary *partialObject = [NSDictionary dictionaryWithObjectsAndKeys:@"San Francisco", @"city", nil];
+NSDictionary *partialObject = @{@"city": @"San Francisco"};
 [index partialUpdateObject:partialObject objectID:@"myID" success:nil failure:nil];
 ```

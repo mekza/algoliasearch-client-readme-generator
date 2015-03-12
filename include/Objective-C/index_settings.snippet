@@ -5,8 +5,8 @@
 ```
 
 ```objc
-NSArray *customRanking = [NSArray arrayWithObjects:@"desc(followers)", @"asc(name)", nil];
-NSDictionary *settings = [NSDictionary dictionaryWithObjectsAndKeys:customRanking, @"customRanking", nil];
+NSArray *customRanking = @[@"desc(followers)", @"asc(name)"];
+NSDictionary *settings = @{@"customRanking": customRanking};
 [index setSettings:settings success:nil failure:nil];
 
 ```

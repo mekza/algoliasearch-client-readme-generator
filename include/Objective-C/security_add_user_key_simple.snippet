@@ -1,12 +1,12 @@
 ```objc
 // Creates a new global API key that can only perform search actions
-[apiClient addUserKey:[NSArray arrayWithObject:@"search"] 
+[apiClient addUserKey:@[@"search"] 
   success:^(ASAPIClient *client, NSArray *acls, NSDictionary *result) {
-    NSLog(@"API Key:%@", [result objectForKey:@"key"]);
+    NSLog(@"API Key: %@", result[@"key"]);
 } failure:nil];
 // Creates a new API key that can only perform search action on this index
-[index addUserKey:[NSArray arrayWithObject:@"search"] 
+[index addUserKey:@[@"search"] 
   success:^(ASRemoteIndex *index, NSArray *acls, NSDictionary *result) {
-    NSLog(@"API Key:%@", [result objectForKey:@"key"]);
+    NSLog(@"API Key: %@", result[@"key"]);
 } failure:nil];
 ```

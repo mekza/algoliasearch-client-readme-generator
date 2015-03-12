@@ -2,14 +2,14 @@
 ASRemoteIndex *index = [apiClient getIndex:@"contacts"];
 [index search:[ASQuery queryWithFullTextQuery:@"s"] 
   success:^(ASRemoteIndex *index, ASQuery *query, NSDictionary *result) {
-    NSLog(@"Result:%@", result);
+    NSLog(@"Result: %@", result);
 } failure:nil];
 
 ASQuery *query = [ASQuery queryWithFullTextQuery:@"s"];
-query.attributesToRetrieve = [NSArray arrayWithObjects:@"firstname", @"lastname", nil];
+query.attributesToRetrieve = @[@"firstname", @"lastname"];
 query.hitsPerPage = 50;
 [index search:query 
   success:^(ASRemoteIndex *index, ASQuery *query, NSDictionary *result) {
-    NSLog(@"Result:%@", result);
+    NSLog(@"Result: %@", result);
 } failure:nil];
 ```

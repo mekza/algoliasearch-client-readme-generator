@@ -6,7 +6,8 @@
     NSLog(@"GetLogs failure: %@", errorMessage);
 }];
 // Get last 100 log entries
-[apiClient getLogsWithOffset:0 length:100 success:^(ASAPIClient *client, NSUInteger offset, NSUInteger length, NSDictionary *result) {
+[apiClient getLogsWithOffset:0 length:100 
+  success:^(ASAPIClient *client, NSUInteger offset, NSUInteger length, NSDictionary *result) {
     NSLog(@"GetLog success: %@", result);
 } failure:^(ASAPIClient *client, NSUInteger offset, NSUInteger length, NSString *errorMessage) {
     NSLog(@"GetLogs failure: %@", errorMessage);

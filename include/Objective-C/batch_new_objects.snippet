@@ -1,9 +1,7 @@
 ```objc
-NSDictionary *obj1 = [NSDictionary dictionaryWithObjectsAndKeys:@"Jimmie", @"firstname",
-                             @"Barninger", @"lastname", nil];
-NSDictionary *obj2 = [NSDictionary dictionaryWithObjectsAndKeys:@"Warren", @"firstname",
-                             @"Speach", @"lastname", nil];
-[index addObjects:[NSArray arrayWithObjects:obj1, obj2, nil] 
+NSDictionary *obj1 = @{@"firstname": @"Jimmie", @"lastname": @"Barninger"};
+NSDictionary *obj2 = @{@"firstname": @"Warren", @"lastname": @"Speach"};
+[index addObjects:@[obj1, obj2] 
   success:^(ASRemoteIndex *index, NSArray *objects, NSDictionary *result) {
     NSLog(@"Object IDs: %@", result);
 } failure:nil];

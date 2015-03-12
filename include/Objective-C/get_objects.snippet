@@ -1,6 +1,6 @@
 ```objc
-[index getObjects:[NSArray arrayWithObjects:@"myObj1", @"myObj2", nil]
+[index getObjects:@[@"myID1", @"myID2"]
   success:^(ASRemoteIndex *index, NSArray *objectIDs, NSDictionary *result) {
-
+	// do something
 } failure:nil];
 ```

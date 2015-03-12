@@ -6,5 +6,5 @@ NSData* jsonData = [NSData dataWithContentsOfFile:jsonPath];
 NSDictionary* dict = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
 // Load all objects of json file in an index named "contacts"
 ASRemoteIndex *index = [apiClient getIndex:@"contacts"];
-[index addObjects:[dict objectForKey:@"objects"] success:nil failure:nil];
+[index addObjects:dict[@"objects"] success:nil failure:nil];
 ```

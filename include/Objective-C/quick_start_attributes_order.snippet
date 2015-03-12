@@ -1,6 +1,6 @@
 ```objc
-NSArray *customRanking = [NSArray arrayWithObjects:@"lastname", @"firstname", @"company", @"email", @"city", @"address", nil];
-NSDictionary *settings = [NSDictionary dictionaryWithObjectsAndKeys:customRanking, @"attributesToIndex", nil];
+NSArray *customRanking = @[@"lastname", @"firstname", @"company", @"email", @"city", @"address"];
+NSDictionary *settings = @{@"attributesToIndex": customRanking};
 [index setSettings:settings success:nil
   failure:^(ASRemoteIndex *index, NSDictionary *settings, NSString *errorMessage) {
     NSLog(@"Error when applying settings: %@", errorMessage);

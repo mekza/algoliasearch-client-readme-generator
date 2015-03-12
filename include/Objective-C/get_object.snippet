@@ -5,7 +5,7 @@
     NSLog(@"Object: %@", result);
 } failure:nil];
 // Retrieves only the firstname attribute
-[index getObject:@"myID" attributesToRetrieve:[NSArray arrayWithObject:@"firstname"] 
+[index getObject:@"myID" attributesToRetrieve:@[@"firstname"] 
   success:^(ASRemoteIndex *index, NSString *objectID, NSArray *attributesToRetrieve, NSDictionary *result) {
     NSLog(@"Object: %@", result);
 } failure:nil];

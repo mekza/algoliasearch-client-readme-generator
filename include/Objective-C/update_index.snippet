@@ -1,9 +1,9 @@
 ```objc
 // Rename MyNewIndex in MyIndex (and overwrite it)
-[apiClient moveIndex:@"MyNewIndex" to:@"MyIndex" success:^(ASAPIClient *client, NSString *srcIndexName, NSString *dstIndexName, NSDictionary *result) {
+[apiClient moveIndex:@"MyNewIndex" to:@"MyIndex" 
+  success:^(ASAPIClient *client, NSString *srcIndexName, NSString *dstIndexName, NSDictionary *result) {
     NSLog(@"Move Success: %@", result);
 } failure:^(ASAPIClient *client, NSString *srcIndexName, NSString *dstIndexName, NSString *errorMessage) {
     NSLog(@"Move Failure: %@", errorMessage);
 }];
-
 ```

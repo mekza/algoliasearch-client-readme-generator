@@ -1,5 +1,8 @@
 ```objc
-NSDictionary *newObject = [NSDictionary dictionaryWithObjectsAndKeys:@"Jimmie", @"firstname",
-                                        @"Barninger", @"lastname", @"New York", @"city", nil];
+NSDictionary *newObject = @{
+	@"firstname": @"Jimmie",
+    @"lastname": @"Barninger",
+	@"city": @"New York"
+};
 [index saveObject:newObject objectID:@"myID" success:nil failure:nil];
 ```

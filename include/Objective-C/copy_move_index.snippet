@@ -1,12 +1,14 @@
 ```objc
 // Rename MyIndex in MyIndexNewName
-[apiClient moveIndex:@"MyIndex" to:@"MyIndexNewName" success:^(ASAPIClient *client, NSString *srcIndexName, NSString *dstIndexName, NSDictionary *result) {
+[apiClient moveIndex:@"MyIndex" to:@"MyIndexNewName" 
+  success:^(ASAPIClient *client, NSString *srcIndexName, NSString *dstIndexName, NSDictionary *result) {
     NSLog(@"Move Success: %@", result);
 } failure:^(ASAPIClient *client, NSString *srcIndexName, NSString *dstIndexName, NSString *errorMessage) {
     NSLog(@"Move Failure: %@", errorMessage);
 }];
 // Copy MyIndex in MyIndexCopy
-[apiClient copyIndex:@"MyIndex" to:@"MyIndexCopy" success:^(ASAPIClient *client, NSString *srcIndexName, NSString *dstIndexName, NSDictionary *result) {
+[apiClient copyIndex:@"MyIndex" to:@"MyIndexCopy" 
+  success:^(ASAPIClient *client, NSString *srcIndexName, NSString *dstIndexName, NSDictionary *result) {
     NSLog(@"Copy Success: %@", result);
 } failure:^(ASAPIClient *client, NSString *srcIndexName, NSString *dstIndexName, NSString *errorMessage) {
     NSLog(@"Copy Failure: %@", errorMessage);
