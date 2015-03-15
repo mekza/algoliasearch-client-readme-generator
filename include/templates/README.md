@@ -112,6 +112,23 @@ Initialize the client with your Application ID and API Key. You can find them on
 <% end %>
 <%= snippet("setup") %>
 
+<% if ruby? -%>
+### Ruby on Rails
+
+If you're a Ruby on Rails user; you're probably looking for the [algoliasearch-rails](https://github.com/algolia/algoliasearch-rails) gem.
+<% elsif php? -%>
+### Framework Integrations
+
+If you're a Symfony or Laravel user; you're probably looking for the following integrations:
+
+ - **Laravel** (community) - [vinkla/algolia](https://github.com/vinkla/algolia)
+ - **Symfony** (official) - [algolia/AlgoliaSearchBundle](https://github.com/algolia/AlgoliaSearchBundle)
+ - **Symfony** (community) - [GoldenLine/AlgoliaBundle](https://github.com/GoldenLine/AlgoliaBundle)
+
+<% end -%>
+
+
+
 <%#    ************************** SETUP WITH PARSE ********************************** %>
 
 <% if nodejs? -%>
