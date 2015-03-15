@@ -23,7 +23,7 @@ Algolia's Search API makes it easy to deliver a great search experience in your 
 
 <% if cmd? -%>
 Our command line API client is a small wrapper around CURL to make it easier to use the [Algolia Search REST API](http://www.algolia.com/doc/rest_api).
-<% elseif !js? -%>
+<% elsif !js? -%>
 Our <%= @name %> client lets you easily use the [Algolia Search API](http://www.algolia.com) from your <%= puts({'C#' => 'App', 'Java' => "Java Application", "Android" => "Android Application", 'Objective-C' => "iOS & OS X applications"}, "backend") %>. It wraps the [Algolia Search REST API](http://www.algolia.com/doc/rest_api).
 <% end -%>
 
