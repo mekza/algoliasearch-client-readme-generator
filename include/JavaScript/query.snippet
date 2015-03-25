@@ -1,68 +1,34 @@
-##### Default
-
 ```javascript
-index = client.initIndex('contacts');
-index.search('query string', function(success, content) {
-    if (!success) {
-        console.log('Error: ' + content.message);
-        return;
-    }
-    for (var h in content.hits) {
-        console.log('Hit(' + content.hits[h].objectID + '): ' + content.hits[h].toString());
-    }
+var client = algoliasearch('ApplicationID', 'Search-Only-API-Key');
+var index = client.initIndex('indexName');
+
+// only query string
+index.search('query string', function searchDone(err, content) {
+  if (err) {
+    console.error(err);
+    return;
+  }
+
+  for (var h in content.hits) {
+    console.log('Hit(' + content.hits[h].objectID + '): ' + content.hits[h].toString());
+  }
 });
 
-index.search('query string', function(success, content) {
-    if (!success) {
-        console.log('Error: ' + content.message);
-        return;
+// with params
+index.search(
+  'query string', {
+    attributesToRetrieve: ['firstname', 'lastname'],
+    hitsPerPage: 50
+  },
+  function searchDone(err, content) {
+    if (err) {
+      console.error(err);
+      return;
     }
+
     for (var h in content.hits) {
-        console.log('Hit(' + content.hits[h].objectID + '): ' + content.hits[h].toString());
+      console.log('Hit(' + content.hits[h].objectID + '): ' + content.hits[h].toString());
     }
-}, {attributesToRetrieve: 'firstname,lastname', hitsPerPage: 50});
-```
-
-##### jQuery
-
-```javascript
-index = client.initIndex('contacts');
-index.search('query string')
-    .done(function(content) {
-        for (var h in content.hits) {
-            console.log('Hit(' + content.hits[h].objectID + '): ' + content.hits[h].toString());
-        }
-    })
-    .fail(function(content) {
-        console.log('Error: ' + content.message);
-    });
-
-index.search('query string', { attributesToRetrieve: 'firstname,lastname', hitsPerPage: 50})
-    .done(function(content) {
-        for (var h in content.hits) {
-            console.log('Hit(' + content.hits[h].objectID + '): ' + content.hits[h].toString());
-        }
-    })
-    .fail(function(content) {
-        console.log('Error: ' + content.message);
-    });
-```
-
-##### Angular.js
-
-```javascript
-index = client.initIndex('contacts');
-index.search('query string')
-    .then(function(content) {
-        $scope.hits = content.hits;
-    }, function(content) {
-        console.log('Error: ' + content.message);
-    });
-
-index.search('query string', { attributesToRetrieve: 'firstname,lastname', hitsPerPage: 50})
-    .then(function(content) {
-        $scope.hits = content.hits;
-    }, function(content) {
-        console.log('Error: ' + content.message);
-    });
+  }
+);
 ```

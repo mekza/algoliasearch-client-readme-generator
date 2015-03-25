@@ -1,87 +1,54 @@
-#### Default
-
 ```javascript
+var client = algoliasearch('ApplicationID', 'Search-Only-API-Key');
+
 // perform 3 queries in a single API call:
 //  - 1st query targets index `categories`
 //  - 2nd and 3rd queries target index `products`
 client.startQueriesBatch();
-client.addQueryInBatch('categories', $('#q').val(), { hitsPerPage: 3 });
-client.addQueryInBatch('products', $('#q').val(), { hitsPerPage: 3, tagFilters: 'promotion' });
-client.addQueryInBatch('products', $('#q').val(), { hitsPerPage: 10 });
+
+client.addQueryInBatch(
+  'categories', // index name
+  'search in categories index', {
+    hitsPerPage: 3
+  }
+);
+
+client.addQueryInBatch(
+  'products',
+  'first search in products', {
+    hitsPerPage: 3,
+    tagFilters: 'promotion'
+  }
+);
+
+client.addQueryInBatch(
+  'products',
+  'another search in products', {
+    hitsPerPage: 10
+  }
+);
+
 client.sendQueriesBatch(searchMultiCallback);
 
-function searchMultiCallback(success, content) {
-  if (success) {
-    var categories = content.results[0];
-    for (var i = 0; i < categories.hits.length; ++i) {
-      console.log(categories.hits[i]);
-    }
+function searchMultiCallback(err, content) {
+  if (err) {
+    console.error(err);
+    return;
+  }
 
-    var products_promotion = content.results[1];
-    for (var i = 0; i < products_promotion.hits.length; ++i) {
-      console.log(products_promotion.hits[i]);
-    }
+  var categories = content.results[0];
+  for (var i = 0; i < categories.hits.length; ++i) {
+    console.log(categories.hits[i]);
+  }
 
-    var products = content.results[2];
-    for (var i = 0; i < products.hits.length; ++i) {
-      console.log(products.hits[i]);
-    }
+  var products_promotion = content.results[1];
+  for (var i = 0; i < products_promotion.hits.length; ++i) {
+    console.log(products_promotion.hits[i]);
+  }
+
+  var products = content.results[2];
+  for (var i = 0; i < products.hits.length; ++i) {
+    console.log(products.hits[i]);
   }
 }
-```
-
-#### jQuery
-
-```javascript
-// perform 3 queries in a single API call:
-//  - 1st query targets index `categories`
-//  - 2nd and 3rd queries target index `products`
-client.startQueriesBatch();
-client.addQueryInBatch('categories', $('#q').val(), { hitsPerPage: 3 });
-client.addQueryInBatch('products', $('#q').val(), { hitsPerPage: 3, tagFilters: 'promotion' });
-client.addQueryInBatch('products', $('#q').val(), { hitsPerPage: 10 });
-client.sendQueriesBatch().done(function(content) {
-  var categories = content.results[0];
-  for (var i = 0; i < categories.hits.length; ++i) {
-    console.log(categories.hits[i]);
-  }
-
-  var products_promotion = content.results[1];
-  for (var i = 0; i < products_promotion.hits.length; ++i) {
-    console.log(products_promotion.hits[i]);
-  }
-
-  var products = content.results[2];
-  for (var i = 0; i < products.hits.length; ++i) {
-    console.log(products.hits[i]);
-  }
-});
-```
-
-#### Angular.js
-
-```javascript
-// perform 3 queries in a single API call:
-//  - 1st query targets index `categories`
-//  - 2nd and 3rd queries target index `products`
-client.startQueriesBatch();
-client.addQueryInBatch('categories', $('#q').val(), { hitsPerPage: 3 });
-client.addQueryInBatch('products', $('#q').val(), { hitsPerPage: 3, tagFilters: 'promotion' });
-client.addQueryInBatch('products', $('#q').val(), { hitsPerPage: 10 });
-client.sendQueriesBatch().then(function(content) {
-  var categories = content.results[0];
-  for (var i = 0; i < categories.hits.length; ++i) {
-    console.log(categories.hits[i]);
-  }
-
-  var products_promotion = content.results[1];
-  for (var i = 0; i < products_promotion.hits.length; ++i) {
-    console.log(products_promotion.hits[i]);
-  }
-
-  var products = content.results[2];
-  for (var i = 0; i < products.hits.length; ++i) {
-    console.log(products.hits[i]);
-  }
-});
 ```
