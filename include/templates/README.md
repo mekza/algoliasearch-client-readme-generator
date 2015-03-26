@@ -7,24 +7,11 @@
 <%#    ************************** INTRO ********************************** %>
 
 [Algolia Search](http://www.algolia.com) is a hosted full-text, numerical, and faceted search engine capable of delivering realtime results from the first keystroke.
-Algolia's Search API makes it easy to deliver a great search experience in your websites and mobile applications by providing:
-
- * REST and JSON based API
- * Search against infinite attributes from a single search box
- * Instant search as you type experience
- * Relevance and popularity ranking
- * Global language support
- * Typo tolerance in any language
- * Smart highlighting
- * Facet as you type
- * Geo awareness
- * 99.99% SLA
- * First class data security
 
 <% if cmd? -%>
 Our command line API client is a small wrapper around CURL to make it easier to use the [Algolia Search REST API](http://www.algolia.com/doc/rest_api).
 <% elsif !js? -%>
-Our <%= @name %> client lets you easily use the [Algolia Search API](http://www.algolia.com) from your <%= puts({'C#' => 'App', 'Java' => "Java Application", "Android" => "Android Application", 'Objective-C' => "iOS & OS X applications"}, "backend") %>. It wraps the [Algolia Search REST API](http://www.algolia.com/doc/rest_api).
+Our <%= @name %> client lets you easily use the [Algolia Search API](https://www.algolia.com/doc/rest_api) from your <%= puts({'C#' => 'App', 'Java' => "Java Application", "Android" => "Android Application", 'Objective-C' => "iOS & OS X applications"}, "backend") %>. It wraps the [Algolia Search REST API](http://www.algolia.com/doc/rest_api).
 <% end -%>
 
 <% if csharp? -%>Compatible with .NET 4.0, .NET 4.5, ASP.NET vNext 1.0, Mono 4.5, Windows 8, Windows 8.1, Windows Phone 8.1, Xamarin iOS, and Xamarin Android.<% end -%>
@@ -33,17 +20,17 @@ Our <%= @name %> client lets you easily use the [Algolia Search API](http://www.
 <%= import("build_status.info") if !cmd? %>
 
 <% if js? -%>
-Our JavaScript client lets you easily use the [Algolia Search API](http://www.algolia.com) in a browser.
+The JavaScript client lets you easily use the [Algolia Search API](https://www.algolia.com/doc/rest_api) in a browser.
 
-It works and has been tested in all the major browsers.
+It is dedicated to web apps searching directly from the browser.
+To add, remove or delete your objects please consider using [a backend API client](https://www.algolia.com/doc).
 
-Our JavaScript client uses either:
+Our JavaScript library is [UMD](https://github.com/umdjs/umd) compatible, you can
+use it with any module loader.
 
-- [CORS](http://en.wikipedia.org/wiki/Cross-Origin_Resource_Sharing#Browser_support) for modern browsers
-- [XDomainRequest](https://msdn.microsoft.com/en-us/library/ie/cc288060%28v=vs.85%29.aspx) for IE <= 10
-- [JSONP](http://en.wikipedia.org/wiki/JSONP) in any situation where Ajax requests are unavailabe or blocked.
+When not using any module loader, it will export an `alogliasearch` method in the `window` object.
 
-The JavaScript API client is dedicated to web apps searching directly from the browser. To add, remove or delete your objects please consider using a backend API client.
+If you are using the V2 of our JavaScript client and want to upgrade, please read [our migration guide](https://github.com/algolia/algoliasearch-client-js/wiki/Migration-guide-from-2.x.x-to-3.x.x).
 <% end -%>
 
 <%#    ************************** TOC ********************************** %>
@@ -60,6 +47,8 @@ Table of Contents
 <% if nodejs? || js? -%>
 1. [Callback convention](#callback-convention)
 <% if js? -%>
+1. [Promises](#promises)
+1. [Request strategy](#request-strategy)
 1. [Cache](#cache)
 <% end -%>
 <% end -%>
@@ -88,7 +77,7 @@ Table of Contents
 <% if ruby? %>1. [Mock](#mock)<% end %>
 <% else %>
 1. [Search](#search)
-1. [Multiple queries](#multi-queries)
+1. [Multiple queries](#multiple-queries)
 1. [Get an object](#get-an-object)
 1. [Security](#security)
 <% end %>
@@ -162,7 +151,7 @@ Then open either:
 To hack and use your own indexes and data, open one of the example file and replace:
 
 ```js
-var client = new AlgoliaSearch(ApplicationID, Search-Only-API-Key);
+var client = algoliasearch('ApplicationID', 'Search-Only-API-Key');
 var index = client.initIndex(indexName);
 ```
 <% else %>
@@ -185,43 +174,79 @@ Since the engine is designed to suggest results as you type, you'll generally se
 <% if !cmd? && !android? && !objc? && !swift? %>
 **Notes:** If you are building a web application, you may be more interested in using our [JavaScript client](https://github.com/algolia/algoliasearch-client-js) to perform queries. It brings two benefits:
   * Your users get a better response time by not going through your servers
-  * It will offload unnecessary tasks from your servers.
+  * It will offload unnecessary tasks from your servers
 
 ```html
-<script type="text/javascript" src="//path/to/algoliasearch.min.js"></script>
-<script type="text/javascript">
-  var client = new AlgoliaSearch("YourApplicationID", "YourSearchOnlyAPIKey");
-  var index = client.initIndex('YourIndexName');
+<script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+<script>
+var client = algoliasearch('ApplicationID', 'Search-Only-API-Key');
+var index = client.initIndex('indexName');
 
-  function searchCallback(success, content) {
-    if (success) {
-      console.log(content);
-    }
+// perform query "jim"
+index.search('jim', searchCallback);
+
+// the last optional argument can be used to add search parameters
+index.search(
+  'jim', {
+    hitsPerPage: 5,
+    facets: '*',
+    maxValuesPerFacet: 10
+  },
+  searchCallback
+);
+
+function searchCallback(err, content) {
+  if (err) {
+    console.error(err);
+    return;
   }
 
-  // perform query "jim"
-  index.search("jim", searchCallback);
-
-  // the last optional argument can be used to add search parameters
-  index.search("jim", searchCallback, { hitsPerPage: 5, facets: '*', maxValuesPerFacet: 10 });
+  console.log(content);
+}
 </script>
 ```
 <% end %>
 
 <% end %>
 
-<% if nodejs? || js? %>
+<% if nodejs? %>
 Callback convention
 -------------
 
 All API calls will return the result in a callback that takes two arguments:
 
- 1. **<%= js? ? 'success' : 'error' %>**: a boolean that is set to <%= js? ? 'false' : 'true' %> when an error occurs.
+ 1. **error**: a boolean that is set to true when an error occurs.
  2. **content**: the object containing the answer (if an error was found, you can retrieve the error message in `content.message`)
-
 <% end %>
 
 <% if js? %>
+Callback convention
+-------------
+
+All API calls will return the result in a callback that takes two arguments:
+
+ 1. **error**: null or an [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error) object. More info on the error can be find in `error.message`.
+ 2. **content**: the object containing the answer
+
+We follow the [error-first callback](http://thenodeway.io/posts/understanding-error-first-callbacks/).
+
+Promises
+-------------
+
+If **you do not provide a callback**, you will get a promise (but never both).
+
+Promises are the [native Promise implementation](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise).
+
+We use [jakearchibald/es6-promise](https://github.com/jakearchibald/es6-promise/) as a polyfill when needed.
+
+Request strategy
+-------------
+
+The request strategy used by the JavaScript client includes:
+- [CORS](http://en.wikipedia.org/wiki/Cross-Origin_Resource_Sharing#Browser_support) for modern browsers
+- [XDomainRequest](https://msdn.microsoft.com/en-us/library/ie/cc288060%28v=vs.85%29.aspx) for IE <= 10
+- [JSONP](http://en.wikipedia.org/wiki/JSONP) in any situation where Ajax requests are unavailabe or blocked.
+
 Cache
 -------------
 
@@ -234,7 +259,7 @@ index.clearCache();
 
 // if you're performing multi-queries using the API client instead of the index
 // you'll need to use the following code
-algoliaClient.clearCache();
+client.clearCache();
 ```
 <% end %>
 
@@ -463,7 +488,7 @@ You can also use a string array encoding (for example `numericFilters: ["price>1
 
 The server response will look like:
 
-```javascript
+```json
 {
   "hits": [
     {
@@ -515,26 +540,34 @@ You can easily retrieve an object using its `objectID` and optionally specify a 
 
 You can also retrieve a set of objects:
 
+<% if !js? %>
 <%= snippet("get_objects") %>
+<% end %>
 
 <% if js? %>
 
 Security
 ---------
 
-If you're using a secured API Key (see backend client documentation), you need to set the associated `tags`:
+If you're using [Per-User security](https://www.algolia.com/doc#SecurityUser) keys, you need to set the associated `tags`:
 
 ```javascript
-var algolia = new AlgoliaSearch('YourApplicationID', 'YourPublicSecuredAPIKey');
-algolia.setSecurityTags('(public,user_42)'); // must be same than those used at generation-time
+var client = algoliasearch('ApplicationID', 'YourPublicSecuredAPIKey');
+
+// must be the same than those used at generation-time
+client.setSecurityTags('(public,user_42)');
 ```
 
-If you've specified a `userToken` while generating your secured API key, you must also specified it at query-time:
+// If you've specified a `userToken` while generating your secured API key, you must also specified it at query-time:
 
 ```javascript
-var algolia = new AlgoliaSearch('YourApplicationID', 'YourPublicSecuredAPIKey');
-algolia.setSecurityTags('(public,user_42)'); // must be the same as the ones used at generation-time
-algolia.setUserToken('user_42')              // must be the same as the one used at generation-time
+var client = algoliasearch('ApplicationID', 'YourPublicSecuredAPIKey');
+
+// must be the same as the ones used at generation-time
+client.setSecurityTags('(public,user_42)');
+
+// must be the same as the one used at generation-time
+client.setUserToken('user_42');
 ```
 
 <% end %>
@@ -544,13 +577,17 @@ algolia.setUserToken('user_42')              // must be the same as the one used
 Updating the index
 -------------
 
-In some use cases, such as an HTML5 mobile application, it may be necessary to perform updates to the index directly in JavaScript. Therefore, just like other languages, the JavaScript client is able to add, update & delete objects, and modify index settings. For more details about updating an index from JavaScript, take a look at the [algoliasearch.js](https://github.com/algolia/algoliasearch-client-js/blob/master/src/algoliasearch.js) source file to see details about each function. If you use the JavaScript client to update the index, you need to specify `https` as the protocol during client initialization:
+In some use cases, such as an HTML5 mobile application, it may be necessary to perform updates to the index directly in JavaScript.
+
+Therefore, just like other languages, the JavaScript client is able to add, update, delete objects and modify index settings.
+
+If you use the JavaScript client to update the index and if you are not on an `https:` website already, you must force the client to use `https:`:
 
 ```javascript
-  <script src="algoliasearch.min.js"></script>
+  <script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
   <script>
-    client = new AlgoliaSearch('ApplicationID', 'API-Key', { method: 'https' });
-    ...
+    var client = algoliasearch('ApplicationID', 'API-Key', {protocol: 'https:'});
+  </script>
 ```
 
 <% else %>
@@ -742,15 +779,23 @@ You may have a single index containing per user data. In that case, all records 
 
 <%= snippet("generate_secured_api_key") if !csharp? && !objc? && !swift? %>
 
-This public API key must then be used in your JavaScript code as follow:
+This public API key can then be used in your JavaScript code as follow:
 
 ```javascript
 <script type="text/javascript">
-  var algolia = new AlgoliaSearch('YourApplicationID', '<%%= public_api_key %>');
-  algolia.setSecurityTags('(public,user_42)'); // must be same than those used at generation-time
-  algolia.initIndex('YourIndex').search($('#q').val(), function(success, content) {
-    // [...]
-  });
+var client = algoliasearch('YourApplicationID', '<%%= public_api_key %>');
+client.setSecurityTags('(public,user_42)'); // must be same than those used at generation-time
+
+var index = client.initIndex('indexName')
+
+index.search('something', function(err, content) {
+  if (err) {
+    console.error(err);
+    return;
+  }
+
+  console.log(content);
+});
 </script>
 ```
 
@@ -758,16 +803,28 @@ You can mix rate limits and secured API keys by setting an extra `user_token` at
 
 <%= snippet("generate_secured_api_key_user_token") if !csharp? && !objc? && !swift? %>
 
-This public API key must then be used in your JavaScript code as follow:
+This public API key can then be used in your JavaScript code as follow:
 
 ```javascript
 <script type="text/javascript">
-  var algolia = new AlgoliaSearch('YourApplicationID', '<%%= public_api_key %>');
-  algolia.setSecurityTags('(public,user_42)'); // must be same than those used at generation-time
-  algolia.setUserToken('user_42')              // must be same than the one used at generation-time
-  algolia.initIndex('YourIndex').search($('#q').val(), function(success, content) {
-    // [...]
-  });
+var client = algoliasearch('YourApplicationID', '<%%= public_api_key %>');
+
+// must be same than those used at generation-time
+client.setSecurityTags('(public,user_42)');
+
+// must be same than the one used at generation-time
+client.setUserToken('user_42');
+
+var index = client.initIndex('indexName')
+
+index.search('another query', function(err, content) {
+  if (err) {
+    console.error(err);
+    return;
+  }
+
+  console.log(content);
+});
 </script>
 ```
 
