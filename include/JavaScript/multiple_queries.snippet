@@ -1,36 +1,25 @@
-```javascript
-var client = algoliasearch('ApplicationID', 'Search-Only-API-Key');
+```js
+var client = algoliasearch('ApplicationID', 'apiKey');
 
-// perform 3 queries in a single API call:
-//  - 1st query targets index `categories`
-//  - 2nd and 3rd queries target index `products`
-client.startQueriesBatch();
-
-client.addQueryInBatch(
-  'categories', // index name
-  'search in categories index', {
+var queries = [{
+  indexName: 'categories',
+  query: 'search in categories index', {
     hitsPerPage: 3
   }
-);
-
-client.addQueryInBatch(
-  'products',
-  'first search in products', {
+}, {
+  indexName: 'products',
+  query: 'first search in products', {
     hitsPerPage: 3,
     tagFilters: 'promotion'
   }
-);
-
-client.addQueryInBatch(
-  'products',
-  'another search in products', {
+}, {
+  indexName: 'products',
+  query: 'another search in products', {
     hitsPerPage: 10
   }
-);
+}];
 
-client.sendQueriesBatch(searchMultiCallback);
-
-function searchMultiCallback(err, content) {
+function searchCallback(err, content) {
   if (err) {
     console.error(err);
     return;
@@ -51,4 +40,9 @@ function searchMultiCallback(err, content) {
     console.log(products.hits[i]);
   }
 }
+
+// perform 3 queries in a single API call:
+//  - 1st query targets index `categories`
+//  - 2nd and 3rd queries target index `products`
+client.search(queries, searchCallback);
 ```

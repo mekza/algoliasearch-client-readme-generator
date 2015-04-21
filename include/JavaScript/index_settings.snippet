@@ -1,0 +1,13 @@
+ni```js
+index.getSettings(function(err, content) {
+  console.log(content);
+});
+```
+
+```js
+index.setSettings({'customRanking': ['desc(followers)']}, function(err) {
+  if (!err) {
+    console.log('success');
+  }
+});
+```

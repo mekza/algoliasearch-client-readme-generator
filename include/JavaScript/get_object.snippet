@@ -1,24 +1,11 @@
-```javascript
-var client = algoliasearch('ApplicationID', 'Search-Only-API-Key');
-var index = client.initIndex('indexName');
-
+```js
 // Retrieves all attributes
-index.getObject('myID', function searchDone(err, content) {
-  if (err) {
-    console.error(err);
-    return;
-  }
-
-  console.log(content.objectID + ": ", content);
+index.getObject('myID', function(err, content) {
+  console.log(content.objectID + ": " + content.toString());
 });
 
 // Retrieves firstname and lastname attributes
-index.getObject('myID', ['firstname', 'lastname'], function searchDone(err, content) {
-  if (err) {
-    console.error(err);
-    return;
-  }
-
-  console.log(content.objectID + ": ", content);
+index.getObject('myID', ['firstname', 'lastname'], function(err, content) {
+  console.log(content.objectID + ": " + content.toString());
 });
 ```

@@ -6,9 +6,6 @@
     "PHP": {
       "outputDir": "../../algoliasearch-client-php"
     },
-    "Node.js": {
-      "outputDir": "../../algoliasearch-client-node"
-    },
     "Python": {
       "outputDir": "../../algoliasearch-client-python"
     },

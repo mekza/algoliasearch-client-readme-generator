@@ -1,3 +1,7 @@
+### Browser
+
+You can either use a package manager like npm or include a `<script>` tag.
+
 #### npm
 
 ```sh
@@ -12,11 +16,11 @@ We are [browserify](http://browserify.org/)able and [webpack](http://webpack.git
 bower install algoliasearch -S
 ```
 
-#### jsDelivr
+#### &lt;script&gt; tag using jsDelivr
 
 [jsDelivr](http://www.jsdelivr.com/about.php) is a global CDN delivery for JavaScript libraries.
 
-You can always get the latest, backward compatible version by including:
+To include the latest releases and all upcoming features and patches, use this:
 
 ```html
 <script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
@@ -27,7 +31,7 @@ You can always get the latest, backward compatible version by including:
 ```html
 <script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
 <script>
-  var client = algoliasearch('ApplicationID', 'Search-Only-API-Key');
+  var client = algoliasearch('ApplicationID', 'apiKey');
   var index = client.initIndex('indexName');
 
   index.search('an example', function searchDone(err, content) {
@@ -56,7 +60,7 @@ It can be used with callbacks or [jQuery promises](https://api.jquery.com/promis
 <script src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
 <script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearch.jquery.min.js"></script>
 <script>
-  var client = $.algolia.Client('ApplicationID', 'Search-Only-API-Key');
+  var client = $.algolia.Client('ApplicationID', 'apiKey');
   var index = client.initIndex('indexName');
   index.search('something', function searchDone(err, content) {
     console.log(err, content)
@@ -79,7 +83,7 @@ It can be used with callbacks or [AngularJS promises](https://docs.angularjs.org
     .controller('SearchCtrl', ['$scope', 'algolia', function($scope, algolia) {
       $scope.query = '';
       $scope.hits = [];
-      var client = algolia.Client('ApplicationID', 'Search-Only-API-Key');
+      var client = algolia.Client('ApplicationID', 'apiKey');
       var index = client.initIndex('indexName');
       index.search('something')
         .then(function searchSuccess(content) {
@@ -91,7 +95,7 @@ It can be used with callbacks or [AngularJS promises](https://docs.angularjs.org
 </script>
 ```
 
-#### Browserify
+#### Browserify, webpack
 
 ```sh
 npm install algoliasearch --save
@@ -99,11 +103,48 @@ npm install algoliasearch --save
 
 ```js
 var algoliasearch = require('algoliasearch');
-var client = algoliasearch('applicationID', 'Search-Only-API-Key');
+var client = algoliasearch('applicationID', 'apiKey');
 var index = client.initIndex('indexName');
 index.search('something', function searchDone(err, content) {
   console.log(err, content);
 });
 ```
 
-We also provide [runnable examples](#quick-start) for you to try.
+### Node.js
+
+```sh
+npm install algoliasearch --save
+```
+
+```js
+var algoliasearch = require('algoliasearch');
+var client = algoliasearch('applicationID', 'apiKey');
+var index = client.initIndex('indexName');
+index.search('something', function searchDone(err, content) {
+  console.log(err, content);
+});
+```
+
+### Parse.com
+
+```sh
+curl https://raw.githubusercontent.com/algolia/algoliasearch-client-js/master/dist/algoliasearch.parse.js -o /your/parse/project/cloud/algoliasearch.parse.js
+```
+
+In `cloud/main.js` for example:
+
+```js
+var algoliasearch = require('cloud/algoliasearch.parse.js');
+var client = algoliasearch('latency', '6be0576ff61c053d5f9a3225e2a90f76');
+var index = client.initIndex('contacts');
+
+Parse.Cloud.define("hello", function(request, response) {
+  index.search('Atlenta', function(err, results) {
+    if (err) {
+      throw err;
+    }
+
+    response.success('We got ' + results.nbHits + ' results');
+  });
+});
+```

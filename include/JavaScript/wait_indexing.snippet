@@ -1,0 +1,12 @@
+```js
+var object = {
+  firstname: 'Jimmie',
+  lastname: 'Barninger'
+};
+
+index.addObject(object, function(err, content) {
+  index.waitTask(content.taskID, function() {
+    console.log('object ' + content.objectID + ' indexed');
+  });
+});
+```
