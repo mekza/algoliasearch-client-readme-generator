@@ -235,7 +235,6 @@ index.clearCache();
 // you'll need to use the following code
 client.clearCache();
 ```
-<% end %>
 
 Proxy
 ------------
@@ -256,6 +255,8 @@ Because of the nature of keepalive connections, your process will hang even if y
 To fix this, we expose a `client.destroy()` method that will terminate all remaining alive connections.
 
 You should call this method when you are finished working with the AlgoliaSearch API. So that your process will exit gently.
+
+<% end %>
 
 Documentation
 ================
