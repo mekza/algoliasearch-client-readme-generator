@@ -53,18 +53,23 @@ Table of Contents
 
 1. [Setup](#setup)
 <% if js? -%>
-  1. [Browser](#browser)
-  1. [Node.js](#node-js)
-  1. [Parse.com](#parse-com)
+  - [Frontend](#frontend)
+  - [Node.js](#node-js)
+  - [Parse.com](#parse-com)
 <% end -%>
 1. [Quick Start](#quick-start)
 <% if js? -%>
-  1. [Frontend](#frontend)
-  1. [Backend](#backend)
+  - [Frontend](#frontend-1)
+    - [Vanilla JavaScript](#vanilla-javascript)
+    - [jQuery module](#jquery-module)
+    - [AngularJS module](#angularjs-module)
+  - [Backend (Node.js)](#backend-nodejs)
 1. [Callback convention](#callback-convention)
 1. [Promises](#promises)
 1. [Request strategy](#request-strategy)
 1. [Cache](#cache)
+1. [Proxy support](#proxy-support)
+1. [Keep-alive](#keep-alive)
 <% end -%>
 1. [Online documentation](#documentation)
 1. [Tutorials](#tutorials)
@@ -132,9 +137,18 @@ Quick Start
 <% if js? -%>
 ### Frontend
 
-To build your frontend search experience, check out our [examples](./examples/) and [tutorials](https://www.algolia.com/doc/tutorials)
+To build your frontend search experience, also check out our [examples](./examples/) and [tutorials](https://www.algolia.com/doc/tutorials).
 
-### Backend
+#### Vanilla JavaScript
+<%= snippet("quick_start_vanilla_javasript") %>
+
+#### jQuery module
+<%= snippet("quick_start_jquery") %>
+
+#### AngularJS module
+<%= snippet("quick_start_angularjs") %>
+
+### Backend (Node.js)
 <% end -%>
 
 In 30 seconds, this quick start tutorial will show you how to index and search objects.
@@ -224,7 +238,9 @@ Connections are always `keep-alive`.
 Cache
 -------------
 
-**Only in browsers**, queries will be stored in a ```cache``` inside your JavaScript ```Index``` and ```AlgoliaSearch``` objects to avoid performing the same API calls twice. It's particularly useful when your users are deleting characters or words from the current query but has a chance of ending up with outdated results if the page isn't refreshed for some time.
+**Browser only**
+
+Queries will be stored in a ```cache``` inside your JavaScript ```Index``` and ```AlgoliaSearch``` objects to avoid performing the same API calls twice. It's particularly useful when your users are deleting characters or words from the current query but has a chance of ending up with outdated results if the page isn't refreshed for some time.
 
 To address this issue, be sure to clear the cache every X minutes to ensure you have up to date results:
 ```js
@@ -236,8 +252,10 @@ index.clearCache();
 client.clearCache();
 ```
 
-Proxy
+Proxy support
 ------------
+
+**Node.js only**
 
 If you are behind a proxy, just set `HTTP_PROXY` or `HTTPS_PROXY` environment variables before starting your Node.js program.
 
@@ -248,6 +266,8 @@ HTTP_PROXY=http://someproxy.com:9320 node main.js
 Keep-alive
 -------------
 
+**Node.js only**
+
 Keep-alive is activated by default.
 
 Because of the nature of keepalive connections, your process will hang even if you do not do any more command using the `client`.
@@ -255,6 +275,8 @@ Because of the nature of keepalive connections, your process will hang even if y
 To fix this, we expose a `client.destroy()` method that will terminate all remaining alive connections.
 
 You should call this method when you are finished working with the AlgoliaSearch API. So that your process will exit gently.
+
+**Note: keep-alive is still always activated in browsers, this is a native behavior of browsers.**
 
 <% end %>
 
