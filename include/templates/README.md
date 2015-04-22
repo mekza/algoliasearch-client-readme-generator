@@ -55,7 +55,7 @@ Table of Contents
 <% if js? -%>
   - [Frontend](#frontend)
   - [Node.js](#node-js)
-  - [Parse.com](#parse-com)
+  - [Parse.com](#parsecom)
 <% end -%>
 1. [Quick Start](#quick-start)
 <% if js? -%>
