@@ -237,6 +237,24 @@ client.clearCache();
 ```
 <% end %>
 
+Proxy
+------------
+
+If you are behind a proxy, just set `HTTP_PROXY` or `HTTPS_PROXY` environment variables before starting your Node.js program.
+
+```sh
+HTTP_PROXY=http://someproxy.com:9320 node main.js
+```
+
+Keep-alive
+-------------
+
+Keep-alive is activated by default, it means that even when you are finished with your backend process, it will hang for some time before exiting.
+
+To fix this, we expose a `client.destroy()` method that will terminate all remaining alive connections.
+
+You should call this method when you are finished working with the AlgoliaSearch API.
+
 Documentation
 ================
 Check our [online documentation](http://www.algolia.com/doc/guides/<%= @slug %>):
