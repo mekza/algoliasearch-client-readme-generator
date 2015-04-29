@@ -731,7 +731,7 @@ Delete an existing key:
 
 <% if !cmd? && !csharp? && !objc? && !swift? %>
 
-You may have a single index containing per user data. In that case, all records should be tagged with their associated user_id in order to add a `tagFilters=(public,user_42)` filter at query time to retrieve only what a user has access to. If you're using the [JavaScript client](http://github.com/algolia/algoliasearch-client-js), it will result in a security breach since the user is able to modify the `tagFilters` you've set by modifying the code from the browser. To keep using the JavaScript client (recommended for optimal latency) and target secured records, you can generate a secured API key from your backend:
+You may have a single index containing per user data. In that case, all records should be tagged with their associated user_id in order to add a `tagFilters=user_42` filter at query time to retrieve only what a user has access to. If you're using the [JavaScript client](http://github.com/algolia/algoliasearch-client-js), it will result in a security breach since the user is able to modify the `tagFilters` you've set by modifying the code from the browser. To keep using the JavaScript client (recommended for optimal latency) and target secured records, you can generate a secured API key from your backend:
 
 <%= snippet("generate_secured_api_key") if !csharp? && !objc? && !swift? %>
 
@@ -739,7 +739,7 @@ This public API key can then be used in your JavaScript code as follow:
 
 ```js
 var client = algoliasearch('YourApplicationID', '<%%= public_api_key %>');
-client.setSecurityTags('(public,user_42)'); // must be same than those used at generation-time
+client.setExtraHeader('X-Algolia-QueryParameters', 'tagFilters=user_42'); // must be same than those used at generation-time
 
 var index = client.initIndex('indexName')
 
@@ -763,10 +763,30 @@ This public API key can then be used in your JavaScript code as follow:
 var client = algoliasearch('YourApplicationID', '<%%= public_api_key %>');
 
 // must be same than those used at generation-time
-client.setSecurityTags('(public,user_42)');
+client.setExtraHeader('X-Algolia-QueryParameters', 'tagFilters=user_42');
 
 // must be same than the one used at generation-time
 client.setUserToken('user_42');
+
+var index = client.initIndex('indexName')
+
+index.search('another query', function(err, content) {
+  if (err) {
+    console.error(err);
+    return;
+  }
+
+  console.log(content);
+});
+```
+
+You can also generate secured API keys to limit the usage of a key to a referer. The generation use the same function than the Per user restriction. This public API key can be used in your JavaScript code as follow:
+
+```js
+var client = algoliasearch('YourApplicationID', '<%%= public_api_key %>');
+
+// must be same than those used at generation-time
+client.setExtraHeader('X-Algolia-AllowedReferer', 'algolia.com/*');
 
 var index = client.initIndex('indexName')
 
