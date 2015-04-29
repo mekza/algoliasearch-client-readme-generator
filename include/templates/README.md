@@ -54,8 +54,8 @@ Table of Contents
 1. [Setup](#setup)
 <% if js? -%>
   - [Frontend](#frontend)
-  - [Node.js](#node-js)
-  - [Parse.com](#parsecom)
+  - [Node.js](#nodejs)
+  - [Parse.com](#parsecom-)
 <% end -%>
 1. [Quick Start](#quick-start)
 <% if js? -%>
@@ -240,9 +240,12 @@ Cache
 
 **Browser only**
 
-Queries will be stored in a ```cache``` inside your JavaScript ```Index``` and ```AlgoliaSearch``` objects to avoid performing the same API calls twice. It's particularly useful when your users are deleting characters or words from the current query but has a chance of ending up with outdated results if the page isn't refreshed for some time.
+To avoid performing the same API calls twice **search** results will be stored in a `cache` that will be tied to your JavaScript `client` and `index` objects.
 
-To address this issue, be sure to clear the cache every X minutes to ensure you have up to date results:
+It's particularly useful when your users are deleting characters or words from the current query but has a chance of ending up with outdated results if the page isn't refreshed for some time.
+
+If at any point you want to clear the cache, just do this:
+
 ```js
 // clear the queries cache
 index.clearCache();
