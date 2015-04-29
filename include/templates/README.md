@@ -531,6 +531,10 @@ You can send multiple queries with a single API call using a batch of queries:
 
 <%= snippet("multiple_queries") %>
 
+You can specify a strategy to optimize your multiple queries:
+- **none**: Execute the sequence of queries until the end.
+- **stopIfEnoughMatches**: Execute the sequence of queries until the number of hits is reached by the sum of hits.
+
 <% end %>
 
 Get an object
