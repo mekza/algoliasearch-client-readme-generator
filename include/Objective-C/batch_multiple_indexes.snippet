@@ -1,0 +1,10 @@
+```objc
+NSArray *requests = @[
+@{@"action": @"addObject", @"indexName": @"index1", @"body": @{@"firstname": @"Jimmie", @"lastname": @"Barninger"}},
+@{@"action": @"addObject", @"indexName": @"index2", @"body": @{@"firstname": @"Warren", @"lastname": @"Speach"}}
+];
+[client batch:requests 
+  success:^(ASRemoteIndex *index, NSArray *request, NSDictionary *result) {
+    NSLog(@"Object IDs: %@", result);
+} failure:nil];
+```

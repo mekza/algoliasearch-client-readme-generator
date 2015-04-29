@@ -1,0 +1,10 @@
+```go
+requests := []]interface{}{
+	map[string]interface{}{
+		"body": map[string]interface{}{"firstname": "Jimmie", "lastname": "Barninger"},
+		"indexName": "index1",
+		"action": "addObject"
+	}
+}
+res, err := client.CustomBatch(requests)
+```

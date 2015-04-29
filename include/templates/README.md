@@ -681,6 +681,17 @@ Custom batch:
 <%= snippet("custom_batch") %>
 <% end %>
 
+If you have one index per user, you may want to perform a batch operations across severals indexes.
+We expose a method to perform this type of batch:
+<%= snippet("batch_multiple_indexes") %>
+
+The attribute **action** can have these values:
+- addObject
+- updateObject
+- partialUpdateObject
+- partialUpdateObjectNoCreate
+- deleteObject
+
 Security / User API Keys
 -------------
 
