@@ -1,9 +1,16 @@
  ```php
-// Creates a new global API key that is valid for 300 seconds
-$res = $client->addUserKey(array("search"), 300);
-echo "key=" . $res['key'] . "\n";
 // Creates a new index specific API key valid for 300 seconds, with a rate limit of 100 calls per hour per IP and a maximum of 20 hits
-$res = $index->addUserKey(array("search"), 300, 100, 20);
+
+$params = array('validity' => 300,
+	'maxQueriesPerIPPerHour' => 100,
+	'maxHitsPerQuery' => 20,
+	'indexes'=> array('dev_*'),
+	'referers' => array('algolia.com/*'),
+	'queryParameters' => 'typoTolerance=strict&ignorePlurals=false',
+	'description' => 'Limited search only API key for algolia.com'
+);
+
+$res = $client->addUserKey(params);
 echo "key=" . $res['key'] . "\n";
 ```
 

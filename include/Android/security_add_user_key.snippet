@@ -1,8 +1,19 @@
 ```java
 // Creates a new global API key that is valid for 300 seconds
-JSONObject res = client.addUserKey(Arrays.asList("search"), 300, 0, 0);
+
+JSONObject param = new JSONObject();
+param.put("acl", Arrays.asList("search"));
+param.put("maxHitsPerQuery", 20);
+param.put("maxQueriesPerIPPerHour", 100);
+param.put("validity", 300);
+param.put("indexes", Arrays.asList("myIndex"));
+param.put("referers", Arrays.asList("algolia.com/*"));
+param.put("queryParameters", "typoTolerance=strict&ignorePlurals=false");
+param.put("description", "Limited search only API key for algolia.com");
+
+JSONObject res = client.addUserKey(param);
 Log.d("debug", "Key: " + res.getString("key"));
 // Creates a new index specific API key valid for 300 seconds, with a rate limit of 100 calls per hour per IP and a maximum of 20 hits
-JSONObject res = index.addUserKey(Arrays.asList("search"), 300, 100, 20);
+JSONObject res = index.addUserKey(param);
 Log.d("debug", "Key: " + res.getString("key"));
 ```

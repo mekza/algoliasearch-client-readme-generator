@@ -1,12 +1,18 @@
 ```csharp
-// Creates a new global API key that is valid for 300 seconds
-var res = client.AddUserKey(new String[] { "search" }, 300, 0, 0, new string[]{"dev_*"});
-// Asynchronous
-// var res = await client.AddUserKeyAsync(new String[] { "search" }, 300, 0, 0, new string[]{"dev_*"});
-System.Diagnostics.Debug.WriteLine("Key: " + res["key"]);
 // Creates a new index specific API key valid for 300 seconds, with a rate limit of 100 calls per hour per IP and a maximum of 20 hits
-res = index.AddUserKey(new String[] { "search" }, 300, 100, 20, new string[]{"dev_*"});
+
+Dictionary<string, object> param = new Dictionary<string, object>();
+param["acl"] = new String[] { "search" };
+param["validity"] = 300;
+param["maxQueriesPerIPPerHour"] = 100;
+param["maxHitsPerQuery"] = 20;
+param["indexes"] = new string[]{"dev_*"};
+param["referers"] = new string[]{"algolia.com/*"};
+param["queryParameters"] = "typoTolerance=strict&ignorePlurals=false";
+param["description"] = "Limited search only API key for algolia.com";
+
+res = index.AddUserKey(param);
 // Asynchronous
-// res = await index.AddUserKeyAsync(new String[] { "search" }, 300, 100, 20, new string[]{"dev_*"});
+// res = await index.AddUserKeyAsync(param);
 System.Diagnostics.Debug.WriteLine("Key: " + res["key"]);
 ```

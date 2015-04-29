@@ -7,6 +7,17 @@ puts res['key']
 #  - rate limit of 100 calls per hour per IP
 #  - maximum of 20 hits
 #  - valid on 'my_index1' and 'my_index2'
-res = Algolia.add_user_key(["search"], 300, 100, 20, ['my_index1', 'my_index2'])
+
+params = {
+	:validity => 300,
+	:maxQueriesPerIPPerHour => 100,
+	:maxHitsPerQuery => 20,
+	:indexes => ['my_index1', 'my_index2'],
+	:referers => ['algolia.com/*'],
+	:queryParameters => 'typoTolerance=strict&ignorePlurals=false',
+	:description => 'Limited search only API key for algolia.com'
+}
+
+res = Algolia.add_user_key(params)
 puts res['key']
 ```

@@ -1,12 +1,13 @@
 ```objc
-// Creates a new global API key that is valid for 300 seconds
-[apiClient addUserKey:@[@"search"] withValidity:300 maxQueriesPerIPPerHour:0 maxHitsPerQuery:0
-  success:^(ASAPIClient *client, NSArray *acls, NSDictionary *result) {
-    NSLog(@"API Key: %@", result[@"key"]);
-} failure:nil];
 // Creates a new index specific API key valid for 300 seconds, with a rate limit of 100 calls per hour per IP and a maximum of 20 hits
-[index addUserKey:[@"search"] withValidity:300 maxQueriesPerIPPerHour:100 maxHitsPerQuery:20
-  success:^(ASRemoteIndex *index, NSArray *acls, NSDictionary *result) {
+
+NSDictionary *params = @{@"validity": 300, @"maxQueriesPerIPPerHour": 100
+					, @"maxHitsPerQuery": 20, @"indexes": @[@"dev_*"], @"referers": @[@"algolia.com/*"]
+					, @"queryParameters": @"typoTolerance=strict&ignorePlurals=false"
+					, @"description": @"Limited search only API key for algolia.com"};
+
+[index addUserKey:[@"search"] withParams:params
+  success:^(ASRemoteIndex *index, NSArray *acls, NSDictionary* params, NSDictionary *result) {
     NSLog(@"API Key: %@", result[@"key"]);
 } failure:nil];
 ```

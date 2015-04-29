@@ -1,9 +1,17 @@
 ```python
-# Creates a new global API key that is valid for 300 seconds
-res = client.add_user_key(["search"], 300)
-print res["key"]
 # Creates a new index specific API key valid for 300 seconds, with a rate limit of 100 calls per hour per IP and a maximum of 20 hits
-res = index.add_user_key(["search"], 300, 100, 20)
+
+params = {                                                         	\
+	'validity': 300,												\
+	'maxQueriesPerIPPerHour': 100,									\
+	'maxHitsPerQuery': 20,											\
+	'indexes': ['dev_*'],											\
+	'referers': ['algolia.com/*'],									\
+	'queryParameters': 'typoTolerance=strict&ignorePlurals=false',	\
+	'description': 'Limited search only API key for algolia.com'	\
+}
+
+res = client.add_user_key(params)
 print res["key"]
 ```
 
