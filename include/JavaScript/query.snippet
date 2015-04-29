@@ -15,20 +15,17 @@ index.search('query string', function searchDone(err, content) {
 });
 
 // with params
-index.search(
-  'query string', {
-    attributesToRetrieve: ['firstname', 'lastname'],
-    hitsPerPage: 50
-  },
-  function searchDone(err, content) {
-    if (err) {
-      console.error(err);
-      return;
-    }
-
-    for (var h in content.hits) {
-      console.log('Hit(' + content.hits[h].objectID + '): ' + content.hits[h].toString());
-    }
+index.search('query string', {
+  attributesToRetrieve: ['firstname', 'lastname'],
+  hitsPerPage: 50
+}, function searchDone(err, content) {
+  if (err) {
+    console.error(err);
+    return;
   }
-);
+
+  for (var h in content.hits) {
+    console.log('Hit(' + content.hits[h].objectID + '): ' + content.hits[h].toString());
+  }
+});
 ```

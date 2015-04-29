@@ -12,8 +12,6 @@ class Language
       'php'
     elsif python?
       'python'
-    elsif nodejs?
-      'node'
     elsif cmd?
       'shell'
     elsif csharp?
@@ -24,6 +22,8 @@ class Language
       'android'
     elsif objc?
       'objc'
+    elsif js?
+      'node'
     elsif go?
       'go'
     elsif swift?
@@ -63,10 +63,6 @@ class Language
     name == 'Python'
   end
 
-  def nodejs?
-    name == 'Node.js'
-  end
-
   def js?
     name == 'JavaScript'
   end
@@ -103,11 +99,11 @@ class Language
     binding
   end
 
-  private  
+  private
   def import_file(fileName, dir)
     fileName = File.join(dir, fileName)
     content = File.read(fileName)
     content = content.rstrip
   end
 
-end 
+end

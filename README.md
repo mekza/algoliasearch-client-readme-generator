@@ -5,7 +5,6 @@ Algolia Search API Client README generator
 
  * [algoliasearch-client-ruby](https://github.com/algolia/algoliasearch-client-ruby)
  * [algoliasearch-client-python](https://github.com/algolia/algoliasearch-client-python)
- * [algoliasearch-client-node](https://github.com/algolia/algoliasearch-client-node)
  * [algoliasearch-client-php](https://github.com/algolia/algoliasearch-client-php)
  * [algoliasearch-client-js](https://github.com/algolia/algoliasearch-client-js)
  * [algoliasearch-client-cmd](https://github.com/algolia/algoliasearch-client-cmd)

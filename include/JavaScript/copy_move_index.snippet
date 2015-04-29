@@ -1,0 +1,11 @@
+```js
+// Rename MyIndex in MyIndexNewName
+client.moveIndex('MyIndex', 'MyIndexNewName', function(err, content) {
+  console.log(content);
+});
+
+// Copy MyIndex in MyIndexCopy
+client.copyIndex('MyIndex', 'MyIndexCopy', function(err, content) {
+  console.log(content);
+});
+```

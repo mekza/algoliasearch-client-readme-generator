@@ -1,0 +1,26 @@
+```js
+// Update an existing global API key that is valid for 300 seconds
+client.updateUserKey(
+  'myAPIKey',
+  ['search'], {
+    validity: 300
+  }, function(err, content) {
+    console.log('Key:' + content['key']);
+  }
+);
+
+// Update an index specific API key:
+// - valid for 300 seconds
+// - with a rate limit of 100 calls per hour per IP
+// - and a maximum of 20 hits
+index.updateUserKey(
+  'myAPIKey',
+  ['search'], {
+    validity: 300,
+    maxQueriesPerIPPerHour: 100,
+    maxHitsPerQuery: 20
+  }, function(err, content) {
+    console.log('Key:' + content['key']);
+  }
+);
+```

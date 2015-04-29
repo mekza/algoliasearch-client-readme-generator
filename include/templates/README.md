@@ -5,8 +5,16 @@
 <% end -%>
 
 <% if js? -%>
-**We recently (March 2015) released a new version (V3) of our JavaScript client,
-if you were using our previous version (V2), [read the migration guide](https://github.com/algolia/algoliasearch-client-js/wiki/Migration-guide-from-2.x.x-to-3.x.x)**
+
+**&lt;New JavaScript clients&gt;**
+
+In April 2015, we released a new JavaScript client (the one you are looking at) able to work in Node.js and the browser.
+
+If you were using our browser version (V2), [read the migration guide](https://github.com/algolia/algoliasearch-client-js/wiki/Migration-guide-from-2.x.x-to-3.x.x)
+
+If you were using our Node.js version (V1, npm `algolia-search`), [read the migration guide](https://github.com/algolia/algoliasearch-client-js/wiki/Node.js-v1.x.x-migration-guide)
+
+**&lt;/New JavaScript clients&gt;**
 <% end -%>
 
 <%#    ************************** INTRO ********************************** %>
@@ -25,17 +33,16 @@ Our <%= @name %> client lets you easily use the [Algolia Search API](https://www
 <%= import("build_status.info") if !cmd? %>
 
 <% if js? -%>
-The JavaScript client lets you easily use the [Algolia Search API](https://www.algolia.com/doc/rest_api) in a browser.
+The JavaScript client lets you use the [Algolia Search API](https://www.algolia.com/doc/rest_api) on the frontend (browsers) or on the backend (Node.js) with the same API.
 
-It is dedicated to web apps searching directly from the browser.
-To add, remove or delete your objects please consider using [a backend API client](https://www.algolia.com/doc).
+We support callbacks and promises.
+
+**Most of the time you should do your indexing on the backend with Node.js and your search experience in the browser by speaking directly with Algolia servers. So that your admin keys will not leak on the internet and your users get the best performance**
 
 Our JavaScript library is [UMD](https://github.com/umdjs/umd) compatible, you can
 use it with any module loader.
 
 When not using any module loader, it will export an `algoliasearch` method in the `window` object.
-
-If you are using the V2 of our JavaScript client and want to upgrade, please read [our migration guide](https://github.com/algolia/algoliasearch-client-js/wiki/Migration-guide-from-2.x.x-to-3.x.x).
 <% end -%>
 
 <%#    ************************** TOC ********************************** %>
@@ -45,27 +52,34 @@ Table of Contents
 **Getting Started**
 
 1. [Setup](#setup)
-<% if nodejs? -%>
-1. [Setup with parse](#setup-with-parse)
+<% if js? -%>
+  - [Frontend](#frontend)
+  - [Node.js](#node-js)
+  - [Parse.com](#parsecom)
 <% end -%>
 1. [Quick Start](#quick-start)
-<% if nodejs? || js? -%>
-1. [Callback convention](#callback-convention)
 <% if js? -%>
+  - [Frontend](#frontend-1)
+    - [Vanilla JavaScript](#vanilla-javascript)
+    - [jQuery module](#jquery-module)
+    - [AngularJS module](#angularjs-module)
+  - [Backend (Node.js)](#backend-nodejs)
+1. [Callback convention](#callback-convention)
 1. [Promises](#promises)
 1. [Request strategy](#request-strategy)
 1. [Cache](#cache)
-<% end -%>
+1. [Proxy support](#proxy-support)
+1. [Keep-alive](#keep-alive)
 <% end -%>
 1. [Online documentation](#documentation)
 1. [Tutorials](#tutorials)
 
 **Commands Reference**
 
-<% if !js? -%>
-1. [Add a new object](#add-a-new-object-in-the-index)
+1. [Add a new object](#add-a-new-object-to-the-index)
 1. [Update an object](#update-an-existing-object-in-the-index)
 1. [Search](#search)
+1. [Multiple queries](#multiple-queries)
 1. [Get an object](#get-an-object)
 1. [Delete an object](#delete-an-object)
 1. [Delete by query](#delete-by-query)
@@ -77,15 +91,9 @@ Table of Contents
 1. [Batch writes](#batch-writes)
 1. [Security / User API Keys](#security--user-api-keys)
 1. [Copy or rename an index](#copy-or-rename-an-index)
-1. [Backup / Retrieve all index content](#backup--retrieve-all-index-content)
+1. [Backup / Retrieve all index content](#backup--retrieve-of-all-index-content)
 1. [Logs](#logs)
 <% if ruby? %>1. [Mock](#mock)<% end %>
-<% else %>
-1. [Search](#search)
-1. [Multiple queries](#multiple-queries)
-1. [Get an object](#get-an-object)
-1. [Security](#security)
-<% end %>
 
 <%#    ************************** SETUP ********************************** %>
 
@@ -121,45 +129,28 @@ If you're a Symfony or Laravel user; you're probably looking for the following i
 
 <% end -%>
 
-
-
-<%#    ************************** SETUP WITH PARSE ********************************** %>
-
-<% if nodejs? -%>
-Setup with Parse
---------------------
-To setup your project with Parse, follow these steps:
-
-
-<%= snippet("setup_parse") %>
-<% end %>
-
 <%#    ************************** QUICK START ********************************** %>
 
 Quick Start
 -------------
-<% if js? %>
-We have easy to run [examples](./examples/) for you to try. First, setup the repository:
 
-```sh
-  git clone https://github.com/algolia/algoliasearch-client-js.git
-  cd algoliasearch-client-js
-  npm install
-  npm run examples
-```
+<% if js? -%>
+### Frontend
 
-Then open either:
-- http://127.0.0.1:8080/examples/ to see a list of examples
-- http://127.0.0.1:8080/examples/autocomplete.html
-- http://127.0.0.1:8080/examples/instantsearch.html
+To build your frontend search experience, also check out our [examples](./examples/) and [tutorials](https://www.algolia.com/doc/tutorials).
 
-To hack and use your own indexes and data, open one of the example file and replace:
+#### Vanilla JavaScript
+<%= snippet("quick_start_vanilla_javasript") %>
 
-```js
-var client = algoliasearch('ApplicationID', 'Search-Only-API-Key');
-var index = client.initIndex(indexName);
-```
-<% else %>
+#### jQuery module
+<%= snippet("quick_start_jquery") %>
+
+#### AngularJS module
+<%= snippet("quick_start_angularjs") %>
+
+### Backend (Node.js)
+<% end -%>
+
 In 30 seconds, this quick start tutorial will show you how to index and search objects.
 
 <%= snippet("quick_start_new_index") %>
@@ -176,7 +167,7 @@ You can also configure the list of attributes you want to index by order of impo
 Since the engine is designed to suggest results as you type, you'll generally search by prefix. In this case the order of attributes is very important to decide which hit is the best:
 <%= snippet("quick_start_search_prefix") %>
 
-<% if !cmd? && !android? && !objc? && !swift? %>
+<% if !cmd? && !android? && !objc? && !swift? && !js? %>
 **Notes:** If you are building a web application, you may be more interested in using our [JavaScript client](https://github.com/algolia/algoliasearch-client-js) to perform queries. It brings two benefits:
   * Your users get a better response time by not going through your servers
   * It will offload unnecessary tasks from your servers
@@ -184,7 +175,7 @@ Since the engine is designed to suggest results as you type, you'll generally se
 ```html
 <script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
 <script>
-var client = algoliasearch('ApplicationID', 'Search-Only-API-Key');
+var client = algoliasearch('ApplicationID', 'apiKey');
 var index = client.initIndex('indexName');
 
 // perform query "jim"
@@ -212,33 +203,19 @@ function searchCallback(err, content) {
 ```
 <% end %>
 
-<% end %>
-
-<% if nodejs? %>
-Callback convention
--------------
-
-All API calls will return the result in a callback that takes two arguments:
-
- 1. **error**: a boolean that is set to true when an error occurs.
- 2. **content**: the object containing the answer (if an error was found, you can retrieve the error message in `content.message`)
-<% end %>
-
 <% if js? %>
 Callback convention
 -------------
 
-All API calls will return the result in a callback that takes two arguments:
+Every API call takes a callback as last parameter. This callback will then be called with two arguments:
 
  1. **error**: null or an [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error) object. More info on the error can be find in `error.message`.
- 2. **content**: the object containing the answer
-
-We follow the [error-first callback](http://thenodeway.io/posts/understanding-error-first-callbacks/).
+ 2. **content**: the object containing the answer from the server, it's a JavaScript object
 
 Promises
 -------------
 
-If **you do not provide a callback**, you will get a promise (but never both).
+**If you do not provide a callback**, you will get a promise (but never both).
 
 Promises are the [native Promise implementation](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise).
 
@@ -248,12 +225,20 @@ Request strategy
 -------------
 
 The request strategy used by the JavaScript client includes:
-- [CORS](http://en.wikipedia.org/wiki/Cross-Origin_Resource_Sharing#Browser_support) for modern browsers
-- [XDomainRequest](https://msdn.microsoft.com/en-us/library/ie/cc288060%28v=vs.85%29.aspx) for IE <= 10
-- [JSONP](http://en.wikipedia.org/wiki/JSONP) in any situation where Ajax requests are unavailabe or blocked.
+
+- On the browser:
+  + [CORS](http://en.wikipedia.org/wiki/Cross-Origin_Resource_Sharing#Browser_support) for modern browsers
+  + [XDomainRequest](https://msdn.microsoft.com/en-us/library/ie/cc288060%28v=vs.85%29.aspx) for IE <= 10
+  + [JSONP](http://en.wikipedia.org/wiki/JSONP) in any situation where Ajax requests are unavailabe or blocked.
+- Node.js:
+  + native [`http` module](https://nodejs.org/api/)
+
+Connections are always `keep-alive`.
 
 Cache
 -------------
+
+**Browser only**
 
 Queries will be stored in a ```cache``` inside your JavaScript ```Index``` and ```AlgoliaSearch``` objects to avoid performing the same API calls twice. It's particularly useful when your users are deleting characters or words from the current query but has a chance of ending up with outdated results if the page isn't refreshed for some time.
 
@@ -266,23 +251,37 @@ index.clearCache();
 // you'll need to use the following code
 client.clearCache();
 ```
+
+Proxy support
+------------
+
+**Node.js only**
+
+If you are behind a proxy, just set `HTTP_PROXY` or `HTTPS_PROXY` environment variables before starting your Node.js program.
+
+```sh
+HTTP_PROXY=http://someproxy.com:9320 node main.js
+```
+
+Keep-alive
+-------------
+
+**Node.js only**
+
+Keep-alive is activated by default.
+
+Because of the nature of keepalive connections, your process will hang even if you do not do any more command using the `client`.
+
+To fix this, we expose a `client.destroy()` method that will terminate all remaining alive connections.
+
+You should call this method when you are finished working with the AlgoliaSearch API. So that your process will exit gently.
+
+**Note: keep-alive is still always activated in browsers, this is a native behavior of browsers.**
+
 <% end %>
 
 Documentation
 ================
-<% if js? %>
-Check our [online documentation](http://www.algolia.com/doc/<%= @slug %>):
- * [Initial Import](http://www.algolia.com/doc/<%= @slug %>#InitialImport)
- * [Ranking &amp; Relevance](http://www.algolia.com/doc/<%= @slug %>#RankingRelevance)
- * [Indexing](http://www.algolia.com/doc/<%= @slug %>#Indexing)
- * [Search](http://www.algolia.com/doc/<%= @slug %>#Search)
- * [Sorting](http://www.algolia.com/doc/<%= @slug %>#Sorting)
- * [Filtering](http://www.algolia.com/doc/<%= @slug %>#Filtering)
- * [Faceting](http://www.algolia.com/doc/<%= @slug %>#Faceting)
- * [Geo-Search](http://www.algolia.com/doc/<%= @slug %>#Geo-Search)
- * [Security](http://www.algolia.com/doc/<%= @slug %>#Security)
- * [REST API](http://www.algolia.com/doc/rest)
-<% else %>
 Check our [online documentation](http://www.algolia.com/doc/guides/<%= @slug %>):
  * [Initial Import](http://www.algolia.com/doc/guides/<%= @slug %>#InitialImport)
  * [Ranking &amp; Relevance](http://www.algolia.com/doc/guides/<%= @slug %>#RankingRelevance)
@@ -294,7 +293,6 @@ Check our [online documentation](http://www.algolia.com/doc/guides/<%= @slug %>)
  * [Geo-Search](http://www.algolia.com/doc/guides/<%= @slug %>#Geo-Search)
  * [Security](http://www.algolia.com/doc/guides/<%= @slug %>#Security)
  * [REST API](http://www.algolia.com/doc/rest)
-<% end %>
 
 Tutorials
 ================
@@ -308,8 +306,6 @@ Check out our [tutorials](http://www.algolia.com/doc/tutorials):
 
 Commands Reference
 ==================
-
-<% if !js? %>
 
 <%#    ************************** API CLIENT REFERENCE OTHERS ********************************** %>
 
@@ -377,8 +373,6 @@ Example to increment a numeric value:
 Example to decrement a numeric value:
 
 <%= snippet("update_object_partial_decrement") %>
-
-<% end %>
 
 Search
 -------------
@@ -545,57 +539,7 @@ You can easily retrieve an object using its `objectID` and optionally specify a 
 
 You can also retrieve a set of objects:
 
-<% if !js? %>
 <%= snippet("get_objects") %>
-<% end %>
-
-<% if js? %>
-
-Security
----------
-
-If you're using [Per-User security](https://www.algolia.com/doc#SecurityUser) keys, you need to set the associated `tags`:
-
-```javascript
-var client = algoliasearch('ApplicationID', 'YourPublicSecuredAPIKey');
-
-// must be the same than those used at generation-time
-client.setSecurityTags('(public,user_42)');
-```
-
-// If you've specified a `userToken` while generating your secured API key, you must also specified it at query-time:
-
-```javascript
-var client = algoliasearch('ApplicationID', 'YourPublicSecuredAPIKey');
-
-// must be the same as the ones used at generation-time
-client.setSecurityTags('(public,user_42)');
-
-// must be the same as the one used at generation-time
-client.setUserToken('user_42');
-```
-
-<% end %>
-
-<% if js? %>
-
-Updating the index
--------------
-
-In some use cases, such as an HTML5 mobile application, it may be necessary to perform updates to the index directly in JavaScript.
-
-Therefore, just like other languages, the JavaScript client is able to add, update, delete objects and modify index settings.
-
-If you use the JavaScript client to update the index and if you are not on an `https:` website already, you must force the client to use `https:`:
-
-```javascript
-  <script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
-  <script>
-    var client = algoliasearch('ApplicationID', 'API-Key', {protocol: 'https:'});
-  </script>
-```
-
-<% else %>
 
 Delete an object
 -------------
@@ -616,7 +560,7 @@ You can delete all objects matching a single query with the following code. Inte
 Index Settings
 -------------
 
-You can retrieve all settings using the `<%= puts({ "Node.js" => "getSettings", "PHP" => "getSettings", "Python" => "get_settings", "Ruby" => "get_settings", "Shell" => "settings", 'C#' => "GetSettings", 'Java' => 'getSettings', 'Android' => 'getSettings' , 'Objective-C' => 'getSettings', 'GO' => "GetSettings"}) %>` function. The result will contain the following attributes:
+You can retrieve all settings using the `<%= puts({ "JavaScript" => "getSettings", "PHP" => "getSettings", "Python" => "get_settings", "Ruby" => "get_settings", "Shell" => "settings", 'C#' => "GetSettings", 'Java' => 'getSettings', 'Android' => 'getSettings' , 'Objective-C' => 'getSettings', 'GO' => "GetSettings"}) %>` function. The result will contain the following attributes:
 
 
 #### Indexing parameters
@@ -679,7 +623,7 @@ You can easily retrieve settings or update them:
 
 List indices
 -------------
-You can list all your indices along with their associated information (number of entries, disk size, etc.) with the `<%= puts({ "Node.js" => "listIndexes", "PHP" => "listIndexes", "Python" => "list_indexes", "Ruby" => "list_indexes", "Shell" => "indexes", "C#" => "listIndexes", "Java" => "listIndexes", "Android" => "listIndexes", "Objective-C" => "listIndexes", "GO" => "ListIndexes" }) %>` method:
+You can list all your indices along with their associated information (number of entries, disk size, etc.) with the `<%= puts({ "JavaScript" => "listIndexes", "PHP" => "listIndexes", "Python" => "list_indexes", "Ruby" => "list_indexes", "Shell" => "indexes", "C#" => "listIndexes", "Java" => "listIndexes", "Android" => "listIndexes", "Objective-C" => "listIndexes", "GO" => "ListIndexes" }) %>` method:
 
 <%= snippet("list_index") %>
 
@@ -711,10 +655,10 @@ Batch writes
 
 You may want to perform multiple operations with one API call to reduce latency.
 We expose three methods to perform batch operations:
- * `<%= puts({ "Node.js" => "addObjects", "PHP" => "addObjects", "Python" => "add_objects", "Ruby" => "add_objects", "Shell" => "addObject", 'C#' => 'AddObjects', 'Java' => 'addObjects', 'Android' => 'addObjects', 'Objective-C' => 'addObjects', 'GO' => 'AddObjects' }) %>`: Add an array of objects using automatic `objectID` assignment.
- * `<%= puts({ "Node.js" => "saveObjects", "PHP" => "saveObjects", "Python" => "save_objects", "Ruby" => "save_objects", "Shell" => "saveObject", 'C#' => 'SaveObjects', 'Java' => 'saveObjects', 'Android' => 'saveObjects', 'Objective-C' => 'saveObjects', 'GO' => 'UpdateObjects' }) %>`: Add or update an array of objects that contains an `objectID` attribute.
- * `<%= puts({ "Node.js" => "deleteObjects", "PHP" => "deleteObjects", "Python" => "delete_objects", "Ruby" => "delete_objects", "Shell" => "deleteObject", 'C#' => 'DeleteObjects', 'Java' => 'deleteObjects', 'Android' => 'deleteObjects', 'Objective-C' => 'deleteObjects', 'GO' => "DeleteObjects" }) %>`: Delete an array of objectIDs.
- * `<%= puts({ "Node.js" => "partialUpdateObjects", "PHP" => "partialUpdateObjects", "Python" => "partial_update_objects", "Ruby" => "partial_update_objects", "Shell" => "partialUpdate", 'C#' => "PartialUpdateObjects", 'Java' => 'partialUpdateObjects', 'Android' => 'partialUpdateObjects', 'Objective-C' => 'partialUpdateObjects', 'GO' => 'PartialUpdateObjects' }) %>`: Partially update an array of objects that contain an `objectID` attribute (only specified attributes will be updated).
+ * `<%= puts({ "JavaScript" => "addObjects", "PHP" => "addObjects", "Python" => "add_objects", "Ruby" => "add_objects", "Shell" => "addObject", 'C#' => 'AddObjects', 'Java' => 'addObjects', 'Android' => 'addObjects', 'Objective-C' => 'addObjects', 'GO' => 'AddObjects' }) %>`: Add an array of objects using automatic `objectID` assignment.
+ * `<%= puts({ "JavaScript" => "saveObjects", "PHP" => "saveObjects", "Python" => "save_objects", "Ruby" => "save_objects", "Shell" => "saveObject", 'C#' => 'SaveObjects', 'Java' => 'saveObjects', 'Android' => 'saveObjects', 'Objective-C' => 'saveObjects', 'GO' => 'UpdateObjects' }) %>`: Add or update an array of objects that contains an `objectID` attribute.
+ * `<%= puts({ "JavaScript" => "deleteObjects", "PHP" => "deleteObjects", "Python" => "delete_objects", "Ruby" => "delete_objects", "Shell" => "deleteObject", 'C#' => 'DeleteObjects', 'Java' => 'deleteObjects', 'Android' => 'deleteObjects', 'Objective-C' => 'deleteObjects', 'GO' => "DeleteObjects" }) %>`: Delete an array of objectIDs.
+ * `<%= puts({ "JavaScript" => "partialUpdateObjects", "PHP" => "partialUpdateObjects", "Python" => "partial_update_objects", "Ruby" => "partial_update_objects", "Shell" => "partialUpdate", 'C#' => "PartialUpdateObjects", 'Java' => 'partialUpdateObjects', 'Android' => 'partialUpdateObjects', 'Objective-C' => 'partialUpdateObjects', 'GO' => 'PartialUpdateObjects' }) %>`: Partially update an array of objects that contain an `objectID` attribute (only specified attributes will be updated).
 
 Example using automatic `objectID` assignment:
 <%= snippet("batch_new_objects") %>
@@ -786,8 +730,7 @@ You may have a single index containing per user data. In that case, all records 
 
 This public API key can then be used in your JavaScript code as follow:
 
-```javascript
-<script type="text/javascript">
+```js
 var client = algoliasearch('YourApplicationID', '<%%= public_api_key %>');
 client.setSecurityTags('(public,user_42)'); // must be same than those used at generation-time
 
@@ -801,7 +744,6 @@ index.search('something', function(err, content) {
 
   console.log(content);
 });
-</script>
 ```
 
 You can mix rate limits and secured API keys by setting an extra `user_token` attribute both at API key generation time and query time. When set, a unique user will be identified by her `IP + user_token` instead of only by her `IP`. This allows you to restrict a single user to performing a maximum of `N` API calls per hour, even if she shares her `IP` with another user.
@@ -810,8 +752,7 @@ You can mix rate limits and secured API keys by setting an extra `user_token` at
 
 This public API key can then be used in your JavaScript code as follow:
 
-```javascript
-<script type="text/javascript">
+```js
 var client = algoliasearch('YourApplicationID', '<%%= public_api_key %>');
 
 // must be same than those used at generation-time
@@ -830,7 +771,6 @@ index.search('another query', function(err, content) {
 
   console.log(content);
 });
-</script>
 ```
 
 <% end %>
@@ -888,7 +828,6 @@ You can retrieve the logs of your last 1,000 API calls and browse them using the
 For testing purposes, you may want to mock Algolia's API calls. We provide a [WebMock](https://github.com/bblimke/webmock) configuration that you can use including `algolia/webmock`:
 
 <%= snippet("mock") %><% end %>
-<% end %>
 
 <% if cmd? %>
 MongoDB

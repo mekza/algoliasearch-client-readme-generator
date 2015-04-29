@@ -1,0 +1,19 @@
+```html
+<script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+<script>
+  var client = algoliasearch('ApplicationID', 'apiKey');
+  var index = client.initIndex('indexName');
+
+  index.search('an example', function searchDone(err, content) {
+    console.log(err, content)
+  });
+
+  index.search('another example')
+    .then(function searchSuccess(content) {
+      console.log(content);
+    })
+    .catch(function searchFailure(err) {
+      console.error(err);
+    });
+</script>
+```

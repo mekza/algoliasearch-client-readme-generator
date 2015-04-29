@@ -1,9 +1,0 @@
-Without any prior configuration, you can start indexing [500 contacts](https://github.com/algolia/algoliasearch-client-csharp/blob/master/contacts.json) in the ```contacts``` index using the following code:
-```javascript
-var index = client.initIndex('contacts');
-var fileJSON = require('./contacts.json');
-index.addObjects(fileJSON, function(error, content) {
-  if (error) console.error("ERROR: %s", content.message);
-});
-```
-

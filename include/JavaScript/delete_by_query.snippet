@@ -1,0 +1,18 @@
+```js
+// no query parameters
+index.deleteByQuery('John', function(error) {
+  if (!err) {
+    console.log('success');
+  }
+});
+
+// with query parameters
+index.deleteByQuery('John', {
+  some: 'query',
+  param: 'eters'
+}, function(error) {
+  if (!err) {
+    console.log('success');
+  }
+});
+```

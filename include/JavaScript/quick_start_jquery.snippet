@@ -1,0 +1,15 @@
+We provide a specific [jQuery](http://jquery.com/) build that will use [jQuery.ajax](http://api.jquery.com/jquery.ajax/).
+
+It can be used with callbacks or [jQuery promises](https://api.jquery.com/promise/).
+
+```html
+<script src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+<script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearch.jquery.min.js"></script>
+<script>
+  var client = $.algolia.Client('ApplicationID', 'apiKey');
+  var index = client.initIndex('indexName');
+  index.search('something', function searchDone(err, content) {
+    console.log(err, content)
+  });
+</script>
+```
